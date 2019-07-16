@@ -1,0 +1,52 @@
+<!--/*
+    Copyright 2017 Adobe Systems Incorporated
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/-->
+<sly data-sly-use.header="we.retail.core.model.Header" data-sly-test.isCommunitiesPage="${header.isCommunitiesPage}"></sly>
+<div class="we-SearchModal modal fade ${isCommunitiesPage?'we-SearchModal-community':''}" id="navbar-search" role="dialog" data-color="primary">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span><i class="we-Icon we-Icon--search"></i>${ 'Search anything' @ i18n }</span>
+                <button type="button" class="close" data-dismiss="modal"><span>${ 'Close search' @ i18n }</span><i class="we-Icon we-Icon--close-alt"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <sly data-sly-test="${isCommunitiesPage}" data-sly-resource="${'./search' @ resourceType='weretail/components/structure/search', selectors='community'}"></sly>
+                        <sly data-sly-test="${!isCommunitiesPage}" data-sly-resource="${'./search' @ resourceType='weretail/components/structure/search', decoration='true'}"></sly>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.we-SearchModal -->
+
+<div class="we-LanguageModal modal fade" tabindex="-1" role="dialog" data-color="primary">
+    <div class="modal-dialog modal-center modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title text-center">${ 'CHOOSE YOUR COUNTRY' @ i18n }</h3>
+            </div>
+            <div class="modal-body">
+                <sly data-sly-resource="${'./languagenavigation' @ resourceType='weretail/components/structure/languagenavigation', decoration=true}"/>
+            </div>
+        </div>
+        <div class="modal-after">
+            <a href="#" data-dismiss="modal"><i class="we-Icon we-Icon--close-alt"></i> ${ 'Close' @ i18n }</a>
+        </div>
+    </div>
+</div><!-- /.we-LanguageModal -->

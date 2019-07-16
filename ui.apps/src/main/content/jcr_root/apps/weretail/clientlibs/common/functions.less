@@ -1,0 +1,49 @@
+/*
+ *  Copyright 2016 Adobe Systems Incorporated
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
+// ............................................................
+// .for
+
+.for(@i, @n) {.-each(@i)}
+.for(@n)     when (isnumber(@n)) {.for(1, @n)}
+.for(@i, @n) when not (@i = @n)  {
+    .for((@i + (@n - @i) / abs(@n - @i)), @n);
+}
+
+// ............................................................
+// .for-each
+
+.for(@array)   when (default()) {.for-impl_(length(@array))}
+.for-impl_(@i) when (@i > 1)    {.for-impl_((@i - 1))}
+.for-impl_(@i) when (@i > 0)    {.-each(extract(@array, @i))}
+
+// ............................................................
+// .font-face
+
+.font-face(@name, @family, @weight: normal, @style: normal, @version: 1.0) {
+    @font-face {
+        font-family: '@{family}';
+        src: url('../fonts/@{name}.eot?v=@{version}');
+        src: url('../fonts/@{name}.eot?#iefix&v=@{version}') format('embedded-opentype'),
+        url('../fonts/@{name}.woff2?v=@{version}') format('woff2'),
+        url('../fonts/@{name}.woff?v=@{version}') format('woff'),
+        url('../fonts/@{name}.ttf?v=@{version}') format('truetype'),
+        url('../fonts/@{name}.svg?v=@{version}#@{name}') format('svg');
+        //  src: url('@{name}/FontAwesome.otf') format('opentype'); // used when developing fonts
+        font-weight: @weight;
+        font-style: @style;
+    }
+}

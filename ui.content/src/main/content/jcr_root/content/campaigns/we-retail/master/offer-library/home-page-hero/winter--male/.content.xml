@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:cloudserviceconfigs="[[]]"
+        cq:lastModified="{Date}2016-05-09T15:05:34.176+02:00"
+        cq:lastModifiedBy="admin"
+        cq:template="/libs/cq/personalization/templates/teaser"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="Winter Collection for Men"
+        sling:resourceType="cq/personalization/components/teaserpage">
+        <par
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="foundation/components/parsys">
+            <hero_image
+                jcr:created="{Date}2015-11-04T00:14:44.088+01:00"
+                jcr:createdBy="admin"
+                jcr:lastModified="{Date}2016-05-09T14:38:27.498+02:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="weretail/components/content/heroimage"
+                buttonLabel="Shop now"
+                buttonLinkTo="/content/we-retail/language-masters/en/women"
+                fileReference="/content/dam/we-retail/en/activities/skiing/skiing-male-winter.jpg"
+                heading="All-new winter collection 2016"
+                title="BUILD FOR THE COLDEST WINTER ON EARTH"
+                useFullWidth="true"/>
+        </par>
+    </jcr:content>
+</jcr:root>
