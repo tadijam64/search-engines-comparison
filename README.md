@@ -1,3 +1,16 @@
+#Apache Lucene, Apache Solr and Elasticsearch comparison on AEM 6.4
+Goal of this project is to explore capabilities of ***search engines*** mentioned in title on different types of content and with different technical cases
+together with their behaviour on AEM's technology stack.
+
+This project is practical part of Master's Thesis "***Implementing Search Engines in Adobe Experience Manager***" on Faculty of Organization and Informatics.
+
+Since proper testing of search engine's capabilities, the one needs large amount of data. To avoid thinking and planing of all of the content on site,
+decision was made to use existing AEM reference site - We Retail.
+
+The whole Master's Thesis will be published here as soon as the project is done.
+
+Copy of original readme file of ***We Retail*** project follows:
+
 # We.Retail
 [![Build Status](https://travis-ci.org/Adobe-Marketing-Cloud/aem-sample-we-retail.png?branch=master)](https://travis-ci.org/Adobe-Marketing-Cloud/aem-sample-we-retail)
 
