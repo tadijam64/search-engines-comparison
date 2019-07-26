@@ -4,8 +4,7 @@ Goal of this project is to explore capabilities of ***search engines*** mentione
 
 This project is practical part of Master's Thesis "***Implementing Search Engines in Adobe Experience Manager***" on Faculty of Organization and Informatics.
 
-Since proper testing of search engine's capabilities, the one needs large amount of data. To avoid thinking and planing of all of the content on site,
-decision was made to use existing AEM reference site - We Retail.
+Proper testing of search engine's capabilities requires large amount of data. To avoid thinking and planing of all content on site, existing AEM reference site - We Retail is used.
 
 The whole Master's Thesis will be published here as soon as the project is done.
 
