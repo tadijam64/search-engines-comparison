@@ -1,6 +1,6 @@
-#Apache Lucene, Apache Solr and Elasticsearch comparison on AEM 6.4
-Goal of this project is to explore capabilities of ***search engines*** mentioned in title on different types of content and with different technical cases
-together with their behaviour on AEM's technology stack.
+# Apache Lucene, Apache Solr and Elasticsearch comparison on AEM 6.4
+
+Goal of this project is to explore capabilities of ***search engines*** mentioned in title on different types of content and with different technical cases, together with their behaviour on AEM's technology stack.
 
 This project is practical part of Master's Thesis "***Implementing Search Engines in Adobe Experience Manager***" on Faculty of Organization and Informatics.
 
