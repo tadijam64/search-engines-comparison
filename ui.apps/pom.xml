@@ -115,14 +115,18 @@
                 <artifactId>content-package-maven-plugin</artifactId>
                 <extensions>true</extensions>
                 <configuration>
-                    <filterSource>${basedir}/META-INF/vault/filter.xml</filterSource>
-                    <verbose>true</verbose>
                     <failOnError>true</failOnError>
                     <group>adobe/aem6/sample</group>
                     <properties>
                         <acHandling>merge_preserve</acHandling>
                     </properties>
-                    <failOnMissingEmbed>true</failOnMissingEmbed>
+                    <embeddeds>
+                        <embedded>
+                            <groupId>com.adobe.cq.sample</groupId>
+                            <artifactId>we.retail.core</artifactId>
+                            <target>/apps/weretail/install</target>
+                        </embedded>
+                    </embeddeds>
                     <dependencies>
                         <dependency>
                             <group>day/cq60/product</group>
@@ -225,6 +229,12 @@
     <!-- ====================================================================== -->
     <dependencies>
         <dependency>
+            <groupId>com.adobe.cq.sample</groupId>
+            <artifactId>we.retail.core</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>com.adobe.aem</groupId>
             <artifactId>uber-jar</artifactId>
             <classifier>apis</classifier>
@@ -233,7 +243,6 @@
             <groupId>javax.jcr</groupId>
             <artifactId>jcr</artifactId>
         </dependency>
-
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
