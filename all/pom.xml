@@ -83,6 +83,11 @@
                             <artifactId>we.retail.commons.content</artifactId>
                             <filter>true</filter>
                         </subPackage>
+                        <subPackage>
+                            <groupId>com.adobe.cq</groupId>
+                            <artifactId>core.wcm.components.all</artifactId>
+                            <filter>true</filter>
+                        </subPackage>
                     </subPackages>
                     <dependencies>
                         <dependency>
@@ -172,6 +177,12 @@
             <groupId>com.adobe.cq.sample</groupId>
             <artifactId>we.retail.config</artifactId>
             <version>${project.version}</version>
+            <type>zip</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.adobe.cq</groupId>
+            <artifactId>core.wcm.components.all</artifactId>
             <type>zip</type>
             <scope>provided</scope>
         </dependency>
