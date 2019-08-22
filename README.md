@@ -8,7 +8,7 @@ Proper testing of search engine's capabilities requires large amount of data. To
 
 The whole Master's Thesis will be published here as soon as the project is done.
 
-Key words: **Apache Lucene*, Apache Solr, Elasticsearch**, AEM, search engines
+Key words: ***Apache Lucene, Apache Solr, Elasticsearch***, AEM, search engines
 
 Copy of original readme file of ***We Retail*** project follows:
 
