@@ -11,4 +11,16 @@
         jcr:primaryType="sling:MessageEntry"
         sling:key="size"
         sling:message="Sizes"/>
+    <searchEnginesTitle
+        jcr:primaryType="sling:MessageEntry"
+        sling:key="searchEnginesTitle"
+        sling:message="Search engines testing"/>
+    <searchEnginesSectionTitle
+        jcr:primaryType="sling:MessageEntry"
+        sling:key="searchEnginesSectionTitle"
+        sling:message="Properties needed for testing capabilities of different search engines"/>
+    <searchDescriptionPlaceholder
+        jcr:primaryType="sling:MessageEntry"
+        sling:key="searchDescriptionPlaceholder"
+        sling:message="Describe what is this page about"/>
 </jcr:root>
