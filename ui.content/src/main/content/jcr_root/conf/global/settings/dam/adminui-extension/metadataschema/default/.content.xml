@@ -841,8 +841,8 @@
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="dam/gui/components/admin/schemafield"
                                     class="searchEngines"
-                                    fieldDescription="Properties for testing performance of different search engines"
-                                    fieldLabel="Search related properties"
+                                    fieldDescription="sectionFieldDescription"
+                                    fieldLabel="sectionFieldLabel"
                                     resourceType="dam/gui/coral/components/admin/schemaforms/formbuilder/sectionfield">
                                     <granite:data
                                         jcr:primaryType="nt:unstructured"
@@ -851,7 +851,7 @@
                                 <description
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="dam/gui/components/admin/schemafield"
-                                    fieldLabel="Description"
+                                    fieldLabel="descriptionFieldLabel"
                                     name="./jcr:content/assetDescription"
                                     resourceType="granite/ui/components/coral/foundation/form/textfield">
                                     <granite:data
