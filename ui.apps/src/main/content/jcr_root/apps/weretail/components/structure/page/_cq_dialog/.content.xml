@@ -115,7 +115,7 @@
                                         <items jcr:primaryType="nt:unstructured">
                                             <searchDescription
                                                 jcr:primaryType="nt:unstructured"
-                                                fieldLabel="Page description"
+                                                fieldLabel="searchPageDescription"
                                                 name="./searchDescription"
                                                 emptyText="searchDescriptionPlaceholder"
                                                 sling:resourceType="granite/ui/components/foundation/form/textfield"/>
