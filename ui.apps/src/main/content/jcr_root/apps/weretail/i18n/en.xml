@@ -19,10 +19,22 @@
         jcr:primaryType="sling:MessageEntry"
         sling:key="searchEnginesSectionTitle"
         sling:message="Properties needed for testing capabilities of different search engines"/>
+    <searchPageDescription_fieldLabel
+        jcr:primaryType="sling:MessageEntry"
+        sling:key="searchPageDescription"
+        sling:message="Page description"/>
     <searchDescriptionPlaceholder
         jcr:primaryType="sling:MessageEntry"
         sling:key="searchDescriptionPlaceholder"
         sling:message="Describe what is this page about"/>
+    <searchManualCreationDate_fieldLabel
+        jcr:primaryType="sling:MessageEntry"
+        sling:key="searchManualCreationDate"
+        sling:message="Manual creation date"/>
+    <pageImportanceRank_fieldLabel
+        jcr:primaryType="sling:MessageEntry"
+        sling:key="pageImportanceRank"
+        sling:message="Page importance rank"/>
     <searchRelatedSectionAssets_fieldDescription
         jcr:primaryType="sling:MessageEntry"
         sling:key="sectionFieldDescription"
@@ -35,4 +47,16 @@
         jcr:primaryType="sling:MessageEntry"
         sling:key="descriptionFieldLabel"
         sling:message="Description"/>
+    <searchRelatedCreationDateAssets_fieldLabel
+        jcr:primaryType="sling:MessageEntry"
+        sling:key="creationDateFieldLabel"
+        sling:message="Creation date"/>
+    <sellingPriorityAssets_fieldDescription
+        jcr:primaryType="sling:MessageEntry"
+        sling:key="sellingPriorityFieldDescription"
+        sling:message="Importance of this asset"/>
+    <sellingPriorityAssets_fieldLabel
+        jcr:primaryType="sling:MessageEntry"
+        sling:key="sellingPriorityFieldLabel"
+        sling:message="Selling priority"/>
 </jcr:root>

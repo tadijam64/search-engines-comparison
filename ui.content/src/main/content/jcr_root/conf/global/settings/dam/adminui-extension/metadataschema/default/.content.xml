@@ -53,9 +53,7 @@
                                     resourceType="granite/ui/components/coral/foundation/form/textfield">
                                     <granite:data
                                         jcr:primaryType="nt:unstructured"
-                                        metaType="text"
-                                        requiredCascading="default"
-                                        visibilityCascading="default"/>
+                                        metaType="text"/>
                                 </description>
                                 <format
                                     jcr:primaryType="nt:unstructured"
@@ -837,6 +835,14 @@
                                         jcr:primaryType="nt:unstructured"
                                         metaType="assetrating"/>
                                 </rating>
+                            </items>
+                        </col2>
+                        <col3
+                            granite:rel="aem-assets-metadata-form-column"
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/container"
+                            listOrder="2">
+                            <items jcr:primaryType="nt:unstructured">
                                 <searchRelatedSection
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="dam/gui/components/admin/schemafield"
@@ -848,6 +854,21 @@
                                         jcr:primaryType="nt:unstructured"
                                         metaType="section"/>
                                 </searchRelatedSection>
+                                <creationDate
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    displayedFormat="YYYY-MM-DD HH:mm"
+                                    fieldLabel="creationDateFieldLabel"
+                                    name="./jcr:content/onTime"
+                                    resourceType="granite/ui/components/coral/foundation/form/datepicker"
+                                    type="datetime">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="datepicker"
+                                        requiredCascading="default"
+                                        typeHint="Date"
+                                        visibilityCascading="default"/>
+                                </creationDate>
                                 <description
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="dam/gui/components/admin/schemafield"
@@ -860,19 +881,20 @@
                                         requiredCascading="default"
                                         visibilityCascading="default"/>
                                 </description>
-                            </items>
-                        </col2>
-                        <col3
-                            granite:rel="aem-assets-metadata-form-column"
-                            jcr:primaryType="nt:unstructured"
-                            sling:resourceType="granite/ui/components/coral/foundation/container"
-                            listOrder="2"/>
-                        <col4
-                            granite:rel="aem-assets-metadata-form-column"
-                            jcr:primaryType="nt:unstructured"
-                            sling:resourceType="granite/ui/components/coral/foundation/container"
-                            listOrder="3">
-                            <items jcr:primaryType="nt:unstructured">
+                                <sellingPriority
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    defaultValue=" "
+                                    fieldDescription="sellingPriorityFieldDescription"
+                                    fieldLabel="sellingPriorityFieldLabel"
+                                    name="./jcr:content/sellingPriority"
+                                    resourceType="granite/ui/components/coral/foundation/form/numberfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="number"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </sellingPriority>
                                 <header
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="dam/gui/components/admin/schemafield"
@@ -898,7 +920,12 @@
                                         name="./jcr:content/metadata/dam:search_promote"/>
                                 </search_promote>
                             </items>
-                        </col4>
+                        </col3>
+                        <col4
+                            granite:rel="aem-assets-metadata-form-column"
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/container"
+                            listOrder="3"/>
                     </items>
                 </tab2>
                 <tab3
