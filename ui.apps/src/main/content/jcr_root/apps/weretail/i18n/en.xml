@@ -19,7 +19,7 @@
         jcr:primaryType="sling:MessageEntry"
         sling:key="searchEnginesSectionTitle"
         sling:message="Properties needed for testing capabilities of different search engines"/>
-    <searchPageDescription
+    <searchPageDescription_fieldLabel
         jcr:primaryType="sling:MessageEntry"
         sling:key="searchPageDescription"
         sling:message="Page description"/>
@@ -27,6 +27,14 @@
         jcr:primaryType="sling:MessageEntry"
         sling:key="searchDescriptionPlaceholder"
         sling:message="Describe what is this page about"/>
+    <searchManualCreationDate_fieldLabel
+        jcr:primaryType="sling:MessageEntry"
+        sling:key="searchManualCreationDate"
+        sling:message="Manual creation date"/>
+    <pageImportanceRank_fieldLabel
+        jcr:primaryType="sling:MessageEntry"
+        sling:key="pageImportanceRank"
+        sling:message="Page importance rank"/>
     <searchRelatedSectionAssets_fieldDescription
         jcr:primaryType="sling:MessageEntry"
         sling:key="sectionFieldDescription"

@@ -119,6 +119,24 @@
                                                 name="./searchDescription"
                                                 emptyText="searchDescriptionPlaceholder"
                                                 sling:resourceType="granite/ui/components/foundation/form/textfield"/>
+                                            <manualCreationDate
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/form/datepicker"
+                                                displayedFormat="MMMM DD, YYYY hh:mm a"
+                                                displayTimezoneMessage="{Boolean}true"
+                                                fieldLabel="searchManualCreationDate"
+                                                name="./manualCreationDate"
+                                                renderReadOnly="{Boolean}true"
+                                                type="datetime"/>
+                                            <pageImportanceRank
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/form/numberfield"
+                                                fieldLabel="pageImportanceRank"
+                                                defaultValue="0"
+                                                min="0"
+                                                max="10"
+                                                step="1"
+                                                name="./pageImportanceRank"/>
                                         </items>
                                     </section>
                                 </items>
