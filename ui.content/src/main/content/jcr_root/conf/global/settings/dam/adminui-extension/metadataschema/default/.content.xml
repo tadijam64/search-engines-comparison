@@ -861,7 +861,8 @@
                                     fieldLabel="creationDateFieldLabel"
                                     name="./jcr:content/onTime"
                                     resourceType="granite/ui/components/coral/foundation/form/datepicker"
-                                    type="datetime">
+                                    type="datetime"
+                                    value="{Date}2019-01-01T00:00:00.000+02:00">
                                     <granite:data
                                         jcr:primaryType="nt:unstructured"
                                         metaType="datepicker"
@@ -874,7 +875,8 @@
                                     sling:resourceType="dam/gui/components/admin/schemafield"
                                     fieldLabel="descriptionFieldLabel"
                                     name="./jcr:content/assetDescription"
-                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                    value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&#xa;">
                                     <granite:data
                                         jcr:primaryType="nt:unstructured"
                                         metaType="text"
@@ -888,7 +890,8 @@
                                     fieldDescription="sellingPriorityFieldDescription"
                                     fieldLabel="sellingPriorityFieldLabel"
                                     name="./jcr:content/sellingPriority"
-                                    resourceType="granite/ui/components/coral/foundation/form/numberfield">
+                                    resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                                    value="{Long}0">
                                     <granite:data
                                         jcr:primaryType="nt:unstructured"
                                         metaType="number"
