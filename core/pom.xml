@@ -32,13 +32,6 @@
     <name>We.Retail - Core</name>
     <description>Core bundle for We.Retail</description>
 
-    <scm>
-        <connection>scm:git:https://github.com/Adobe-Marketing-Cloud/aem-sample-we-retail.git</connection>
-        <developerConnection>scm:git:git@github.com:Adobe-Marketing-Cloud/aem-sample-we-retail.git</developerConnection>
-        <url>https://github.com/Adobe-Marketing-Cloud/aem-sample-we-retail/tree/master/core</url>
-        <tag>we.retail.reactor-3.0.0</tag>
-    </scm>
-
     <build>
         <plugins>
             <plugin>
@@ -49,6 +42,15 @@
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
                 <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <id>bundle-manifest</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>manifest</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
                     <instructions>
                         <!-- <Embed-Dependency> artifactId1, artifactId2;inline=true </Embed-Dependency> -->
@@ -95,10 +97,6 @@
             <artifactId>org.apache.felix.scr.annotations</artifactId>
         </dependency>
         <dependency>
-            <groupId>biz.aQute</groupId>
-            <artifactId>bndlib</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>osgi.core</artifactId>
         </dependency>
@@ -109,6 +107,10 @@
         <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>osgi.annotation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>biz.aQute</groupId>
+            <artifactId>bndlib</artifactId>
         </dependency>
         <dependency>
             <groupId>javax.inject</groupId>
@@ -170,6 +172,27 @@
             <artifactId>commons-imaging</artifactId>
             <version>1.0-R1534292</version>
             <scope>test</scope>
+        </dependency>
+        <!-- Jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <scope>provided</scope>
         </dependency>
         <!--
             AEM APIs; make sure to not move this bundle upper in the list so that newer APIs available in AEM but not in the Uber

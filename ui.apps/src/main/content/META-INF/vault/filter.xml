@@ -15,11 +15,7 @@
   ~ limitations under the License.
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <workspaceFilter version="1.0">
-    <filter root="/apps/weretail/clientlibs"/>
-    <filter root="/apps/weretail/components"/>
-    <filter root="/apps/weretail/gui"/>
-    <filter root="/apps/weretail/i18n"/>
-
+    <filter root="/apps/weretail"/>
     <filter root="/apps/public/weretail"/>
     <filter root="/var/commerce/payment-methods/we-retail"/>
     <filter root="/var/commerce/shipping-methods/we-retail"/>

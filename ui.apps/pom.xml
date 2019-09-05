@@ -35,13 +35,6 @@
     <name>We.Retail - UI apps</name>
     <description>UI apps package for We.Retail</description>
 
-    <scm>
-        <connection>scm:git:https://github.com/Adobe-Marketing-Cloud/aem-sample-we-retail.git</connection>
-        <developerConnection>scm:git:git@github.com:Adobe-Marketing-Cloud/aem-sample-we-retail.git</developerConnection>
-        <url>https://github.com/Adobe-Marketing-Cloud/aem-sample-we-retail/tree/master/ui.apps</url>
-      <tag>we.retail.reactor-3.0.0</tag>
-  </scm>
-
     <!-- ====================================================================== -->
     <!-- B U I L D   D E F I N I T I O N                                        -->
     <!-- ====================================================================== -->
@@ -115,14 +108,18 @@
                 <artifactId>content-package-maven-plugin</artifactId>
                 <extensions>true</extensions>
                 <configuration>
-                    <filterSource>${basedir}/META-INF/vault/filter.xml</filterSource>
-                    <verbose>true</verbose>
                     <failOnError>true</failOnError>
                     <group>adobe/aem6/sample</group>
                     <properties>
                         <acHandling>merge_preserve</acHandling>
                     </properties>
-                    <failOnMissingEmbed>true</failOnMissingEmbed>
+                    <embeddeds>
+                        <embedded>
+                            <groupId>com.adobe.cq.sample</groupId>
+                            <artifactId>we.retail.core</artifactId>
+                            <target>/apps/weretail/install</target>
+                        </embedded>
+                    </embeddeds>
                     <dependencies>
                         <dependency>
                             <group>day/cq60/product</group>
@@ -225,6 +222,12 @@
     <!-- ====================================================================== -->
     <dependencies>
         <dependency>
+            <groupId>com.adobe.cq.sample</groupId>
+            <artifactId>we.retail.core</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>com.adobe.aem</groupId>
             <artifactId>uber-jar</artifactId>
             <classifier>apis</classifier>
@@ -233,7 +236,6 @@
             <groupId>javax.jcr</groupId>
             <artifactId>jcr</artifactId>
         </dependency>
-
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>

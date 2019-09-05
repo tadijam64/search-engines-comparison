@@ -26,4 +26,5 @@
     </filter>
     <filter root="/content/projects/we-retail"/>
     <filter root="/home/groups/projects/admin/we_retail"/>
+    <filter root="/conf/global/settings/dam/adminui-extension/metadataschema/default"></filter>
 </workspaceFilter>

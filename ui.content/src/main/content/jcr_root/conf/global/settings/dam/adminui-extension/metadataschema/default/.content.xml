@@ -1,0 +1,1842 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="sling:Folder">
+    <jcr:content jcr:primaryType="nt:unstructured"/>
+    <items jcr:primaryType="nt:unstructured">
+        <tabs
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/coral/foundation/tabs"
+            size="L">
+            <items jcr:primaryType="nt:unstructured">
+                <tab1
+                    granite:rel="aem-assets-metadata-form-tab"
+                    jcr:primaryType="nt:unstructured"
+                    jcr:title="Basic"
+                    sling:resourceType="granite/ui/components/coral/foundation/container"
+                    listOrder="0">
+                    <granite:data
+                        jcr:primaryType="nt:unstructured"
+                        tabid="f84cc8d6-60ab-474e-bdf8-a0b7a434f289"/>
+                    <items jcr:primaryType="nt:unstructured">
+                        <col1
+                            granite:rel="aem-assets-metadata-form-column"
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/container"
+                            listOrder="0">
+                            <items jcr:primaryType="nt:unstructured">
+                                <header
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Metadata"
+                                    resourceType="dam/gui/coral/components/admin/schemaforms/formbuilder/sectionfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="section"/>
+                                </header>
+                                <title
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Title"
+                                    name="./jcr:content/metadata/dc:title"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </title>
+                                <description
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Description"
+                                    name="./jcr:content/metadata/dc:description"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"/>
+                                </description>
+                                <format
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    disabled="{Boolean}true"
+                                    fieldLabel="Type"
+                                    name="./jcr:content/metadata/dc:format"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </format>
+                                <language
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    emptyText="Select Option"
+                                    fieldLabel="Language"
+                                    name="./jcr:content/metadata/dc:language"
+                                    ordered="true"
+                                    resourceType="granite/ui/components/coral/foundation/form/select">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        choicesCascading="default"
+                                        metaType="dropdown"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <ar_tn
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Arabic (Tunisia)"
+                                            value="ar_tn"/>
+                                        <ar_ye
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Arabic (Yemen)"
+                                            value="ar_ye"/>
+                                        <be_by
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Belorussian (Belorussia)"
+                                            value="be_by"/>
+                                        <bg_bg
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Bulgarian (Bulgaria)"
+                                            value="bg_bg"/>
+                                        <ca_es
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Catalan (Spain)"
+                                            value="ca_es"/>
+                                        <cs_cz
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Czech (Czech Republic)"
+                                            value="cs_cz"/>
+                                        <da_dk
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Danish (Denmark)"
+                                            value="da_dk"/>
+                                        <de
+                                            jcr:primaryType="nt:unstructured"
+                                            text="German"
+                                            value="de"/>
+                                        <de_at
+                                            jcr:primaryType="nt:unstructured"
+                                            text="German (Austria)"
+                                            value="de_at"/>
+                                        <de_ch
+                                            jcr:primaryType="nt:unstructured"
+                                            text="German (Switzerland)"
+                                            value="de_ch"/>
+                                        <de_de
+                                            jcr:primaryType="nt:unstructured"
+                                            text="German (Germany)"
+                                            value="de_de"/>
+                                        <de_lu
+                                            jcr:primaryType="nt:unstructured"
+                                            text="German (Luxembourg)"
+                                            value="de_lu"/>
+                                        <el_gr
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Greek (Greece)"
+                                            value="el_gr"/>
+                                        <en
+                                            jcr:primaryType="nt:unstructured"
+                                            text="English"
+                                            value="en"/>
+                                        <en_au
+                                            jcr:primaryType="nt:unstructured"
+                                            text="English (Australia)"
+                                            value="en_au"/>
+                                        <en_ca
+                                            jcr:primaryType="nt:unstructured"
+                                            text="English (Canada)"
+                                            value="en_ca"/>
+                                        <en_gb
+                                            jcr:primaryType="nt:unstructured"
+                                            text="English (United Kingdom)"
+                                            value="en_gb"/>
+                                        <en_ie
+                                            jcr:primaryType="nt:unstructured"
+                                            text="English (Ireland)"
+                                            value="en_ie"/>
+                                        <en_in
+                                            jcr:primaryType="nt:unstructured"
+                                            text="English (India)"
+                                            value="en_in"/>
+                                        <en_nz
+                                            jcr:primaryType="nt:unstructured"
+                                            text="English (New Zealand)"
+                                            value="en_nz"/>
+                                        <en_us
+                                            jcr:primaryType="nt:unstructured"
+                                            text="English (United States)"
+                                            value="en_us"/>
+                                        <en_za
+                                            jcr:primaryType="nt:unstructured"
+                                            text="English (South Africa)"
+                                            value="en_za"/>
+                                        <es
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Spanish"
+                                            value="es"/>
+                                        <es_ar
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Spanish (Argentina)"
+                                            value="es_ar"/>
+                                        <es_bo
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Spanish (Bolivia)"
+                                            value="es_bo"/>
+                                        <es_cl
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Spanish (Chile)"
+                                            value="es_cl"/>
+                                        <es_co
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Spanish (Colombia)"
+                                            value="es_co"/>
+                                        <es_cr
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Spanish (Costa Rica)"
+                                            value="es_cr"/>
+                                        <es_do
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Spanish (Dominican Republic)"
+                                            value="es_do"/>
+                                        <es_ec
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Spanish (Ecuador)"
+                                            value="es_ec"/>
+                                        <es_es
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Spanish (Spain)"
+                                            value="es_es"/>
+                                        <es_gt
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Spanish (Guatemala)"
+                                            value="es_gt"/>
+                                        <es_hn
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Spanish (Honduras)"
+                                            value="es_hn"/>
+                                        <es_mx
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Spanish (Mexico)"
+                                            value="es_mx"/>
+                                        <es_ni
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Spanish (Nicaragua)"
+                                            value="es_ni"/>
+                                        <es_pa
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Spanish (Panama)"
+                                            value="es_pa"/>
+                                        <es_pe
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Spanish (Peru)"
+                                            value="es_pe"/>
+                                        <es_pr
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Spanish (Puerto Rico)"
+                                            value="es_pr"/>
+                                        <es_py
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Spanish (Paraguay)"
+                                            value="es_py"/>
+                                        <es_sv
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Spanish (El Salvador)"
+                                            value="es_sv"/>
+                                        <es_uy
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Spanish (Uruguay)"
+                                            value="es_uy"/>
+                                        <es_ve
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Spanish (Venezuela)"
+                                            value="es_ve"/>
+                                        <et_ee
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Estonian (Estonia)"
+                                            value="et_ee"/>
+                                        <fi_fi
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Finnish (Finland)"
+                                            value="fi_fi"/>
+                                        <fr
+                                            jcr:primaryType="nt:unstructured"
+                                            text="French"
+                                            value="fr"/>
+                                        <fr_be
+                                            jcr:primaryType="nt:unstructured"
+                                            text="French (Belgium)"
+                                            value="fr_be"/>
+                                        <fr_ca
+                                            jcr:primaryType="nt:unstructured"
+                                            text="French (Canada)"
+                                            value="fr_ca"/>
+                                        <fr_ch
+                                            jcr:primaryType="nt:unstructured"
+                                            text="French (Switzerland)"
+                                            value="fr_ch"/>
+                                        <fr_fr
+                                            jcr:primaryType="nt:unstructured"
+                                            text="French (France)"
+                                            value="fr_fr"/>
+                                        <fr_lu
+                                            jcr:primaryType="nt:unstructured"
+                                            text="French (Luxembourg)"
+                                            value="fr_lu"/>
+                                        <hi_in
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Hindi (India)"
+                                            value="hi_in"/>
+                                        <hr_hr
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Croatian (Croatia)"
+                                            value="hr_hr"/>
+                                        <hu_hu
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Hungarian (Hungary)"
+                                            value="hu_hu"/>
+                                        <is_is
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Icelandic (Iceland)"
+                                            value="is_is"/>
+                                        <it
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Italian"
+                                            value="it"/>
+                                        <it_ch
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Italian (Switzerland)"
+                                            value="it_ch"/>
+                                        <it_it
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Italian (Italy)"
+                                            value="it_it"/>
+                                        <iw_il
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Hebrew (Israel)"
+                                            value="iw_il"/>
+                                        <ja
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Japanese"
+                                            value="ja"/>
+                                        <ja_jp
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Japanese (Japan)"
+                                            value="ja_jp"/>
+                                        <ko_kr
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Korean (South Korea)"
+                                            value="ko_kr"/>
+                                        <lt_lt
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Lithuanian (Lithuania)"
+                                            value="lt_lt"/>
+                                        <lv_lv
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Latvian (Latvia)"
+                                            value="lv_lv"/>
+                                        <mk_mk
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Macedonian (Macedonia)"
+                                            value="mk_mk"/>
+                                        <nl_be
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Dutch (Belgium)"
+                                            value="nl_be"/>
+                                        <nl_nl
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Dutch (Netherlands)"
+                                            value="nl_nl"/>
+                                        <no_no
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Norwegian (Bokmål) (Norway)"
+                                            value="no_no"/>
+                                        <no_no_ny
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Norwegian (Nynorsk) (Norway)"
+                                            value="no_no_ny"/>
+                                        <pl_pl
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Polish (Poland)"
+                                            value="pl_pl"/>
+                                        <pt
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Portuguese"
+                                            value="pt"/>
+                                        <pt_br
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Portuguese (Brazil)"
+                                            value="pt_br"/>
+                                        <pt_pt
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Portuguese (Portugal)"
+                                            value="pt_pt"/>
+                                        <ro_ro
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Romanian (Romania)"
+                                            value="ro_ro"/>
+                                        <ru
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Russian"
+                                            value="ru"/>
+                                        <ru_ru
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Russian (Russia)"
+                                            value="ru_ru"/>
+                                        <sh_yu
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Serbo-Croatian (Yugoslavia)"
+                                            value="sh_yu"/>
+                                        <sk_sk
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Slovak (Slovakia)"
+                                            value="sk_sk"/>
+                                        <sl_si
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Slovenian (Slovenia)"
+                                            value="sl_si"/>
+                                        <sq_al
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Albanian (Albania)"
+                                            value="sq_al"/>
+                                        <sr_yu
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Serbian (Cyrillic) (Yugoslavia)"
+                                            value="sr_yu"/>
+                                        <sv
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Swedish"
+                                            value="sv"/>
+                                        <sv_se
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Swedish (Sweden)"
+                                            value="sv_se"/>
+                                        <th_th
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Thai (Western digits) (Thailand)"
+                                            value="th_th"/>
+                                        <th_th_th
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Thai (Thai digits) (Thailand)"
+                                            value="th_th_th"/>
+                                        <tr_tr
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Turkish (Turkey)"
+                                            value="tr_tr"/>
+                                        <uk_ua
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Ukrainian (Ukraine)"
+                                            value="uk_ua"/>
+                                        <zh
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Chinese (Simplified)"
+                                            value="zh"/>
+                                        <zh_cn
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Simplified Chinese (China)"
+                                            value="zh_cn"/>
+                                        <zh_hk
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Chinese (Hong Kong)"
+                                            value="zh_hk"/>
+                                        <zh_tw
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Chinese (Taiwan)"
+                                            value="zh_tw"/>
+                                    </items>
+                                    <cascadeitems
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="dam/gui/coral/components/admin/schemaforms/formbuilder/cascadeitems"/>
+                                </language>
+                                <tags
+                                    cq:showOnCreate="{Boolean}true"
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    cq-msm-lockable="cq:tags"
+                                    fieldLabel="Tags"
+                                    metaType="tags"
+                                    multiple="true"
+                                    name="./jcr:content/metadata/cq:tags"
+                                    resourceType="cq/gui/components/coral/common/form/tagfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        visibilityCascading="default"/>
+                                </tags>
+                                <autotags
+                                    cq:showOnCreate="{Boolean}true"
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    allowCreate="{Boolean}true"
+                                    disabled="{Boolean}true"
+                                    fieldLabel="Smart Tags"
+                                    metaType="autotags"
+                                    name="./jcr:content/metadata/predictedTags"
+                                    resourceType="dam/gui/coral/components/admin/autotag">
+                                    <granite:rendercondition
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="dam/gui/coral/components/admin/autotag/autotagrendercondition"/>
+                                </autotags>
+                                <creation
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    disabled="{Boolean}true"
+                                    displayedFormat="YYYY-MM-DD HH:mm"
+                                    fieldLabel="Created"
+                                    name="./jcr:created"
+                                    resourceType="granite/ui/components/coral/foundation/form/datepicker"
+                                    type="datetime">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="datepicker"
+                                        requiredCascading="default"
+                                        typeHint="Date"
+                                        visibilityCascading="default"/>
+                                </creation>
+                                <creatortool
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Creator Tool"
+                                    name="./jcr:content/metadata/xmp:CreatorTool"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </creatortool>
+                                <reviewstatus
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    disabled="{Boolean}true"
+                                    emptyText="Select Option"
+                                    fieldLabel="Review Status"
+                                    name="./jcr:content/metadata/dam:status"
+                                    resourceType="granite/ui/components/coral/foundation/form/select">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        choicesCascading="default"
+                                        metaType="dropdown"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <approved
+                                            jcr:primaryType="nt:unstructured"
+                                            selected="{Boolean}false"
+                                            text="Approved"
+                                            value="approved"/>
+                                        <rejected
+                                            jcr:primaryType="nt:unstructured"
+                                            selected="{Boolean}false"
+                                            text="Rejected"
+                                            value="rejected"/>
+                                        <changesrequested
+                                            jcr:primaryType="nt:unstructured"
+                                            selected="{Boolean}false"
+                                            text="Changes Requested"
+                                            value="changesRequested"/>
+                                    </items>
+                                    <cascadeitems
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="dam/gui/coral/components/admin/schemaforms/formbuilder/cascadeitems"/>
+                                </reviewstatus>
+                            </items>
+                        </col1>
+                        <col2
+                            granite:rel="aem-assets-metadata-form-column"
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/container"
+                            listOrder="1">
+                            <items jcr:primaryType="nt:unstructured">
+                                <header
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Scheduled (de)activation"
+                                    resourceType="dam/gui/coral/components/admin/schemaforms/formbuilder/sectionfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="section"/>
+                                </header>
+                                <ontime
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    displayedFormat="YYYY-MM-DD HH:mm"
+                                    fieldLabel="On Time"
+                                    name="./jcr:content/onTime"
+                                    resourceType="granite/ui/components/coral/foundation/form/datepicker"
+                                    type="datetime">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="datepicker"
+                                        requiredCascading="default"
+                                        typeHint="Date"
+                                        visibilityCascading="default"/>
+                                </ontime>
+                                <offime
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    displayedFormat="YYYY-MM-DD HH:mm"
+                                    fieldLabel="Off Time"
+                                    name="./jcr:content/offTime"
+                                    resourceType="granite/ui/components/coral/foundation/form/datepicker"
+                                    type="datetime">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="datepicker"
+                                        requiredCascading="default"
+                                        typeHint="Date"
+                                        visibilityCascading="default"/>
+                                </offime>
+                            </items>
+                        </col2>
+                        <col3
+                            granite:rel="aem-assets-metadata-form-column"
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/container"
+                            listOrder="2">
+                            <items jcr:primaryType="nt:unstructured">
+                                <header
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    class="hide-in-bulkeditor"
+                                    fieldLabel="References"
+                                    resourceType="dam/gui/coral/components/admin/schemaforms/formbuilder/sectionfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="section"/>
+                                </header>
+                                <references
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    class="references-referencing"
+                                    fieldLabel="Referenced By"
+                                    resourceType="dam/gui/coral/components/admin/references">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="reference"/>
+                                </references>
+                                <referencing
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Dependencies"
+                                    resourceType="dam/gui/components/admin/referencing">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="referencing"/>
+                                </referencing>
+                                <header2
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    class="hide-in-bulkeditor"
+                                    fieldLabel="Related"
+                                    resourceType="dam/gui/coral/components/admin/schemaforms/formbuilder/sectionfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="section"/>
+                                </header2>
+                                <source
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    class="references-referencing"
+                                    fieldLabel="Source"
+                                    relationLabel="sources"
+                                    resourceType="dam/gui/components/admin/relation"
+                                    reverseRelationLabel="derived">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="sources"/>
+                                </source>
+                                <derived
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    class="references-referencing"
+                                    fieldLabel="Derived"
+                                    relationLabel="derived"
+                                    resourceType="dam/gui/components/admin/relation"
+                                    reverseRelationLabel="source">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="derived"/>
+                                </derived>
+                                <others
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    class="references-referencing"
+                                    fieldLabel="Others"
+                                    relationLabel="others"
+                                    resourceType="dam/gui/components/admin/relation">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="others"/>
+                                </others>
+                                <header3
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    class="hide-in-bulkeditor"
+                                    fieldLabel="Subassets"
+                                    resourceType="dam/gui/coral/components/admin/schemaforms/formbuilder/sectionfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="section"/>
+                                </header3>
+                            </items>
+                        </col3>
+                    </items>
+                </tab1>
+                <tab2
+                    granite:rel="aem-assets-metadata-form-tab"
+                    jcr:primaryType="nt:unstructured"
+                    jcr:title="Advanced"
+                    sling:resourceType="granite/ui/components/coral/foundation/container"
+                    listOrder="1">
+                    <granite:data
+                        jcr:primaryType="nt:unstructured"
+                        tabid="7c927721-1473-492f-b949-4fa2f82a32a0"/>
+                    <items jcr:primaryType="nt:unstructured">
+                        <col1
+                            granite:rel="aem-assets-metadata-form-column"
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/container"
+                            listOrder="0">
+                            <items jcr:primaryType="nt:unstructured">
+                                <header
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="License"
+                                    resourceType="dam/gui/coral/components/admin/schemaforms/formbuilder/sectionfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="section"/>
+                                </header>
+                                <creator
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Creator"
+                                    name="./jcr:content/metadata/dc:creator"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </creator>
+                                <contributor
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Contributor"
+                                    name="./jcr:content/metadata/dc:contributor"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </contributor>
+                                <copyright
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Copyright"
+                                    name="./jcr:content/metadata/dc:rights"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </copyright>
+                                <copyrightowner
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Copyright Owner"
+                                    name="./jcr:content/metadata/xmpRights:Owner"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </copyrightowner>
+                                <usageterms
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Usage Terms"
+                                    name="./jcr:content/metadata/xmpRights:UsageTerms"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </usageterms>
+                                <expires
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    displayedFormat="YYYY-MM-DD HH:mm"
+                                    fieldLabel="Expires"
+                                    minDate="today"
+                                    name="./jcr:content/metadata/prism:expirationDate"
+                                    resourceType="granite/ui/components/coral/foundation/form/datepicker"
+                                    type="datetime">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="datepicker"
+                                        requiredCascading="default"
+                                        typeHint="Date"
+                                        visibilityCascading="default"/>
+                                </expires>
+                                <id
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    disabled="{Boolean}true"
+                                    fieldLabel="ID"
+                                    name="./jcr:uuid"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </id>
+                            </items>
+                        </col1>
+                        <col2
+                            granite:rel="aem-assets-metadata-form-column"
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/container"
+                            listOrder="1">
+                            <items jcr:primaryType="nt:unstructured">
+                                <header
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Creative Rating"
+                                    resourceType="dam/gui/coral/components/admin/schemaforms/formbuilder/sectionfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="section"/>
+                                </header>
+                                <creativerating
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    defaultValue=" "
+                                    disabled="{Boolean}true"
+                                    name="./jcr:content/metadata/xmp:Rating"
+                                    resourceType="granite/ui/components/coral/foundation/form/numberfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="number"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </creativerating>
+                                <rating
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Rating"
+                                    resourceType="dam/gui/coral/components/admin/rating">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="assetrating"/>
+                                </rating>
+                            </items>
+                        </col2>
+                        <col3
+                            granite:rel="aem-assets-metadata-form-column"
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/container"
+                            listOrder="2">
+                            <items jcr:primaryType="nt:unstructured">
+                                <searchRelatedSection
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    class="searchEngines"
+                                    fieldDescription="sectionFieldDescription"
+                                    fieldLabel="sectionFieldLabel"
+                                    resourceType="dam/gui/coral/components/admin/schemaforms/formbuilder/sectionfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="section"/>
+                                </searchRelatedSection>
+                                <creationDate
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    displayedFormat="YYYY-MM-DD HH:mm"
+                                    fieldLabel="creationDateFieldLabel"
+                                    name="./jcr:content/onTime"
+                                    resourceType="granite/ui/components/coral/foundation/form/datepicker"
+                                    type="datetime"
+                                    value="{Date}2019-01-01T00:00:00.000+02:00">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="datepicker"
+                                        requiredCascading="default"
+                                        typeHint="Date"
+                                        visibilityCascading="default"/>
+                                </creationDate>
+                                <description
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="descriptionFieldLabel"
+                                    name="./jcr:content/assetDescription"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                    value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&#xa;">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </description>
+                                <sellingPriority
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    defaultValue=" "
+                                    fieldDescription="sellingPriorityFieldDescription"
+                                    fieldLabel="sellingPriorityFieldLabel"
+                                    name="./jcr:content/sellingPriority"
+                                    resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                                    value="{Long}0">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="number"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </sellingPriority>
+                                <header
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Elevate for search keywords"
+                                    resourceType="dam/gui/coral/components/admin/schemaforms/formbuilder/sectionfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="section"/>
+                                </header>
+                                <search_promote
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Search Promote"
+                                    resourceType="granite/ui/components/coral/foundation/form/multifield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="mvtext"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                    <field
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                        name="./jcr:content/metadata/dam:search_promote"/>
+                                </search_promote>
+                            </items>
+                        </col3>
+                        <col4
+                            granite:rel="aem-assets-metadata-form-column"
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/container"
+                            listOrder="3"/>
+                    </items>
+                </tab2>
+                <tab3
+                    granite:rel="aem-assets-metadata-form-tab"
+                    jcr:primaryType="nt:unstructured"
+                    jcr:title="IPTC"
+                    sling:resourceType="granite/ui/components/coral/foundation/container"
+                    listOrder="2">
+                    <granite:data jcr:primaryType="nt:unstructured"/>
+                    <items jcr:primaryType="nt:unstructured">
+                        <col1
+                            granite:rel="aem-assets-metadata-form-column"
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/container"
+                            listOrder="0">
+                            <items jcr:primaryType="nt:unstructured">
+                                <header
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Contact"
+                                    resourceType="dam/gui/coral/components/admin/schemaforms/formbuilder/sectionfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="section"/>
+                                </header>
+                                <creatorjobtitle
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Creator's Job Title"
+                                    name="./jcr:content/metadata/photoshop:AuthorsPosition"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </creatorjobtitle>
+                                <address
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Address"
+                                    name="./jcr:content/metadata/Iptc4xmpCore:CreatorContactInfo/Iptc4xmpCore:CiAdrExtadr"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </address>
+                                <city
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="City"
+                                    name="./jcr:content/metadata/Iptc4xmpCore:CreatorContactInfo/Iptc4xmpCore:CiAdrCity"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </city>
+                                <state
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="State/Province"
+                                    name="./jcr:content/metadata/Iptc4xmpCore:CreatorContactInfo/Iptc4xmpCore:CiAdrRegion"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </state>
+                                <postalcode
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Postal Code"
+                                    name="./jcr:content/metadata/Iptc4xmpCore:CreatorContactInfo/Iptc4xmpCore:CiAdrPcode"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </postalcode>
+                                <country
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Country"
+                                    name="./jcr:content/metadata/Iptc4xmpCore:CreatorContactInfo/Iptc4xmpCore:CiAdrCtry"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </country>
+                                <phone
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Phone(s)"
+                                    name="./jcr:content/metadata/Iptc4xmpCore:CreatorContactInfo/Iptc4xmpCore:CiTelWork"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </phone>
+                                <email
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="E-Mail(s)"
+                                    name="./jcr:content/metadata/Iptc4xmpCore:CreatorContactInfo/Iptc4xmpCore:CiEmailWork"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </email>
+                                <website
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Website(s)"
+                                    name="./jcr:content/metadata/Iptc4xmpCore:CreatorContactInfo/Iptc4xmpCore:CiUrlWork"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </website>
+                            </items>
+                        </col1>
+                        <col2
+                            granite:rel="aem-assets-metadata-form-column"
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/container"
+                            listOrder="1"
+                            oice-options="on">
+                            <items jcr:primaryType="nt:unstructured">
+                                <header
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Image"
+                                    resourceType="dam/gui/coral/components/admin/schemaforms/formbuilder/sectionfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="section"/>
+                                </header>
+                                <datecreated
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    displayedFormat="YYYY-MM-DD HH:mm"
+                                    fieldLabel="Date Created"
+                                    name="./jcr:content/metadata/photoshop:DateCreated"
+                                    resourceType="granite/ui/components/coral/foundation/form/datepicker"
+                                    type="datetime">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="datepicker"
+                                        requiredCascading="default"
+                                        typeHint="Date"
+                                        visibilityCascading="default"/>
+                                </datecreated>
+                                <genre
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Intellectual Genre"
+                                    name="./jcr:content/metadata/Iptc4xmpCore:IntellectualGenre"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </genre>
+                                <scenecode
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    emptyText="Select Option"
+                                    fieldLabel="IPTC Scene Code"
+                                    name="./jcr:content/metadata/Iptc4xmpCore:Scene"
+                                    resourceType="granite/ui/components/coral/foundation/form/select">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        choicesCascading="default"
+                                        metaType="dropdown"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <_x0030_10100
+                                            jcr:primaryType="nt:unstructured"
+                                            text="headshot"
+                                            value="scn:010100"/>
+                                        <_x0030_10200
+                                            jcr:primaryType="nt:unstructured"
+                                            text="half-length"
+                                            value="scn:010200"/>
+                                        <_x0030_10300
+                                            jcr:primaryType="nt:unstructured"
+                                            text="full-length"
+                                            value="scn:010300"/>
+                                        <_x0030_10400
+                                            jcr:primaryType="nt:unstructured"
+                                            text="profile"
+                                            value="scn:010400"/>
+                                        <_x0030_10500
+                                            jcr:primaryType="nt:unstructured"
+                                            text="rear view"
+                                            value="scn:010500"/>
+                                        <_x0030_10600
+                                            jcr:primaryType="nt:unstructured"
+                                            text="single"
+                                            value="scn:010600"/>
+                                        <_x0030_10700
+                                            jcr:primaryType="nt:unstructured"
+                                            text="couple"
+                                            value="scn:010700,"/>
+                                        <_x0030_10800
+                                            jcr:primaryType="nt:unstructured"
+                                            text="two"
+                                            value="scn:010800"/>
+                                        <_x0030_10900
+                                            jcr:primaryType="nt:unstructured"
+                                            text="group"
+                                            value="scn:010900"/>
+                                        <_x0030_11000
+                                            jcr:primaryType="nt:unstructured"
+                                            text="general view"
+                                            value="scn:011000"/>
+                                        <_x0030_11100
+                                            jcr:primaryType="nt:unstructured"
+                                            text="panoramic view"
+                                            value="scn:011100"/>
+                                        <_x0030_11200
+                                            jcr:primaryType="nt:unstructured"
+                                            text="aerial view"
+                                            value="scn:011200"/>
+                                        <_x0030_11300
+                                            jcr:primaryType="nt:unstructured"
+                                            text="scn:011300"
+                                            value="under-water"/>
+                                        <_x0030_11400
+                                            jcr:primaryType="nt:unstructured"
+                                            text="night scene"
+                                            value="scn:011400"/>
+                                        <_x0030_11500
+                                            jcr:primaryType="nt:unstructured"
+                                            text="satellite"
+                                            value="scn:011500"/>
+                                        <_x0030_11600
+                                            jcr:primaryType="nt:unstructured"
+                                            text="exterior view"
+                                            value="scn:011600"/>
+                                        <_x0030_11700
+                                            jcr:primaryType="nt:unstructured"
+                                            text="interior view"
+                                            value="scn:011700"/>
+                                        <_x0030_11800
+                                            jcr:primaryType="nt:unstructured"
+                                            text="close-up"
+                                            value="scn:011800"/>
+                                        <_x0030_11900
+                                            jcr:primaryType="nt:unstructured"
+                                            text="action"
+                                            value="scn:011900"/>
+                                        <_x0030_12000
+                                            jcr:primaryType="nt:unstructured"
+                                            text="performing"
+                                            value="scn:012000"/>
+                                        <_x0030_12100
+                                            jcr:primaryType="nt:unstructured"
+                                            text="posing"
+                                            value="scn:012100"/>
+                                        <_x0030_12200
+                                            jcr:primaryType="nt:unstructured"
+                                            text="symbolic"
+                                            value="scn:012200"/>
+                                        <_x0030_12300
+                                            jcr:primaryType="nt:unstructured"
+                                            text="off-beat"
+                                            value="scn:012300"/>
+                                        <_x0030_12400
+                                            jcr:primaryType="nt:unstructured"
+                                            text="movie scene"
+                                            value="scn:012400"/>
+                                    </items>
+                                    <cascadeitems
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="dam/gui/coral/components/admin/schemaforms/formbuilder/cascadeitems"/>
+                                </scenecode>
+                                <sublocation
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Sublocation"
+                                    name="./jcr:content/metadata/Iptc4xmpCore:Location"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </sublocation>
+                                <imagecity
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="City"
+                                    name="./jcr:content/metadata/photoshop:City"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </imagecity>
+                                <imagestate
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="State/Province"
+                                    name="./jcr:content/metadata/photoshop:State"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </imagestate>
+                                <imagecountry
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Country"
+                                    name="./jcr:content/metadata/photoshop:Country"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </imagecountry>
+                                <isocountrycode
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="ISO Country Code"
+                                    name="./jcr:content/metadata/Iptc4xmpCore:CountryCode"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </isocountrycode>
+                            </items>
+                        </col2>
+                        <col3
+                            granite:rel="aem-assets-metadata-form-column"
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/container"
+                            listOrder="2">
+                            <items jcr:primaryType="nt:unstructured">
+                                <header
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Content and Status"
+                                    resourceType="dam/gui/coral/components/admin/schemaforms/formbuilder/sectionfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="section"/>
+                                </header>
+                                <headline
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Headline"
+                                    name="./jcr:content/metadata/photoshop:Headline"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </headline>
+                                <keywords
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Keywords"
+                                    resourceType="granite/ui/components/coral/foundation/form/multifield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="mvtext"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                    <field
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                        name="./jcr:content/metadata/dc:subject"/>
+                                </keywords>
+                                <subjectcode
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="IPTC Subject Code"
+                                    name="./jcr:content/metadata/Iptc4xmpCore:SubjectCode"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </subjectcode>
+                                <writerdescription
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Description Writer"
+                                    name="./jcr:content/metadata/photoshop:CaptionWriter"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </writerdescription>
+                                <jobidentifier
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Job Identifier"
+                                    name="./jcr:content/metadata/photoshop:TransmissionReference"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </jobidentifier>
+                                <instructions
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Instructions"
+                                    name="./jcr:content/metadata/photoshop:Instructions"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </instructions>
+                                <creditline
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Credit Line"
+                                    name="./jcr:content/metadata/photoshop:Credit"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </creditline>
+                                <source
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Source"
+                                    name="./jcr:content/metadata/photoshop:Source"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </source>
+                            </items>
+                        </col3>
+                    </items>
+                </tab3>
+                <tab4
+                    granite:rel="aem-assets-metadata-form-tab"
+                    jcr:primaryType="nt:unstructured"
+                    jcr:title="IPTC Extension"
+                    sling:resourceType="granite/ui/components/coral/foundation/container"
+                    listOrder="3">
+                    <granite:data jcr:primaryType="nt:unstructured"/>
+                    <items jcr:primaryType="nt:unstructured">
+                        <col1
+                            granite:rel="aem-assets-metadata-form-column"
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/container"
+                            listOrder="0">
+                            <items jcr:primaryType="nt:unstructured">
+                                <header
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Description of Image"
+                                    resourceType="dam/gui/coral/components/admin/schemaforms/formbuilder/sectionfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="section"/>
+                                </header>
+                                <personshown
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Person  Shown"
+                                    resourceType="granite/ui/components/coral/foundation/form/multifield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="mvtext"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                    <field
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                        name="./jcr:content/metadata/Iptc4xmpExt:PersonInImage"/>
+                                </personshown>
+                                <organisationimagename
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Name of Featured Organisation"
+                                    name="./jcr:content/metadata/Iptc4xmpExt:OrganisationInImageName"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </organisationimagename>
+                                <organisationimagecode
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Code of Featured Organisation"
+                                    name="./jcr:content/metadata/Iptc4xmpExt:OrganisationInImageCode"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </organisationimagecode>
+                            </items>
+                        </col1>
+                        <col2
+                            granite:rel="aem-assets-metadata-form-column"
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/container"
+                            listOrder="1">
+                            <items jcr:primaryType="nt:unstructured">
+                                <header
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="About Models in Image"
+                                    resourceType="dam/gui/coral/components/admin/schemaforms/formbuilder/sectionfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="section"/>
+                                </header>
+                                <modelinfo
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Additional Model Info"
+                                    name="./jcr:content/metadata/Iptc4xmpExt:AddlModelInfo"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </modelinfo>
+                                <modelage
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Model Age"
+                                    name="./jcr:content/metadata/Iptc4xmpExt:ModelAge"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </modelage>
+                                <modeldisclosure
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Minor Model Image Disclosure"
+                                    name="./jcr:content/metadata/plus:MinorModelAgeDisclosure"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </modeldisclosure>
+                                <modelreleasestatus
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Model Release Status"
+                                    name="./jcr:content/metadata/plus:ModelReleaseStatus"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </modelreleasestatus>
+                                <modelreleaseidentifier
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Model Release Identifier"
+                                    name="./jcr:content/metadata/plus:ModelReleaseID"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </modelreleaseidentifier>
+                            </items>
+                        </col2>
+                        <col3
+                            granite:rel="aem-assets-metadata-form-column"
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/container"
+                            listOrder="2">
+                            <items jcr:primaryType="nt:unstructured">
+                                <header
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Administrative and Rights Information"
+                                    resourceType="dam/gui/coral/components/admin/schemaforms/formbuilder/sectionfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="section"/>
+                                </header>
+                                <supplierid
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Supplier's Image ID"
+                                    name="./jcr:content/metadata/plus:ImageSupplierImageID"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </supplierid>
+                                <maxavailwidth
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    defaultValue=" "
+                                    fieldLabel="Max available Width"
+                                    name="./jcr:content/metadata/Iptc4xmpExt:MaxAvailWidth"
+                                    resourceType="granite/ui/components/coral/foundation/form/numberfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="number"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </maxavailwidth>
+                                <maxavailheight
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    defaultValue=" "
+                                    fieldLabel="Max. available Height"
+                                    name="./jcr:content/metadata/Iptc4xmpExt:MaxAvailHeight"
+                                    resourceType="granite/ui/components/coral/foundation/form/numberfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="number"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </maxavailheight>
+                                <digitalsourcetype
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Digital Source Type"
+                                    name="./jcr:content/metadata/Iptc4xmpExt:DigitalSourceType"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </digitalsourcetype>
+                                <propertyreleasestatus
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Property Release Status"
+                                    name="./jcr:content/metadata/plus:PropertyReleaseStatus"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </propertyreleasestatus>
+                                <propertyreleaseid
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Property Release Identifier"
+                                    name="./jcr:content/metadata/plus:PropertyReleaseID"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </propertyreleaseid>
+                            </items>
+                        </col3>
+                    </items>
+                </tab4>
+                <tab5
+                    granite:rel="aem-assets-metadata-form-tab"
+                    jcr:primaryType="nt:unstructured"
+                    jcr:title="Camera Data"
+                    sling:resourceType="granite/ui/components/coral/foundation/container"
+                    listOrder="4">
+                    <granite:data jcr:primaryType="nt:unstructured"/>
+                    <items jcr:primaryType="nt:unstructured">
+                        <col1
+                            granite:rel="aem-assets-metadata-form-column"
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/container"
+                            listOrder="0">
+                            <items jcr:primaryType="nt:unstructured">
+                                <header
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Camera Information test"
+                                    resourceType="dam/gui/coral/components/admin/schemaforms/formbuilder/sectionfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="section"/>
+                                </header>
+                                <make
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    disabled="{Boolean}true"
+                                    fieldLabel="Make"
+                                    name="./jcr:content/metadata/tiff:Make"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </make>
+                                <model
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    disabled="{Boolean}true"
+                                    fieldLabel="Model"
+                                    name="./jcr:content/metadata/tiff:Model"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </model>
+                                <owner
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    disabled="{Boolean}true"
+                                    fieldLabel="Owner"
+                                    name="./jcr:content/metadata/psAux:OwnerName"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </owner>
+                                <lens
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    disabled="{Boolean}true"
+                                    fieldLabel="Lens"
+                                    name="./jcr:content/metadata/psAux:Lens"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </lens>
+                            </items>
+                        </col1>
+                        <col2
+                            granite:rel="aem-assets-metadata-form-column"
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/container"
+                            listOrder="1">
+                            <items jcr:primaryType="nt:unstructured">
+                                <header
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    fieldLabel="Shot Information"
+                                    resourceType="dam/gui/coral/components/admin/schemaforms/formbuilder/sectionfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="section"/>
+                                </header>
+                                <focallength
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    disabled="{Boolean}true"
+                                    fieldLabel="Focal Length (in mm)"
+                                    name="./jcr:content/metadata/exif:FocalLength"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </focallength>
+                                <focallength35mm
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    disabled="{Boolean}true"
+                                    fieldLabel="Focal Length (in 35 mm)"
+                                    name="./jcr:content/metadata/exif:FocalLengthIn35mmFilm"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </focallength35mm>
+                                <exposure
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    disabled="{Boolean}true"
+                                    fieldLabel="Exposure Time (secs)"
+                                    name="./jcr:content/metadata/exif:ExposureTime"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </exposure>
+                                <fnumber
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    disabled="{Boolean}true"
+                                    fieldLabel="F-Number"
+                                    name="./jcr:content/metadata/exif:FNumber"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </fnumber>
+                                <iso
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    disabled="{Boolean}true"
+                                    fieldLabel="ISO"
+                                    name="./jcr:content/metadata/exifEX:PhotographicSensitivity"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </iso>
+                                <orientation
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    disabled="{Boolean}true"
+                                    fieldLabel="Orientation"
+                                    name="./jcr:content/metadata/tiff:Orientation"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </orientation>
+                                <resolution
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    disabled="{Boolean}true"
+                                    fieldLabel="Resolution (Pixels per Inch)"
+                                    name="./jcr:content/metadata/tiff:XResolution"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </resolution>
+                                <flash
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    disabled="{Boolean}true"
+                                    fieldLabel="Flash"
+                                    name="./jcr:content/metadata/exif:Flash/exif:Fired"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </flash>
+                            </items>
+                        </col2>
+                    </items>
+                </tab5>
+            </items>
+        </tabs>
+    </items>
+</jcr:root>
