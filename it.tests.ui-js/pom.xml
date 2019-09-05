@@ -35,13 +35,6 @@
     <name>We.Retail - JavaScript UI Integration Tests Package</name>
     <description>Package for JavaScript UI Integration Tests for We.Retail</description>
 
-    <scm>
-        <connection>scm:git:https://github.com/Adobe-Marketing-Cloud/aem-sample-we-retail.git</connection>
-        <developerConnection>scm:git:https://github.com/Adobe-Marketing-Cloud/aem-sample-we-retail.git</developerConnection>
-        <url>https://github.com/Adobe-Marketing-Cloud/aem-sample-we-retail/tree/master/it.tests.ui-js</url>
-        <tag>we.retail.reactor-3.0.0</tag>
-    </scm>
-
     <!-- ====================================================================== -->
     <!-- B U I L D D E F I N I T I O N -->
     <!-- ====================================================================== -->
