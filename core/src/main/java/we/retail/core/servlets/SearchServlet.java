@@ -176,7 +176,7 @@ public class SearchServlet extends SlingSafeMethodsServlet {
             resultsOffset = Long.parseLong(request.getParameter(PARAM_RESULTS_OFFSET));
         }
         Map<String, String> predicatesMap = new HashMap<>();
-        predicatesMap.put(PREDICATE_FULLTEXT, fulltext);
+        predicatesMap.put(PREDICATE_FULLTEXT, "*" + fulltext + "*");
         predicatesMap.put(PREDICATE_PATH, searchRootPagePath);
         predicatesMap.put(PREDICATE_TYPE, NameConstants.NT_PAGE);
         PredicateGroup predicates = PredicateConverter.createPredicates(predicatesMap);
