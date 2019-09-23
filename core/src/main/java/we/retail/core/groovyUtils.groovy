@@ -6,6 +6,9 @@ import javax.jcr.Node
 import com.day.cq.wcm.api.Page;
 import groovy.transform.Field;
 
+// Warning: set to FALSE in order to see test run. Set to true to apply the changes!
+shouldApplyChanges = false
+
 //Three random examples of properties
 @Field descriptionList = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Oh to talking improve produce in limited offices fifteen an. Wicket branch to answer do we. Place are decay men hours tiled.",
                           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. On no twenty spring of in esteem spirit likely estate. Continue new you declared differed learning bringing honoured. At mean mind so upon they rent am walk. Shortly am waiting inhabit smiling he chiefly of in. Lain tore time gone him his dear sure.",
