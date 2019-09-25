@@ -20,11 +20,10 @@
     <filter root="/content/catalogs/we-retail/en/website-catalog"/>
     <filter root="/content/catalogs/we-retail/en/website-template-pages"/>
     <filter root="/content/dam/collections/w/we-retail" mode="merge"/>
-    <filter root="/content/dam/projects/we-retail"/>
-    <filter root="/content/we-retail">
+    <filter root="/content/we-retail" mode="merge">
         <exclude pattern="/content/we-retail/us/en/community"/>
     </filter>
     <filter root="/content/projects/we-retail"/>
     <filter root="/home/groups/projects/admin/we_retail"/>
-    <filter root="/conf/global/settings/dam/adminui-extension/metadataschema/default"></filter>
+    <filter root="/conf/global/settings/dam/adminui-extension/metadataschema/default" mode="merge"></filter>
 </workspaceFilter>
