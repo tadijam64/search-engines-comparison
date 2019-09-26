@@ -1,3 +1,5 @@
+package we.retail.core.groovyScripts
+
 import org.apache.sling.api.resource.ModifiableValueMap
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.api.resource.ResourceResolver
