@@ -31,7 +31,8 @@ result.hits.each { hit ->
     }
 }
 
-session.save()
+// Uncomment this to applly changes on server
+//session.save()
 
 def setValuesToChildren(res){
     def r = new Random();
