@@ -1,3 +1,5 @@
+package we.retail.core.groovyScripts
+
 import org.apache.sling.api.resource.ModifiableValueMap
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.api.resource.ResourceResolver
@@ -24,6 +26,7 @@ noOfPages = 0
 path='/content/we-retail/';
 /*Iterate through all pages and set three new proeprties to random values from lists*/
 setPropertiesForAllPages();
+
 /*Save changes to the CRXDE*/
 session.save();
 
