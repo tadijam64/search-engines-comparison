@@ -30,6 +30,24 @@
                 <i class="cmp-search__clear-icon"></i>
             </button>
         </div>
+        <div>
+        <h3>Choose search options</h3>
+        <div style="display:inline-block;margin-right:10px;">
+            <select style="background-color:#D43732;" name = "searchContent">
+                <option value="pages" selected> Pages</option>
+                <option value="assets"> Assets</option>
+                <option value="allContent"> All content</option>
+            </select>
+        </div>
+
+        <div style="display:inline-block">
+            <select style="background-color:#D43732;" name = "searchEngine">
+                <option value="lucene" selected> Lucene</option>
+                <option value="solr"> Solr</option>
+                <option value="elasticsearch"> Elasticsearch</option>
+            </select>
+        </div>
+        </div>
     </form>
     <div class="cmp-search__results" data-cmp-hook-search="results" role="listbox" aria-multiselectable="false"></div>
     <sly data-sly-include="itemTemplate.html"/>
