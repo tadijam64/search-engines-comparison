@@ -61,6 +61,7 @@
                     <exclude>**/.DS_Store</exclude>
                     <exclude>**/target/**</exclude>
                     <exclude>**/pom.xml</exclude>
+                    <exclude>jcr_root/content/dam/we-retail/*</exclude>
                 </excludes>
             </resource>
         </resources>
