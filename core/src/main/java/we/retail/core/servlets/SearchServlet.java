@@ -33,6 +33,8 @@ import com.day.cq.search.Query;
 import com.day.cq.search.QueryBuilder;
 import com.day.cq.search.result.Hit;
 import com.day.cq.search.result.SearchResult;
+import com.day.cq.tagging.Tag;
+import com.day.cq.tagging.TagManager;
 import com.day.cq.wcm.api.LanguageManager;
 import com.day.cq.wcm.api.Page;
 import com.day.cq.wcm.api.PageManager;
@@ -72,6 +74,7 @@ public class SearchServlet extends SlingSafeMethodsServlet
     private static final String PROP_SEARCH_PAGES = "pages";
     private static final String PROP_SEARCH_ASSETS = "assets";
     private static final String PROP_SEARCH_CONTENT_TYPE = "searchContent";
+    private static final String PROP_SEARCH_TAGS = "tags";
     private static final long serialVersionUID = 5692888423980970123L;
 
     @Reference
@@ -183,7 +186,7 @@ public class SearchServlet extends SlingSafeMethodsServlet
             resultsOffset = Long.parseLong(request.getParameter(PARAM_RESULTS_OFFSET));
         }
 
-        predicatesMap.put(PREDICATE_FULLTEXT, fulltext);
+        predicatesMap.put(PREDICATE_FULLTEXT, "*" + fulltext + "*");
         String searchContentType = request.getParameter(PROP_SEARCH_CONTENT_TYPE);
 
         if (searchContentType.equalsIgnoreCase(PROP_SEARCH_ASSETS))
@@ -198,6 +201,21 @@ public class SearchServlet extends SlingSafeMethodsServlet
         }
         else
         {
+            if (searchContentType.equalsIgnoreCase(PROP_SEARCH_TAGS))
+            {
+                TagManager tagManager = request.getResource().getResourceResolver().adaptTo(TagManager.class);
+                Tag[] tags = tagManager.findTagsByTitle("*" + fulltext, null);
+                predicatesMap.clear();
+                if (tags.length >= 1)
+                {
+                    predicatesMap.put("tagid", tags[0].getTagID());
+                }
+                else
+                {
+                    predicatesMap.put("tagid", fulltext);
+                }
+                predicatesMap.put("tagid.property", "jcr:content/cq:tags");
+            }
             predicatesMap.put("group.p.or", "true"); //combine this group with OR
             predicatesMap.put("group.1_group.path", searchRootPagePath);
             predicatesMap.put("group.1_group.type", NT_PAGE);
