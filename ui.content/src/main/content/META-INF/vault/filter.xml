@@ -15,15 +15,14 @@
   ~ limitations under the License.
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <workspaceFilter version="1.0">
-    <filter root="/conf/we-retail"/>
-    <filter root="/content/campaigns/we-retail"/>
-    <filter root="/content/catalogs/we-retail/en/website-catalog"/>
-    <filter root="/content/catalogs/we-retail/en/website-template-pages"/>
-    <filter root="/content/dam/collections/w/we-retail" mode="merge"/>
+    <filter root="/conf/we-retail" />
+    <filter root="/content/campaigns/we-retail" />
+    <filter root="/content/catalogs/we-retail/en/website-catalog" />
+    <filter root="/content/catalogs/we-retail/en/website-template-pages" />
+    <filter root="/content/dam/collections/w/we-retail" mode="merge" />
     <filter root="/content/we-retail" mode="merge">
-        <exclude pattern="/content/we-retail/us/en/community"/>
+        <exclude pattern="/content/we-retail/us/en/community" />
     </filter>
-    <filter root="/content/projects/we-retail"/>
-    <filter root="/home/groups/projects/admin/we_retail"/>
-    <filter root="/conf/global/settings/dam/adminui-extension/metadataschema/default" mode="merge"/>
+    <filter root="/content/projects/we-retail" />
+    <filter root="/conf/global/settings/dam/adminui-extension/metadataschema/default" mode="merge" />
 </workspaceFilter>
