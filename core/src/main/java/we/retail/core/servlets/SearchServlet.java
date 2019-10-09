@@ -52,6 +52,7 @@ import static we.retail.core.util.SearchHelpers.getAsset;
 import static we.retail.core.util.SearchHelpers.getContentPolicyProperties;
 import static we.retail.core.util.SearchHelpers.getPage;
 import static we.retail.core.util.SearchHelpers.getSearchRootPagePath;
+import static we.retail.core.util.SolrUtils.PROP_SEARCH_ROOT_ASSETS;
 
 @Component(service = Servlet.class, property = { "sling.servlet.selectors=" + SearchServlet.DEFAULT_SELECTOR, "sling.servlet.resourceTypes=cq/Page",
   "sling.servlet.extensions=json", "sling.servlet.methods=" + HttpConstants.METHOD_GET })
@@ -70,7 +71,6 @@ public class SearchServlet extends SlingSafeMethodsServlet
     private static final int PROP_RESULTS_SIZE_DEFAULT = 10;
     private static final int PROP_SEARCH_TERM_MINIMUM_LENGTH_DEFAULT = 3;
     private static final String PROP_SEARCH_ROOT_DEFAULT = "/content";
-    private static final String PROP_SEARCH_ROOT_ASSETS = "/content/dam/we-retail";
     private static final String PROP_SEARCH_PAGES = "pages";
     private static final String PROP_SEARCH_ASSETS = "assets";
     private static final String PROP_SEARCH_CONTENT_TYPE = "searchContent";
@@ -87,7 +87,7 @@ public class SearchServlet extends SlingSafeMethodsServlet
     private LiveRelationshipManager relationshipManager;
 
     @Override
-    protected void doGet(@NotNull final SlingHttpServletRequest request, @NotNull final SlingHttpServletResponse response) throws IOException
+    protected void doGet(@NotNull SlingHttpServletRequest request, @NotNull SlingHttpServletResponse response) throws IOException
     {
         try
         {
@@ -203,16 +203,19 @@ public class SearchServlet extends SlingSafeMethodsServlet
         {
             if (searchContentType.equalsIgnoreCase(PROP_SEARCH_TAGS))
             {
-                TagManager tagManager = request.getResource().getResourceResolver().adaptTo(TagManager.class);
-                Tag[] tags = tagManager.findTagsByTitle("*" + fulltext, null);
                 predicatesMap.clear();
-                if (tags.length >= 1)
+                TagManager tagManager = request.getResource().getResourceResolver().adaptTo(TagManager.class);
+                if (tagManager != null)
                 {
-                    predicatesMap.put("tagid", tags[0].getTagID());
-                }
-                else
-                {
-                    predicatesMap.put("tagid", fulltext);
+                    Tag[] tags = tagManager.findTagsByTitle("*" + fulltext, null);
+                    if (tags.length >= 1)
+                    {
+                        predicatesMap.put("tagid", tags[0].getTagID());
+                    }
+                    else
+                    {
+                        predicatesMap.put("tagid", fulltext);
+                    }
                 }
                 predicatesMap.put("tagid.property", "jcr:content/cq:tags");
             }

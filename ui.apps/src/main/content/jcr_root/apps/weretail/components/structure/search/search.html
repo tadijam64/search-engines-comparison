@@ -23,26 +23,37 @@
                 <i class="cmp-search__clear-icon"></i>
             </button>
         </div>
-        <div>
-            <h3>Choose search options</h3>
-            <div style="display:inline-block;margin-right:10px;">
-                <select style="background-color:#D43732;" name="searchContent">
-                    <option value="pages" selected> Pages</option>
-                    <option value="assets"> Assets</option>
-                    <option value="allContent"> All content</option>
-                    <option value="tags"> Content with tag</option>
-                </select>
-            </div>
+        <h3>Choose search options</h3>
+        <div style="display:inline-block;margin-right:10px;">
+            <select style="background-color:#D43732;" name="searchContent">
+                <option value="pages" selected> Pages</option>
+                <option value="assets"> Assets</option>
+                <option value="allContent"> All content</option>
+                <option value="tags"> Content with tag</option>
+            </select>
+        </div>
 
-            <div style="display:inline-block">
-                <select style="background-color:#D43732;" name="searchEngine">
-                    <option value="lucene" selected> Lucene</option>
-                    <option value="solr"> Solr</option>
-                    <option value="elasticsearch"> Elasticsearch</option>
-                </select>
-            </div>
+        <div style="display:inline-block">
+            <select style="background-color:#D43732;" name="searchEngine">
+                <option value="lucene" selected> Lucene</option>
+                <option value="solr"> Solr</option>
+                <option value="elasticsearch"> Elasticsearch</option>
+            </select>
         </div>
     </form>
+
     <div class="cmp-search__results" data-cmp-hook-search="results" role="listbox" aria-multiselectable="false"></div>
     <sly data-sly-include="itemTemplate.html"/>
+
+    <form action="${currentPage.path @ addSelectors=['indexpages'], extension='json', suffix = search.relativePath}" autocomplete="off" method="get">
+        <h3>Solr collection management</h3>
+        <button name="indexType" type="submit" value="indexpages" style="background-color:#D43732; border-radius: 8px; display:inline-block;  margin-right:10px">
+            Index data
+        </button>
+        <button name="indexType" type="submit" value="deleteindexdata" style="background-color:#D43732; border-radius: 8px; display:inline-block;">
+            Delete index
+        </button>
+    </form>
+    <br>
 </section>
+
