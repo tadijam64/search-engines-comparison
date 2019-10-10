@@ -1,12 +1,10 @@
-package we.retail.core.groovyScripts
+package groovyScripts
 
+import groovy.transform.Field
 import org.apache.sling.api.resource.ModifiableValueMap
 import org.apache.sling.api.resource.Resource
-import org.apache.sling.api.resource.ResourceResolver
 
 import javax.jcr.Node
-import com.day.cq.wcm.api.Page;
-import groovy.transform.Field;
 
 //Three random examples of properties
 @Field descriptionList = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Oh to talking improve produce in limited offices fifteen an. Wicket branch to answer do we. Place are decay men hours tiled.",
@@ -23,7 +21,7 @@ import groovy.transform.Field;
 /*Flag to count the number of pages*/
 noOfPages = 0
 /*Pathfield which needs to be iterated for an operation*/
-path='/content/we-retail/';
+path = '/content/we-retail/';
 /*Iterate through all pages and set three new proeprties to random values from lists*/
 setPropertiesForAllPages();
 
@@ -33,7 +31,7 @@ session.save();
 println '----------------------------------------'
 println 'Number of pages: ' + noOfPages;
 
-def setPropertiesForAllPages(){
+def setPropertiesForAllPages() {
     def r = new Random();
     getPage(path).recurse
             { page ->
@@ -59,7 +57,7 @@ def setPropertiesForAllPages(){
                         ModifiableValueMap valueMap = child.adaptTo(ModifiableValueMap.class);
                         for (String key : valueMap.keySet()) {
                             String value = valueMap.get(key, String.class);
-                            println 'Key-'+key+' value-'+value
+                            println 'Key-' + key + ' value-' + value
                         }
                     }
                 }
