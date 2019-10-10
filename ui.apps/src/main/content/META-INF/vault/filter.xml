@@ -26,6 +26,4 @@
     <filter root="/apps/msm/we-retail/blueprintconfigs/weretail-italian" />
     <filter root="/apps/msm/we-retail/blueprintconfigs/weretail-spanish" />
 
-    <filter root="/oak:index" mode="merge" />
-
 </workspaceFilter>
