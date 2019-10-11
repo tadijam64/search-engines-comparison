@@ -25,26 +25,22 @@ import com.day.cq.wcm.msm.api.LiveRelationshipManager;
 
 public class SearchHelpers
 {
+    private SearchHelpers()
+    {
+    }
+
     public static String getSearchRootPagePath(String searchRoot, Page currentPage, LanguageManager languageManager, LiveRelationshipManager relationshipManager)
     {
         String searchRootPagePath = null;
         PageManager pageManager = currentPage.getPageManager();
-        if (StringUtils.isNotEmpty(searchRoot) && pageManager != null)
+        if (ExtendedStringUtils.isNotEmpty(searchRoot) && pageManager != null)
         {
             Page rootPage = pageManager.getPage(searchRoot);
             if (rootPage != null)
             {
                 Page searchRootLanguageRoot = languageManager.getLanguageRoot(rootPage.getContentResource());
                 Page currentPageLanguageRoot = languageManager.getLanguageRoot(currentPage.getContentResource());
-                RangeIterator liveCopiesIterator = null;
-                try
-                {
-                    liveCopiesIterator = relationshipManager.getLiveRelationships(currentPage.adaptTo(Resource.class), null, null);
-                }
-                catch (WCMException e)
-                {
-                    // ignore it
-                }
+                RangeIterator liveCopiesIterator = getLiveCopiesIterator(relationshipManager, currentPage);
                 if (searchRootLanguageRoot != null && currentPageLanguageRoot != null && !searchRootLanguageRoot.equals(currentPageLanguageRoot))
                 {
                     // check if there's a language copy of the search root
@@ -56,24 +52,45 @@ public class SearchHelpers
                 }
                 else if (liveCopiesIterator != null)
                 {
-                    while (liveCopiesIterator.hasNext())
-                    {
-                        LiveRelationship relationship = (LiveRelationship) liveCopiesIterator.next();
-                        if (currentPage.getPath().startsWith(relationship.getTargetPath() + "/"))
-                        {
-                            Page liveCopySearchRoot = pageManager.getPage(relationship.getTargetPath());
-                            if (liveCopySearchRoot != null)
-                            {
-                                rootPage = liveCopySearchRoot;
-                                break;
-                            }
-                        }
-                    }
+                    rootPage = getCurrentLiveCopyRoot(liveCopiesIterator, currentPage, pageManager, rootPage);
                 }
                 searchRootPagePath = rootPage.getPath();
             }
         }
         return searchRootPagePath;
+    }
+
+    private static Page getCurrentLiveCopyRoot(RangeIterator liveCopiesIterator, Page currentPage, PageManager pageManager, Page rootPage)
+    {
+        Page result = rootPage;
+        while (liveCopiesIterator.hasNext())
+        {
+            LiveRelationship relationship = (LiveRelationship) liveCopiesIterator.next();
+            if (currentPage.getPath().startsWith(relationship.getTargetPath() + "/"))
+            {
+                Page liveCopySearchRoot = pageManager.getPage(relationship.getTargetPath());
+                if (liveCopySearchRoot != null)
+                {
+                    result = liveCopySearchRoot;
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+
+    private static RangeIterator getLiveCopiesIterator(LiveRelationshipManager relationshipManager, Page currentPage)
+    {
+        RangeIterator result = null;
+        try
+        {
+            result = relationshipManager.getLiveRelationships(currentPage.adaptTo(Resource.class), null, null);
+        }
+        catch (WCMException e)
+        {
+            // ignore it
+        }
+        return result;
     }
 
     @Nullable
@@ -90,7 +107,7 @@ public class SearchHelpers
         return null;
     }
 
-    public static ValueMap getContentPolicyProperties(Resource searchResource, Resource requestedResource)
+    public static ValueMap getContentPolicyProperties(Resource searchResource)
     {
         ValueMap contentPolicyProperties = new ValueMapDecorator(new HashMap<>());
         ResourceResolver resourceResolver = searchResource.getResourceResolver();

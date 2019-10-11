@@ -95,13 +95,10 @@ public class PageListItemImpl implements ListItem
         while (result != null && StringUtils.isNotEmpty((redirectTarget = result.getProperties().get(PN_REDIRECT_TARGET, String.class))))
         {
             result = pageManager.getPage(redirectTarget);
-            if (result != null)
+            if (result != null && !redirectCandidates.add(result.getPath()))
             {
-                if (!redirectCandidates.add(result.getPath()))
-                {
-                    LOGGER.warn("Detected redirect loop for the following pages: {}.", redirectCandidates.toString());
-                    break;
-                }
+                LOGGER.warn("Detected redirect loop for the following pages: {}.", redirectCandidates);
+                break;
             }
         }
         return result;
