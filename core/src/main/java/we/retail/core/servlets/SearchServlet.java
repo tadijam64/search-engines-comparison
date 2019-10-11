@@ -42,7 +42,7 @@ import com.day.cq.wcm.api.Template;
 import com.day.cq.wcm.msm.api.LiveRelationshipManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import we.retail.core.util.StringUtils;
+import we.retail.core.util.ExtendedStringUtils;
 import we.retail.core.vo.AssetListItemImpl;
 import we.retail.core.vo.PageListItemImpl;
 
@@ -75,6 +75,7 @@ public class SearchServlet extends SlingSafeMethodsServlet
     private static final String PROP_SEARCH_ASSETS = "assets";
     private static final String PROP_SEARCH_CONTENT_TYPE = "searchContent";
     private static final String PROP_SEARCH_TAGS = "tags";
+    private static final String PREDICATE_TAG_ID = "tagid";
     private static final long serialVersionUID = 5692888423980970123L;
 
     @Reference
@@ -124,9 +125,9 @@ public class SearchServlet extends SlingSafeMethodsServlet
         Resource searchContentResource = null;
         RequestPathInfo requestPathInfo = request.getRequestPathInfo();
         Resource resource = request.getResource();
-        String relativeContentResource = StringUtils.removeStartingSlash(requestPathInfo.getSuffix());
+        String relativeContentResource = ExtendedStringUtils.removeStartingSlash(requestPathInfo.getSuffix());
 
-        if (StringUtils.isNotEmpty(relativeContentResource))
+        if (ExtendedStringUtils.isNotEmpty(relativeContentResource))
         {
             searchContentResource = resource.getChild(relativeContentResource);
             if (searchContentResource == null)
@@ -157,7 +158,7 @@ public class SearchServlet extends SlingSafeMethodsServlet
         if (searchResource != null)
         {
             ValueMap valueMap = searchResource.getValueMap();
-            ValueMap contentPolicyMap = getContentPolicyProperties(searchResource, request.getResource());
+            ValueMap contentPolicyMap = getContentPolicyProperties(searchResource);
             searchTermMinimumLength = valueMap.get(Search.PN_SEARCH_TERM_MINIMUM_LENGTH, contentPolicyMap.get(Search.PN_SEARCH_TERM_MINIMUM_LENGTH, PROP_SEARCH_TERM_MINIMUM_LENGTH_DEFAULT));
             resultsSize = valueMap.get(Search.PN_RESULTS_SIZE, contentPolicyMap.get(Search.PN_RESULTS_SIZE, PROP_RESULTS_SIZE_DEFAULT));
             String searchRoot = valueMap.get(Search.PN_SEARCH_ROOT, contentPolicyMap.get(Search.PN_SEARCH_ROOT, PROP_SEARCH_ROOT_DEFAULT));
@@ -168,7 +169,7 @@ public class SearchServlet extends SlingSafeMethodsServlet
             String languageRoot = this.languageManager.getLanguageRoot(currentPage.getContentResource()).getPath();
             searchRootPagePath = getSearchRootPagePath(languageRoot, currentPage, this.languageManager, this.relationshipManager);
         }
-        if (StringUtils.isEmpty(searchRootPagePath))
+        if (ExtendedStringUtils.isEmpty(searchRootPagePath))
         {
             searchRootPagePath = currentPage.getPath();
         }
@@ -204,17 +205,23 @@ public class SearchServlet extends SlingSafeMethodsServlet
             if (searchContentType.equalsIgnoreCase(PROP_SEARCH_TAGS))
             {
                 TagManager tagManager = request.getResource().getResourceResolver().adaptTo(TagManager.class);
-                Tag[] tags = tagManager.findTagsByTitle("*" + fulltext, null);
-                predicatesMap.clear();
-                if (tags.length >= 1)
+                Tag[] tags = null;
+                if (tagManager != null)
                 {
-                    predicatesMap.put("tagid", tags[0].getTagID());
+                    tags = tagManager.findTagsByTitle("*" + fulltext, null);
+                }
+                predicatesMap.clear();
+
+                if (tags != null && tags.length >= 1)
+                {
+                    predicatesMap.put(PREDICATE_TAG_ID, tags[0].getTagID());
                 }
                 else
                 {
-                    predicatesMap.put("tagid", fulltext);
+                    predicatesMap.put(PREDICATE_TAG_ID, fulltext);
                 }
-                predicatesMap.put("tagid.property", "jcr:content/cq:tags");
+
+                predicatesMap.put(PREDICATE_TAG_ID + ".property", "jcr:content/cq:tags");
             }
             predicatesMap.put("group.p.or", "true"); //combine this group with OR
             predicatesMap.put("group.1_group.path", searchRootPagePath);
