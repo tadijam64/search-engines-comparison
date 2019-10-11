@@ -87,7 +87,7 @@ public class SearchServlet extends SlingSafeMethodsServlet
     private LiveRelationshipManager relationshipManager;
 
     @Override
-    protected void doGet(@NotNull final SlingHttpServletRequest request, @NotNull final SlingHttpServletResponse response) throws IOException
+    protected void doGet(@NotNull SlingHttpServletRequest request, @NotNull SlingHttpServletResponse response) throws IOException
     {
         try
         {
