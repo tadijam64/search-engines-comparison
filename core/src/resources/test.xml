@@ -34,6 +34,13 @@
     <name>We.Retail - Core</name>
     <description>Core bundle for We.Retail</description>
 
+    <scm>
+        <connection>scm:git:https://github.com/Adobe-Marketing-Cloud/aem-sample-we-retail.git</connection>
+        <developerConnection>scm:git:git@github.com:Adobe-Marketing-Cloud/aem-sample-we-retail.git</developerConnection>
+        <url>https://github.com/Adobe-Marketing-Cloud/aem-sample-we-retail/tree/master/core</url>
+        <tag>we.retail.reactor-3.0.0</tag>
+    </scm>
+
     <build>
         <plugins>
             <plugin>
@@ -44,25 +51,10 @@
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
                 <extensions>true</extensions>
-                <executions>
-                    <execution>
-                        <id>bundle-manifest</id>
-                        <phase>process-classes</phase>
-                        <goals>
-                            <goal>manifest</goal>
-                        </goals>
-                    </execution>
-                </executions>
                 <configuration>
                     <instructions>
                         <!-- <Embed-Dependency> artifactId1, artifactId2;inline=true </Embed-Dependency> -->
-                        <Embed-Dependency>org.apache.servicemix.bundles.solr-solrj, log4j, noggit, zookeeper</Embed-Dependency>
-                        <Embed-Transitive>false</Embed-Transitive>
-                        <Embed-Directory>OSGI-INF/lib</Embed-Directory>
                         <Export-Package>we.retail.core.model*</Export-Package>
-                        <Import-Package>
-                            *;resolution:=optional
-                        </Import-Package>
                         <Private-Package>we.retail.core*</Private-Package>
                         <Sling-Model-Packages>
                             we.retail.core.model
@@ -105,6 +97,10 @@
             <artifactId>org.apache.felix.scr.annotations</artifactId>
         </dependency>
         <dependency>
+            <groupId>biz.aQute</groupId>
+            <artifactId>bndlib</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>osgi.core</artifactId>
         </dependency>
@@ -115,10 +111,6 @@
         <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>osgi.annotation</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>biz.aQute</groupId>
-            <artifactId>bndlib</artifactId>
         </dependency>
         <dependency>
             <groupId>javax.inject</groupId>
@@ -181,27 +173,6 @@
             <version>1.0-R1534292</version>
             <scope>test</scope>
         </dependency>
-        <!-- Jackson -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <scope>provided</scope>
-        </dependency>
         <!--
             AEM APIs; make sure to not move this bundle upper in the list so that newer APIs available in AEM but not in the Uber
             Jar can be used as dependencies.
@@ -210,27 +181,6 @@
             <groupId>com.adobe.aem</groupId>
             <artifactId>uber-jar</artifactId>
             <classifier>apis</classifier>
-        </dependency>
-        <!-- Solr Dependencies -->
-        <dependency>
-            <groupId>org.apache.servicemix.bundles</groupId>
-            <artifactId>org.apache.servicemix.bundles.solr-solrj</artifactId>
-            <version>5.4.1_1</version>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.16</version>
-        </dependency>
-        <dependency>
-            <groupId>org.noggit</groupId>
-            <artifactId>noggit</artifactId>
-            <version>0.5</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.zookeeper</groupId>
-            <artifactId>zookeeper</artifactId>
-            <version>3.4.5</version>
         </dependency>
 
     </dependencies>
