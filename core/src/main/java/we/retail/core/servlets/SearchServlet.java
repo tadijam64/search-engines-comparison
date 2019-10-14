@@ -92,7 +92,7 @@ public class SearchServlet extends SlingSafeMethodsServlet
     private LiveRelationshipManager relationshipManager;
 
     @Reference
-    SolrServerConfiguration solrConfigurationService;
+    private SolrServerConfiguration solrConfigurationService;
 
     @Override
     protected void doGet(@NotNull SlingHttpServletRequest request, @NotNull SlingHttpServletResponse response) throws IOException
