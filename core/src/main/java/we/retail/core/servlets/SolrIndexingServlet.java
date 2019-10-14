@@ -25,6 +25,7 @@ import we.retail.core.model.AbstractSolrItemModel;
 import we.retail.core.services.SolrSearchService;
 
 import static com.adobe.granite.rest.Constants.CT_TEXT_HTML;
+import static we.retail.core.util.SolrUtils.getSolrServerUrl;
 
 /**
  *
@@ -62,11 +63,8 @@ public class SolrIndexingServlet extends SlingAllMethodsServlet
         response.setContentType(CT_TEXT_HTML);
 
         String indexType = request.getParameter(PARAM_INDEX_TYPE);
-        String protocol = this.solrConfigurationService.getSolrProtocol();
-        String serverName = this.solrConfigurationService.getSolrServerName();
-        String serverPort = this.solrConfigurationService.getSolrServerPort();
-        String coreName = this.solrConfigurationService.getSolrCoreName();
-        String url = protocol + "://" + serverName + ":" + serverPort + "/solr/" + coreName;
+
+        String url = getSolrServerUrl(this.solrConfigurationService);
 
         if (indexType.equalsIgnoreCase(PROP_INDEX_TYPE_INDEX))
         {

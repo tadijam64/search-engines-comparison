@@ -1,9 +1,11 @@
 package we.retail.core.util;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.jcr.RangeIterator;
 
+import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ResourceUtil;
@@ -12,6 +14,7 @@ import org.apache.sling.api.wrappers.ValueMapDecorator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import com.adobe.cq.wcm.core.components.models.ListItem;
 import com.day.cq.dam.api.Asset;
 import com.day.cq.dam.commons.util.DamUtil;
 import com.day.cq.wcm.api.LanguageManager;
@@ -22,6 +25,9 @@ import com.day.cq.wcm.api.policies.ContentPolicy;
 import com.day.cq.wcm.api.policies.ContentPolicyManager;
 import com.day.cq.wcm.msm.api.LiveRelationship;
 import com.day.cq.wcm.msm.api.LiveRelationshipManager;
+
+import we.retail.core.vo.AssetListItemImpl;
+import we.retail.core.vo.PageListItemImpl;
 
 public class SearchHelpers
 {
@@ -139,5 +145,25 @@ public class SearchHelpers
         }
 
         return null;
+    }
+
+    public static void addPageToResultsList(List<ListItem> results, SlingHttpServletRequest request, Resource hitRes)
+    {
+        Page page = getPage(hitRes);
+
+        if (page != null)
+        {
+            results.add(new PageListItemImpl(request, page));
+        }
+    }
+
+    public static void addAssetToResultsList(List<ListItem> results, SlingHttpServletRequest request, Resource hitRes)
+    {
+        Asset asset = getAsset(hitRes);
+
+        if (asset != null)
+        {
+            results.add(new AssetListItemImpl(request, asset));
+        }
     }
 }
