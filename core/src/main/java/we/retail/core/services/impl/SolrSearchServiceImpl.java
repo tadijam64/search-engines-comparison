@@ -169,6 +169,10 @@ public class SolrSearchServiceImpl implements SolrSearchService
     private SolrInputDocument createPageSolrDoc(SolrPageModel solrPageModel)
     {
         SolrInputDocument doc = new SolrInputDocument();
+
+        doc.addField("id", solrPageModel.getId());
+        doc.addField("type", solrPageModel.getType());
+
         doc.addField("jcr_title", solrPageModel.getJcrTitle());
         doc.addField("jcr_created", solrPageModel.getJcrCreated());
         doc.addField("jcr_description", solrPageModel.getJcrDescription());
@@ -192,15 +196,19 @@ public class SolrSearchServiceImpl implements SolrSearchService
     private SolrInputDocument createAssetSolrDoc(SolrAssetModel solrAssetModel)
     {
         SolrInputDocument doc = new SolrInputDocument();
+
+        doc.addField("id", solrAssetModel.getId());
+        doc.addField("type", solrAssetModel.getType());
+
         doc.addField("damAssetId", solrAssetModel.getId());
         doc.addField("jcr_mimeType", solrAssetModel.getJcrMimeType());
         doc.addField("cqName", solrAssetModel.getCqName());
         doc.addField("cqParentPath", solrAssetModel.getCqParentPath());
         doc.addField("damRelativePath", solrAssetModel.getDamRelativePath());
+        doc.addField("cqTags_asset", solrAssetModel.getCqTags());
         doc.addField("description", solrAssetModel.getDescription());
         doc.addField("sellingPriotiry", solrAssetModel.getSellingPriority());
         doc.addField("creationDate", solrAssetModel.getCreationDate());
-        doc.addField("cqTags_asset", solrAssetModel.getCqTags());
 
         return doc;
     }

@@ -24,6 +24,10 @@ public class PageListItemImpl implements ListItem
     protected SlingHttpServletRequest request;
     protected Page page;
 
+    public PageListItemImpl()
+    {
+    }
+
     public PageListItemImpl(@Nonnull SlingHttpServletRequest request, @Nonnull Page page)
     {
         this.request = request;
