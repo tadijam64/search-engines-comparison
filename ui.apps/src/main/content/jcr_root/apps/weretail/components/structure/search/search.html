@@ -46,8 +46,17 @@
     <div class="cmp-search__results" data-cmp-hook-search="results" role="listbox" aria-multiselectable="false"></div>
     <sly data-sly-include="itemTemplate.html"/>
 
-    <form action="${currentPage.path @ addSelectors=['indexpages'], extension='json', suffix = search.relativePath}" autocomplete="off" method="get">
+    <form action="${currentPage.path @ addSelectors=['indexSolrPages'], extension='json', suffix = search.relativePath}" autocomplete="off" method="get">
         <h3>Solr collection management</h3>
+        <button name="indexType" type="submit" value="indexpages" style="background-color:#D43732; border-radius: 8px; display:inline-block;  margin-right:10px">
+            Index data
+        </button>
+        <button name="indexType" type="submit" value="deleteindexdata" style="background-color:#D43732; border-radius: 8px; display:inline-block;">
+            Delete index
+        </button>
+    </form>
+    <form action="${currentPage.path @ addSelectors=['indexElasticsearchPages'], extension='json', suffix = search.relativePath}" autocomplete="off" method="get">
+        <h3>Elasticsearch index management</h3>
         <button name="indexType" type="submit" value="indexpages" style="background-color:#D43732; border-radius: 8px; display:inline-block;  margin-right:10px">
             Index data
         </button>

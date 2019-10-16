@@ -33,7 +33,7 @@ import static we.retail.core.util.SolrUtils.getSolrServerUrl;
  *
  */
 
-@Component(service = Servlet.class, property = { "sling.servlet.selectors=indexpages", "sling.servlet.resourceTypes=cq/Page",
+@Component(service = Servlet.class, property = { "sling.servlet.selectors=indexSolrPages", "sling.servlet.resourceTypes=cq/Page",
   "sling.servlet.extensions=json", "sling.servlet.methods=" + HttpConstants.METHOD_GET })
 public class SolrIndexingServlet extends SlingAllMethodsServlet
 {
