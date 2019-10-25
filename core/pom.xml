@@ -46,32 +46,47 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Embed-Dependency>org.apache.servicemix.bundles.solr-solrj, noggit, zookeeper,
-                            elasticsearch-rest-high-level-client;scope=compile|runtime,
-                            elasticsearch;scope=compile|runtime,
-                            elasticsearch-rest-client;scope=compile|runtime,
-                            elasticsearch-x-content;scope=compile|runtime,
-                            elasticsearch-core;scope=compile|runtime,
-                            rank-eval-client;scope=compile|runtime,
-                            lang-mustache-client;scope=compile|runtime,
-                            httpasyncclient;scope=compile|runtime;
+                        <Embed-Dependency>org.apache.servicemix.bundles.solr-solrj, noggit,
+                            elasticsearch-rest-high-level-client;scope=compile|runtime;inline=true,
+                            elasticsearch;scope=compile|runtime;inline=true,
+                            elasticsearch-core;scope=compile|runtime;inline=true,
+                            elasticsearch-rest-client;scope=compile|runtime;inline=true,
+                            elasticsearch-x-content;scope=compile|runtime;inline=true,
+                            elasticsearch-core;scope=compile|runtime;inline=true,
+                            elasticsearch-secure-sm;scope=compile|runtime;inline=true,
+                            rank-eval-client;scope=compile|runtime;inline=true,
+                            lang-mustache-client;scope=compile|runtime;inline=true,
+                            httpasyncclient;scope=compile|runtime;inline=true,
+                            httpclient;scope=compile|runtime;inline=true,
+                            httpcore-nio;scope=compile|runtime;inline=true,
+                            httpcore;scope=compile|runtime;inline=true,
+                            commons-codec;scope=compile|runtime;inline=true,
+                            commons-logging;scope=compile|runtime;inline=true,
+                            lucene-core;scope=compile|runtime;inline=true;
                         </Embed-Dependency>
                         <Embed-Transitive>true</Embed-Transitive>
                         <Embed-Directory>OSGI-INF/lib</Embed-Directory>
                         <Export-Package>we.retail.core.model*</Export-Package>
                         <Import-Package>
-                            *;resolution:=optional,
-                            <!-- !com.carrotsearch.hppc*, !com.sun.management*, !jline*,
-                            !org.apache.http.impl.nio.client*, !org.apache.http.nio.client.*, !org.apache.log4j.jmx*,
-                            !org.apache.logging.log4j*, !org.elasticsearch.core.internal.*, !org.elasticsearch.index.rankeval,
-                            !org.elasticsearch.script.mustache*, !org.jboss.netty*;-->
+                            *;resolution:=optional
                         </Import-Package>
-                        <Private-Package>we.retail.core*</Private-Package>
+                        <Private-Package>
+                            we.retail.core*
+                        </Private-Package>
                         <Sling-Model-Packages>
                             we.retail.core.model
                         </Sling-Model-Packages>
                         <_fixupmessages>"Classes found in the wrong directory";is:=warning</_fixupmessages>
                     </instructions>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <excludePackageNames>
+                        *.impl
+                    </excludePackageNames>
                 </configuration>
             </plugin>
         </plugins>
@@ -204,6 +219,10 @@
             <artifactId>org.apache.servicemix.bundles.solr-solrj</artifactId>
         </dependency>
         <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.noggit</groupId>
             <artifactId>noggit</artifactId>
         </dependency>
@@ -229,10 +248,6 @@
             <artifactId>elasticsearch-x-content</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.elasticsearch</groupId>
-            <artifactId>elasticsearch-core</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.elasticsearch.plugin</groupId>
             <artifactId>rank-eval-client</artifactId>
         </dependency>
@@ -244,11 +259,44 @@
         <dependency>
             <groupId>org.elasticsearch.plugin</groupId>
             <artifactId>lang-mustache-client</artifactId>
-            <version>7.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch-secure-sm</artifactId>
+            <version>7.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-core</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpasyncclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore-nio</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.2</version>
         </dependency>
 
     </dependencies>

@@ -126,6 +126,11 @@
                             <artifactId>elasticsearch-rest-client</artifactId>
                             <target>/apps/weretail/install</target>
                         </embedded>
+                        <embedded>
+                            <groupId>org.elasticsearch</groupId>
+                            <artifactId>elasticsearch</artifactId>
+                            <target>/apps/weretail/install</target>
+                        </embedded>
                     </embeddeds>
                     <dependencies>
                         <dependency>
@@ -261,7 +266,17 @@
         </dependency>
         <dependency>
             <groupId>org.elasticsearch.client</groupId>
+            <artifactId>elasticsearch-rest-high-level-client</artifactId>
+            <version>7.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
             <artifactId>elasticsearch-rest-client</artifactId>
+            <version>7.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch</artifactId>
             <version>7.4.0</version>
         </dependency>
     </dependencies>
