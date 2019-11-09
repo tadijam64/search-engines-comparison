@@ -23,6 +23,13 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocumentList;
+import org.elasticsearch.ElasticsearchException;
+import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -44,16 +51,22 @@ import com.day.cq.wcm.api.Template;
 import com.day.cq.wcm.msm.api.LiveRelationshipManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import we.retail.core.config.ElasticsearchServerConfiguration;
 import we.retail.core.config.SolrServerConfiguration;
 import we.retail.core.util.ExtendedStringUtils;
 
 import static com.day.cq.dam.api.DamConstants.NT_DAM_ASSET;
 import static com.day.cq.wcm.api.NameConstants.NT_PAGE;
+import static we.retail.core.util.ElasticsearchUtils.addResultsToResultItemList;
+import static we.retail.core.util.ElasticsearchUtils.getBoolQuery;
+import static we.retail.core.util.ElasticsearchUtils.getSearchRequest;
+import static we.retail.core.util.ElasticsearchUtils.getSourceBuilder;
 import static we.retail.core.util.LuceneUtils.addResultDocsToResultItemList;
 import static we.retail.core.util.LuceneUtils.searchAllContent;
 import static we.retail.core.util.LuceneUtils.setPageAndPath;
 import static we.retail.core.util.LuceneUtils.setPredicatesForTags;
 import static we.retail.core.util.SearchHelpers.getContentPolicyProperties;
+import static we.retail.core.util.SearchHelpers.getEsClient;
 import static we.retail.core.util.SearchHelpers.getSearchRootPagePath;
 import static we.retail.core.util.SolrUtils.addHitsToResultsListItem;
 import static we.retail.core.util.SolrUtils.getSolrServerUrl;
@@ -62,17 +75,13 @@ import static we.retail.core.util.SolrUtils.getSolrServerUrl;
   "sling.servlet.extensions=json", "sling.servlet.methods=" + HttpConstants.METHOD_GET })
 public class SearchServlet extends SlingSafeMethodsServlet
 {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SearchServlet.class);
 
     static final String DEFAULT_SELECTOR = "mysearchresults";
-
     public static final String PREDICATE_FULLTEXT = "fulltext";
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(SearchServlet.class);
     private static final String PARAM_RESULTS_OFFSET = "resultsOffset";
     private static final String NN_STRUCTURE = "structure";
     private static final String PROP_SEARCH_ASSETS = "assets";
-    private static final int PROP_RESULTS_SIZE_DEFAULT = 10;
-    private static final int PROP_SEARCH_TERM_MINIMUM_LENGTH_DEFAULT = 3;
     private static final String PROP_SOLR_QUERY_FULLTEXT = "text:";
     private static final String PROP_SEARCH_ROOT_DEFAULT = "/content";
     private static final String PROP_SEARCH_ROOT_ASSETS = "/content/dam/we-retail";
@@ -80,7 +89,12 @@ public class SearchServlet extends SlingSafeMethodsServlet
     private static final String PROP_SEARCH_CONTENT_TYPE = "searchContent";
     private static final String PROP_SEARCH_TAGS = "tags";
     private static final String PARAM_SEARCH_ENGINE = "searchEngine";
-    private static final long serialVersionUID = 5692888423980970123L;
+    private static final String PROP_SEARCH_TYPE = "type";
+    private static final String PROP_SEARCH_TAGS_ON_PAGES = "cqTags";
+    private static final String PROP_SEARCH_TAGS_ON_ASSETS = "cqTags_asset";
+
+    private static final int PROP_RESULTS_SIZE_DEFAULT = 10;
+    private static final int PROP_SEARCH_TERM_MINIMUM_LENGTH_DEFAULT = 3;
 
     @Reference
     private QueryBuilder queryBuilder;
@@ -94,37 +108,38 @@ public class SearchServlet extends SlingSafeMethodsServlet
     @Reference
     private SolrServerConfiguration solrConfigurationService;
 
+    @Reference
+    private ElasticsearchServerConfiguration esConfigService;
+
     @Override
-    protected void doGet(@NotNull SlingHttpServletRequest request, @NotNull SlingHttpServletResponse response) throws IOException
+    protected void doGet(@NotNull SlingHttpServletRequest request, @NotNull SlingHttpServletResponse response)
     {
-        try
+        handleRequest(request, response);
+    }
+
+    private void handleRequest(SlingHttpServletRequest request, SlingHttpServletResponse response)
+    {
+        Page currentPage = getCurrentPage(request);
+
+        if (currentPage != null)
         {
-            Page currentPage = getCurrentPage(request);
-            if (currentPage != null)
+            Resource searchResource = getSearchContentResource(request, currentPage);
+            List<ListItem> results = null;
+
+            if (StringUtils.equalsIgnoreCase(request.getParameter(PARAM_SEARCH_ENGINE), "lucene"))
             {
-                Resource searchResource = getSearchContentResource(request, currentPage);
-                List<ListItem> results = null;
-
-                if (StringUtils.equalsIgnoreCase(request.getParameter(PARAM_SEARCH_ENGINE), "lucene"))
-                {
-                    results = getLuceneResults(request, searchResource, currentPage);
-                }
-                else if (StringUtils.equalsIgnoreCase(request.getParameter(PARAM_SEARCH_ENGINE), "solr"))
-                {
-                    results = getSolrResults(request);
-                }
-                else if (StringUtils.equalsIgnoreCase(request.getParameter(PARAM_SEARCH_ENGINE), "elasticsearch"))
-                {
-                    // TODO results = getElasticsearchResults(request, searchResource, currentPage);
-                }
-
-                writeJson(results, response);
+                results = getLuceneResults(request, searchResource, currentPage);
             }
-        }
-        catch (Exception ex)
-        {
-            LOGGER.error("Error in SearchServlet - ", ex);
-            response.getWriter().write(ex.getLocalizedMessage());
+            else if (StringUtils.equalsIgnoreCase(request.getParameter(PARAM_SEARCH_ENGINE), "solr"))
+            {
+                results = getSolrResults(request);
+            }
+            else if (StringUtils.equalsIgnoreCase(request.getParameter(PARAM_SEARCH_ENGINE), "elasticsearch"))
+            {
+                results = getElasticsearchResults(request);
+            }
+
+            writeJson(results, response);
         }
     }
 
@@ -148,7 +163,7 @@ public class SearchServlet extends SlingSafeMethodsServlet
         Resource resource = request.getResource();
         String relativeContentResource = ExtendedStringUtils.removeStartingSlash(requestPathInfo.getSuffix());
 
-        if (ExtendedStringUtils.isNotEmpty(relativeContentResource))
+        if (StringUtils.isNotEmpty(relativeContentResource))
         {
             searchContentResource = resource.getChild(relativeContentResource);
             if (searchContentResource == null)
@@ -190,7 +205,7 @@ public class SearchServlet extends SlingSafeMethodsServlet
             String languageRoot = this.languageManager.getLanguageRoot(currentPage.getContentResource()).getPath();
             searchRootPagePath = getSearchRootPagePath(languageRoot, currentPage, this.languageManager, this.relationshipManager);
         }
-        if (ExtendedStringUtils.isEmpty(searchRootPagePath))
+        if (StringUtils.isEmpty(searchRootPagePath))
         {
             searchRootPagePath = currentPage.getPath();
         }
@@ -261,16 +276,16 @@ public class SearchServlet extends SlingSafeMethodsServlet
 
         if (searchContentType.equalsIgnoreCase(PROP_SEARCH_ASSETS))
         {
-            query.setFilterQueries("type:\"" + NT_DAM_ASSET + "\"");
+            query.setFilterQueries(PROP_SEARCH_TYPE + ":\"" + NT_DAM_ASSET + "\"");
         }
         else if (searchContentType.equalsIgnoreCase(PROP_SEARCH_PAGES))
         {
-            query.setFilterQueries("type:\"" + NT_PAGE + "\"");
+            query.setFilterQueries(PROP_SEARCH_TYPE + ":\"" + NT_PAGE + "\"");
         }
 
         if (searchContentType.equalsIgnoreCase(PROP_SEARCH_TAGS))
         {
-            query.setQuery("(cqTags:*" + fulltext + ") OR (cqTags_asset:*" + fulltext + ")");
+            query.setQuery("(" + PROP_SEARCH_TAGS_ON_PAGES + ":*" + fulltext + ") OR (" + PROP_SEARCH_TAGS_ON_ASSETS + ":*" + fulltext + ")");
         }
         else
         {
@@ -289,6 +304,31 @@ public class SearchServlet extends SlingSafeMethodsServlet
             addResultDocsToResultItemList(resultDocs, request, results);
         }
         catch (SolrServerException | IOException e)
+        {
+            LOGGER.error("Exception due to ", e);
+        }
+
+        return results;
+    }
+
+    private List<ListItem> getElasticsearchResults(SlingHttpServletRequest request)
+    {
+        List<ListItem> results = new ArrayList<>();
+        String fulltext = request.getParameter(PREDICATE_FULLTEXT);
+        String searchContentType = request.getParameter(PROP_SEARCH_CONTENT_TYPE);
+        String indexName = this.esConfigService.getElasticsearchIndexName();
+
+        try (RestHighLevelClient client = getEsClient(this.esConfigService))
+        {
+            BoolQueryBuilder boolQueryBuilder = getBoolQuery(fulltext, searchContentType);
+            SearchSourceBuilder sourceBuilder = getSourceBuilder(boolQueryBuilder);
+            SearchRequest searchRequest = getSearchRequest(sourceBuilder, indexName);
+
+            SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+
+            addResultsToResultItemList(results, request, searchResponse);
+        }
+        catch (ElasticsearchException | IOException e)
         {
             LOGGER.error("Exception due to ", e);
         }
