@@ -5,12 +5,16 @@ import java.util.List;
 
 import javax.jcr.RangeIterator;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpHost;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ResourceUtil;
 import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.api.wrappers.ValueMapDecorator;
+import org.elasticsearch.client.RestClient;
+import org.elasticsearch.client.RestHighLevelClient;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,6 +30,7 @@ import com.day.cq.wcm.api.policies.ContentPolicyManager;
 import com.day.cq.wcm.msm.api.LiveRelationship;
 import com.day.cq.wcm.msm.api.LiveRelationshipManager;
 
+import we.retail.core.config.ElasticsearchServerConfiguration;
 import we.retail.core.vo.AssetListItemImpl;
 import we.retail.core.vo.PageListItemImpl;
 
@@ -39,7 +44,7 @@ public class SearchHelpers
     {
         String searchRootPagePath = null;
         PageManager pageManager = currentPage.getPageManager();
-        if (ExtendedStringUtils.isNotEmpty(searchRoot) && pageManager != null)
+        if (StringUtils.isNotEmpty(searchRoot) && pageManager != null)
         {
             Page rootPage = pageManager.getPage(searchRoot);
             if (rootPage != null)
@@ -165,5 +170,15 @@ public class SearchHelpers
         {
             results.add(new AssetListItemImpl(request, asset));
         }
+    }
+
+    public static RestHighLevelClient getEsClient(ElasticsearchServerConfiguration esConfigService)
+    {
+        String server = esConfigService.getElasticsearchServerName();
+        int port = Integer.parseInt(esConfigService.getElasticsearchServerPort());
+        int secondPort = Integer.parseInt(esConfigService.getElasticsearchSecondServerPort());
+        String protocol = esConfigService.getElasticsearchProtocol();
+
+        return new RestHighLevelClient(RestClient.builder(new HttpHost(server, port, protocol), new HttpHost(server, secondPort, protocol)));
     }
 }

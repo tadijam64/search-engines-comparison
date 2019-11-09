@@ -4,7 +4,7 @@ import org.osgi.service.metatype.annotations.AttributeDefinition;
 import org.osgi.service.metatype.annotations.ObjectClassDefinition;
 
 @ObjectClassDefinition(name = "AEM Elasticsearch Search - Elasticsearch Configuration Service", description = "Service Configuration")
-public @interface ElasticsearchConfigurationService
+public @interface EsConfigService
 {
     @AttributeDefinition(name = "Protocol", description = "Configuration value") //
       String protocolValue() default "http";
@@ -20,4 +20,7 @@ public @interface ElasticsearchConfigurationService
 
     @AttributeDefinition(name = "Elasticsearch Index Name", description = "Core name in Elasticsearch server") //
       String serverIndex() default "gettingstarted";
+
+    @AttributeDefinition(name = "Elasticsearch Index Id", description = "Id of elasticsearch server index") //
+      String serverIndexId() default "1";
 }
