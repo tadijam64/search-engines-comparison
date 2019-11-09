@@ -35,7 +35,7 @@
             </div>
 
             <div style="display:inline-block">
-                <select style="background-color:#D43732;" name="searchEngine">
+                <select style="background-color:#D43732;" name="searchEngine" id="searchEngine" onchange="yesnoCheck(this);">
                     <option value="lucene" selected> Lucene</option>
                     <option value="solr"> Solr</option>
                     <option value="elasticsearch"> Elasticsearch</option>
@@ -46,7 +46,7 @@
     <div class="cmp-search__results" data-cmp-hook-search="results" role="listbox" aria-multiselectable="false"></div>
     <sly data-sly-include="itemTemplate.html"/>
 
-    <form action="${currentPage.path @ addSelectors=['indexSolrPages'], extension='json', suffix = search.relativePath}" autocomplete="off" method="get">
+    <form id="solrForm" action="${currentPage.path @ addSelectors=['indexSolrPages'], extension='json', suffix = search.relativePath}" autocomplete="off" method="get" style="display: none;">
         <h3>Solr collection management</h3>
         <button name="indexType" type="submit" value="indexpages" style="background-color:#D43732; border-radius: 8px; display:inline-block;  margin-right:10px">
             Index data
@@ -55,7 +55,7 @@
             Delete index
         </button>
     </form>
-    <form action="${currentPage.path @ addSelectors=['indexElasticsearchPages'], extension='json', suffix = search.relativePath}" autocomplete="off" method="get">
+    <form id="elasticsearchForm" action="${currentPage.path @ addSelectors=['indexElasticsearchPages'], extension='json', suffix = search.relativePath}" autocomplete="off" method="get" style="display: none;">
         <h3>Elasticsearch index management</h3>
         <button name="indexType" type="submit" value="indexpages" style="background-color:#D43732; border-radius: 8px; display:inline-block;  margin-right:10px">
             Index data
@@ -66,3 +66,18 @@
     </form>
     <br>
 </section>
+
+<script>
+    function yesnoCheck(that) {
+        if (that.value == "solr") {
+            document.getElementById("solrForm").style.display = "block";
+            document.getElementById("elasticsearchForm").style.display = "none";
+        } else if (that.value == "elasticsearch") {
+            document.getElementById("solrForm").style.display = "none";
+            document.getElementById("elasticsearchForm").style.display = "block";
+        } else {
+            document.getElementById("solrForm").style.display = "none";
+            document.getElementById("elasticsearchForm").style.display = "none";
+        }
+    }
+</script>
