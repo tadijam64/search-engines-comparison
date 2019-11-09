@@ -41,14 +41,13 @@ import static com.day.cq.wcm.api.NameConstants.NT_PAGE;
 import static com.day.cq.wcm.api.NameConstants.PN_PAGE_LAST_MOD;
 import static org.apache.sling.jcr.resource.api.JcrResourceConstants.SLING_RESOURCE_TYPE_PROPERTY;
 import static we.retail.core.util.ElasticsearchUtils.addFields;
+import static we.retail.core.util.SearchHelpers.prepareQuery;
 
 @Component
 public class EsServiceImpl implements EsService
 {
     private static final Logger LOG = LoggerFactory.getLogger(EsServiceImpl.class);
 
-    private static final String PROP_SEARCH_ROOT_PAGES = "/content/we-retail";
-    private static final String PROP_SEARCH_ROOT_ASSETS = "/content/dam";
     private static final String PROP_SEARCH_ID = "id";
     private static final String PROP_SEARCH_TYPE = "type";
 
@@ -59,21 +58,13 @@ public class EsServiceImpl implements EsService
     public List<XContentBuilder> crawlContent(Session session) throws IOException, RepositoryException
     {
         Map<String, String> predicatesMap = new HashMap<>();
-
-        predicatesMap.put("group.p.or", "true"); //combine this group with OR
-        predicatesMap.put("group.1_group.path", PROP_SEARCH_ROOT_PAGES);
-        predicatesMap.put("group.1_group.type", NT_PAGE);
-        predicatesMap.put("group.2_group.path", PROP_SEARCH_ROOT_ASSETS);
-        predicatesMap.put("group.2_group.type", NT_DAM_ASSET);
-        predicatesMap.put("p.offset", "0");
-        predicatesMap.put("p.limit", "10000");
+        prepareQuery(predicatesMap);
 
         PredicateGroup predicates = PredicateConverter.createPredicates(predicatesMap);
         Query query = this.queryBuilder.createQuery(predicates, session);
         SearchResult searchResults = query.getResult();
 
-        LOG.info("Found '{}' matches for query", searchResults.getTotalMatches());
-
+        LOG.info("Found '{}' matches in CRXDE for query. Indexing process continues.", searchResults.getTotalMatches());
         return createResultsList(searchResults);
     }
 

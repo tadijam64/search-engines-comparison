@@ -20,7 +20,4 @@ public @interface EsConfigService
 
     @AttributeDefinition(name = "Elasticsearch Index Name", description = "Core name in Elasticsearch server") //
       String serverIndex() default "gettingstarted";
-
-    @AttributeDefinition(name = "Elasticsearch Index Id", description = "Id of elasticsearch server index") //
-      String serverIndexId() default "1";
 }

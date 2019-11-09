@@ -8,6 +8,7 @@ import javax.jcr.RepositoryException;
 
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
+import org.apache.solr.client.solrj.SolrQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,8 +26,14 @@ public class SolrUtils
 {
     static final String PROP_SEARCH_ROOT_ASSETS = "/content/dam/we-retail";
     private static final Logger LOGGER = LoggerFactory.getLogger(SolrUtils.class);
+    private static final String PROP_SEARCH_ASSETS = "assets";
+    private static final String PROP_SOLR_QUERY_FULLTEXT = "text:";
+    private static final String PROP_SEARCH_PAGES = "pages";
+    private static final String PROP_SEARCH_TAGS = "tags";
+    private static final String PROP_SEARCH_TYPE = "type";
+    private static final String PROP_SEARCH_TAGS_ON_PAGES = "cqTags";
+    private static final String PROP_SEARCH_TAGS_ON_ASSETS = "cqTags_asset";
 
-    // private constructor to avoid unnecessary instantiation of the class
     private SolrUtils()
     {
     }
@@ -80,5 +87,28 @@ public class SolrUtils
                 LOGGER.error("Unable to retrieve search results for query.", e);
             }
         }
+    }
+
+    public static void addPredicatesToQuery(String searchContentType, SolrQuery query, String fulltext)
+    {
+        if (searchContentType.equalsIgnoreCase(PROP_SEARCH_ASSETS))
+        {
+            query.setFilterQueries(PROP_SEARCH_TYPE + ":\"" + NT_DAM_ASSET + "\"");
+        }
+        else if (searchContentType.equalsIgnoreCase(PROP_SEARCH_PAGES))
+        {
+            query.setFilterQueries(PROP_SEARCH_TYPE + ":\"" + NT_PAGE + "\"");
+        }
+
+        if (searchContentType.equalsIgnoreCase(PROP_SEARCH_TAGS))
+        {
+            query.setQuery("(" + PROP_SEARCH_TAGS_ON_PAGES + ":*" + fulltext + ") OR (" + PROP_SEARCH_TAGS_ON_ASSETS + ":*" + fulltext + ")");
+        }
+        else
+        {
+            query.setQuery(PROP_SOLR_QUERY_FULLTEXT + fulltext);
+        }
+        query.setStart(0);
+        query.setRows(10);
     }
 }

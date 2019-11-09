@@ -15,7 +15,7 @@ import we.retail.core.model.AbstractSolrItemModel;
 
 public interface SolrSearchService
 {
-    List<AbstractSolrItemModel> crawlContent(Session session);
+    List<AbstractSolrItemModel> crawlContent(Session session) throws RepositoryException;
 
     List<AbstractSolrItemModel> createItemsMetadataArray(SearchResult results) throws RepositoryException;
 

@@ -102,7 +102,7 @@ public class ElasticsearchUtils
         }
         else if (key.equals(JCR_CREATED) || key.equals("manualCreationDate") || key.equals("creationDate") || key.equals(PN_PAGE_LAST_MOD))
         {
-            addDateFields(builder, key, vm);
+            addDateField(builder, key, vm);
         }
         else
         {
@@ -110,7 +110,7 @@ public class ElasticsearchUtils
         }
     }
 
-    private static void addDateFields(XContentBuilder builder, String key, ValueMap vm) throws IOException
+    private static void addDateField(XContentBuilder builder, String key, ValueMap vm) throws IOException
     {
         Calendar cal = vm.get(key, Calendar.class);
         Date d = new Date();

@@ -18,7 +18,6 @@ public class ElasticsearchServerConfigurationImpl implements ElasticsearchServer
     private String elasticsearchServerPort;
     private String elasticsearchSecondServerPort;
     private String elasticsearchIndexName;
-    private String elasticsearchIndexId;
 
     @Activate
     @Modified
@@ -29,13 +28,6 @@ public class ElasticsearchServerConfigurationImpl implements ElasticsearchServer
         this.elasticsearchServerPort = config.serverPort();
         this.elasticsearchSecondServerPort = config.secondServerPort();
         this.elasticsearchIndexName = config.serverIndex();
-        this.elasticsearchIndexId = config.serverIndexId();
-    }
-
-    @Override
-    public String getElasticsearchIndexId()
-    {
-        return this.elasticsearchIndexId;
     }
 
     @Override
