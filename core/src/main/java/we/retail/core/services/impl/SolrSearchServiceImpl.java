@@ -2,7 +2,6 @@ package we.retail.core.services.impl;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,14 +32,12 @@ import we.retail.core.services.SolrSearchService;
 
 import static com.day.cq.dam.api.DamConstants.NT_DAM_ASSET;
 import static com.day.cq.wcm.api.NameConstants.NT_PAGE;
+import static we.retail.core.util.SearchHelpers.prepareQuery;
 
 @Component
 public class SolrSearchServiceImpl implements SolrSearchService
 {
     private static final Logger LOG = LoggerFactory.getLogger(SolrSearchServiceImpl.class);
-
-    private static final String PROP_SEARCH_ROOT_PAGES = "/content/we-retail";
-    private static final String PROP_SEARCH_ROOT_ASSETS = "/content/dam";
 
     @Reference
     private QueryBuilder queryBuilder;
@@ -52,35 +49,17 @@ public class SolrSearchServiceImpl implements SolrSearchService
      * @return List<AbstractSolrItemModel> with all data to be indexed
      */
     @Override
-    public List<AbstractSolrItemModel> crawlContent(Session session)
+    public List<AbstractSolrItemModel> crawlContent(Session session) throws RepositoryException
     {
         Map<String, String> predicatesMap = new HashMap<>();
+        prepareQuery(predicatesMap);
 
-        predicatesMap.put("group.p.or", "true"); //combine this group with OR
-        predicatesMap.put("group.1_group.path", PROP_SEARCH_ROOT_PAGES);
-        predicatesMap.put("group.1_group.type", NT_PAGE);
-        predicatesMap.put("group.2_group.path", PROP_SEARCH_ROOT_ASSETS);
-        predicatesMap.put("group.2_group.type", NT_DAM_ASSET);
-        predicatesMap.put("p.offset", "0");
-        predicatesMap.put("p.limit", "10000");
+        PredicateGroup predicates = PredicateConverter.createPredicates(predicatesMap);
+        Query query = this.queryBuilder.createQuery(predicates, session);
+        SearchResult searchResults = query.getResult();
 
-        try
-        {
-            PredicateGroup predicates = PredicateConverter.createPredicates(predicatesMap);
-            Query query = this.queryBuilder.createQuery(predicates, session);
-            SearchResult searchResult = query.getResult();
-
-            LOG.info("Found '{}' matches for query", searchResult.getTotalMatches());
-
-            return createItemsMetadataArray(searchResult);
-        }
-        catch (RepositoryException e)
-        {
-            LOG.error("Exception due to", e);
-            session.logout();
-        }
-
-        return Collections.emptyList();
+        LOG.info("Found '{}' matches in CRXDE for query. Indexing process continues.", searchResults.getTotalMatches());
+        return createItemsMetadataArray(searchResults);
     }
 
     /**
@@ -130,7 +109,7 @@ public class SolrSearchServiceImpl implements SolrSearchService
      * @param indexItemData
      * @param server
      * Takes Json array and iterates over each object and index solr
-     * @return coolean true if it indexes successfully to solr server, else false.
+     * @return boolean true if it indexes successfully to solr server, else false.
      * @throws SolrServerException
      * @throws IOException
      */

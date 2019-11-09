@@ -55,20 +55,20 @@ import we.retail.core.config.ElasticsearchServerConfiguration;
 import we.retail.core.config.SolrServerConfiguration;
 import we.retail.core.util.ExtendedStringUtils;
 
-import static com.day.cq.dam.api.DamConstants.NT_DAM_ASSET;
-import static com.day.cq.wcm.api.NameConstants.NT_PAGE;
+import static com.adobe.aemds.guide.utils.GuideConstants.UTF_8;
+import static com.adobe.cq.mcm.salesforce.SalesforceExportProcess.APPLICATION_JSON;
 import static we.retail.core.util.ElasticsearchUtils.addResultsToResultItemList;
 import static we.retail.core.util.ElasticsearchUtils.getBoolQuery;
 import static we.retail.core.util.ElasticsearchUtils.getSearchRequest;
 import static we.retail.core.util.ElasticsearchUtils.getSourceBuilder;
 import static we.retail.core.util.LuceneUtils.addResultDocsToResultItemList;
-import static we.retail.core.util.LuceneUtils.searchAllContent;
-import static we.retail.core.util.LuceneUtils.setPageAndPath;
-import static we.retail.core.util.LuceneUtils.setPredicatesForTags;
+import static we.retail.core.util.LuceneUtils.getResultOffset;
+import static we.retail.core.util.LuceneUtils.setQueryPredicates;
 import static we.retail.core.util.SearchHelpers.getContentPolicyProperties;
 import static we.retail.core.util.SearchHelpers.getEsClient;
 import static we.retail.core.util.SearchHelpers.getSearchRootPagePath;
 import static we.retail.core.util.SolrUtils.addHitsToResultsListItem;
+import static we.retail.core.util.SolrUtils.addPredicatesToQuery;
 import static we.retail.core.util.SolrUtils.getSolrServerUrl;
 
 @Component(service = Servlet.class, property = { "sling.servlet.selectors=" + SearchServlet.DEFAULT_SELECTOR, "sling.servlet.resourceTypes=cq/Page",
@@ -79,19 +79,10 @@ public class SearchServlet extends SlingSafeMethodsServlet
 
     static final String DEFAULT_SELECTOR = "mysearchresults";
     public static final String PREDICATE_FULLTEXT = "fulltext";
-    private static final String PARAM_RESULTS_OFFSET = "resultsOffset";
     private static final String NN_STRUCTURE = "structure";
-    private static final String PROP_SEARCH_ASSETS = "assets";
-    private static final String PROP_SOLR_QUERY_FULLTEXT = "text:";
     private static final String PROP_SEARCH_ROOT_DEFAULT = "/content";
-    private static final String PROP_SEARCH_ROOT_ASSETS = "/content/dam/we-retail";
-    private static final String PROP_SEARCH_PAGES = "pages";
     private static final String PROP_SEARCH_CONTENT_TYPE = "searchContent";
-    private static final String PROP_SEARCH_TAGS = "tags";
     private static final String PARAM_SEARCH_ENGINE = "searchEngine";
-    private static final String PROP_SEARCH_TYPE = "type";
-    private static final String PROP_SEARCH_TAGS_ON_PAGES = "cqTags";
-    private static final String PROP_SEARCH_TAGS_ON_ASSETS = "cqTags_asset";
 
     private static final int PROP_RESULTS_SIZE_DEFAULT = 10;
     private static final int PROP_SEARCH_TERM_MINIMUM_LENGTH_DEFAULT = 3;
@@ -114,7 +105,7 @@ public class SearchServlet extends SlingSafeMethodsServlet
     @Override
     protected void doGet(@NotNull SlingHttpServletRequest request, @NotNull SlingHttpServletResponse response)
     {
-        handleRequest(request, response);
+        this.handleRequest(request, response);
     }
 
     private void handleRequest(SlingHttpServletRequest request, SlingHttpServletResponse response)
@@ -205,10 +196,12 @@ public class SearchServlet extends SlingSafeMethodsServlet
             String languageRoot = this.languageManager.getLanguageRoot(currentPage.getContentResource()).getPath();
             searchRootPagePath = getSearchRootPagePath(languageRoot, currentPage, this.languageManager, this.relationshipManager);
         }
+
         if (StringUtils.isEmpty(searchRootPagePath))
         {
             searchRootPagePath = currentPage.getPath();
         }
+
         List<ListItem> results = new ArrayList<>();
         Map<String, String> predicatesMap = new HashMap<>();
 
@@ -217,35 +210,13 @@ public class SearchServlet extends SlingSafeMethodsServlet
         {
             return results;
         }
-        long resultsOffset = 0;
-        if (request.getParameter(PARAM_RESULTS_OFFSET) != null)
-        {
-            resultsOffset = Long.parseLong(request.getParameter(PARAM_RESULTS_OFFSET));
-        }
 
-        predicatesMap.put(PREDICATE_FULLTEXT, "*" + fulltext + "*");
-        String searchContentType = request.getParameter(PROP_SEARCH_CONTENT_TYPE);
-
-        if (searchContentType.equalsIgnoreCase(PROP_SEARCH_ASSETS))
-        {
-            setPageAndPath(predicatesMap, PROP_SEARCH_ROOT_ASSETS, NT_DAM_ASSET);
-        }
-        else if (searchContentType.equalsIgnoreCase(PROP_SEARCH_PAGES))
-        {
-            setPageAndPath(predicatesMap, searchRootPagePath, NT_PAGE);
-        }
-        else
-        {
-            if (searchContentType.equalsIgnoreCase(PROP_SEARCH_TAGS))
-            {
-                setPredicatesForTags(request, predicatesMap);
-            }
-
-            searchAllContent(searchRootPagePath, predicatesMap);
-        }
+        long resultsOffset = getResultOffset(request);
+        setQueryPredicates(request, predicatesMap, fulltext, searchRootPagePath);
 
         PredicateGroup predicates = PredicateConverter.createPredicates(predicatesMap);
         ResourceResolver resourceResolver = request.getResource().getResourceResolver();
+
         Query query = this.queryBuilder.createQuery(predicates, resourceResolver.adaptTo(Session.class));
         if (resultsSize != 0)
         {
@@ -270,37 +241,16 @@ public class SearchServlet extends SlingSafeMethodsServlet
     {
         List<ListItem> results = new ArrayList<>();
         String fulltext = request.getParameter(PREDICATE_FULLTEXT);
-
-        SolrQuery query = new SolrQuery();
         String searchContentType = request.getParameter(PROP_SEARCH_CONTENT_TYPE);
 
-        if (searchContentType.equalsIgnoreCase(PROP_SEARCH_ASSETS))
-        {
-            query.setFilterQueries(PROP_SEARCH_TYPE + ":\"" + NT_DAM_ASSET + "\"");
-        }
-        else if (searchContentType.equalsIgnoreCase(PROP_SEARCH_PAGES))
-        {
-            query.setFilterQueries(PROP_SEARCH_TYPE + ":\"" + NT_PAGE + "\"");
-        }
+        SolrQuery query = new SolrQuery();
+        addPredicatesToQuery(searchContentType, query, fulltext);
 
-        if (searchContentType.equalsIgnoreCase(PROP_SEARCH_TAGS))
+        try (HttpSolrClient server = new HttpSolrClient(getSolrServerUrl(this.solrConfigurationService)))
         {
-            query.setQuery("(" + PROP_SEARCH_TAGS_ON_PAGES + ":*" + fulltext + ") OR (" + PROP_SEARCH_TAGS_ON_ASSETS + ":*" + fulltext + ")");
-        }
-        else
-        {
-            query.setQuery(PROP_SOLR_QUERY_FULLTEXT + fulltext);
-        }
-        query.setStart(0);
-        query.setRows(10);
-
-        String url = getSolrServerUrl(this.solrConfigurationService);
-        QueryResponse response = null;
-
-        try (HttpSolrClient server = new HttpSolrClient(url))
-        {
-            response = server.query(query);
+            QueryResponse response = server.query(query);
             SolrDocumentList resultDocs = response.getResults();
+
             addResultDocsToResultItemList(resultDocs, request, results);
         }
         catch (SolrServerException | IOException e)
@@ -338,8 +288,8 @@ public class SearchServlet extends SlingSafeMethodsServlet
 
     private void writeJson(List<ListItem> results, SlingHttpServletResponse response)
     {
-        response.setContentType("application/json");
-        response.setCharacterEncoding("utf-8");
+        response.setContentType(APPLICATION_JSON);
+        response.setCharacterEncoding(UTF_8);
         ObjectMapper mapper = new ObjectMapper();
         try
         {

@@ -17,18 +17,15 @@ public class SolrServerConfigurationImpl implements SolrServerConfiguration
     private String solrServerName;
     private String solrServerPort;
     private String solrCoreName;
-    private String contentPagePath;
 
     @Activate
     @Modified
     public void activate(SolrConfigurationService config)
     {
-        //Populate the solrProtocol data member
         this.solrProtocol = config.protocolValue();
         this.solrServerName = config.serverName();
         this.solrServerPort = config.serverPort();
         this.solrCoreName = config.serverCollection();
-        this.contentPagePath = config.serverPath();
     }
 
     @Override
@@ -53,11 +50,5 @@ public class SolrServerConfigurationImpl implements SolrServerConfiguration
     public String getSolrCoreName()
     {
         return this.solrCoreName;
-    }
-
-    @Override
-    public String getContentPagePath()
-    {
-        return this.contentPagePath;
     }
 }

@@ -51,61 +51,68 @@ public class SolrIndexingServlet extends SlingAllMethodsServlet
     SolrSearchService solrSearchService;
 
     @Override
-    protected void doGet(@Nonnull SlingHttpServletRequest request, @Nonnull SlingHttpServletResponse response) throws IOException
+    protected void doGet(@Nonnull SlingHttpServletRequest request, @Nonnull SlingHttpServletResponse response)
     {
-
         this.doPost(request, response);
     }
 
     @Override
-    protected void doPost(@Nonnull SlingHttpServletRequest request, @Nonnull SlingHttpServletResponse response) throws IOException
+    protected void doPost(@Nonnull SlingHttpServletRequest request, @Nonnull SlingHttpServletResponse response)
     {
         response.setContentType(CT_TEXT_HTML);
-
         String indexType = request.getParameter(PARAM_INDEX_TYPE);
-
         String url = getSolrServerUrl(this.solrConfigurationService);
 
         if (indexType.equalsIgnoreCase(PROP_INDEX_TYPE_INDEX))
         {
-            Resource resource = request.getResource();
-            try (HttpSolrClient server = new HttpSolrClient(url); ResourceResolver resourceResolver = resource.getResourceResolver())
-            {
-                Session session = resourceResolver.adaptTo(Session.class);
-                List<AbstractSolrItemModel> indexPageData = this.solrSearchService.crawlContent(session);
-                boolean resultIndexingPages = this.solrSearchService.indexPagesToSolr(indexPageData, server);
-
-                if (resultIndexingPages)
-                {
-                    response.getWriter().write("<h3>Successfully indexed content pages to Solr server </h3>");
-                }
-                else
-                {
-                    response.getWriter().write("<h3>Something went wrong</h3>");
-                }
-            }
-            catch (Exception e)
-            {
-                LOG.error("Exception due to ", e);
-                response.getWriter().write("<h3>Something went wrong. Please make sure Solr server is configured properly in Felix</h3>");
-            }
+            indexData(request, response, url);
         }
         else if (indexType.equalsIgnoreCase(PROP_INDEX_TYPE_DELETE))
         {
-            try (HttpSolrClient server = new HttpSolrClient(url))
-            {
-                server.deleteByQuery("*:*");
-                server.commit();
-                response.getWriter().write("<h3>Deleted all the indexes from solr server </h3>");
-            }
-            catch (SolrServerException e)
-            {
-                LOG.error("Exception due to ", e);
-            }
+            deleteData(url, response);
+        }
+    }
+
+    private void indexData(SlingHttpServletRequest request, SlingHttpServletResponse response, String url)
+    {
+        Resource resource = request.getResource();
+        try (HttpSolrClient server = new HttpSolrClient(url); ResourceResolver resourceResolver = resource.getResourceResolver())
+        {
+            Session session = resourceResolver.adaptTo(Session.class);
+            List<AbstractSolrItemModel> indexPageData = this.solrSearchService.crawlContent(session);
+            boolean dataIndexed = this.solrSearchService.indexPagesToSolr(indexPageData, server);
+
+            writeResponse(dataIndexed, response);
+        }
+        catch (Exception e)
+        {
+            LOG.error("Exception due to ", e);
+        }
+    }
+
+    private void writeResponse(boolean dataIndexed, SlingHttpServletResponse response) throws IOException
+    {
+        if (dataIndexed)
+        {
+            response.getWriter().write("<h3>Successfully indexed content pages to Solr server </h3>");
         }
         else
         {
             response.getWriter().write("<h3>Something went wrong</h3>");
+        }
+    }
+
+    private void deleteData(String url, SlingHttpServletResponse response)
+    {
+        try (HttpSolrClient server = new HttpSolrClient(url))
+        {
+            server.deleteByQuery("*:*");
+            server.commit();
+            response.getWriter().write("<h3>Deleted all the indexes from solr server </h3>");
+        }
+        catch (SolrServerException | IOException e)
+        {
+            LOG.error("Exception due to ", e);
         }
     }
 }

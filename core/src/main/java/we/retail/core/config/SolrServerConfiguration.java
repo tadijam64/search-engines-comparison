@@ -9,6 +9,4 @@ public interface SolrServerConfiguration
     String getSolrServerPort();
 
     String getSolrCoreName();
-
-    String getContentPagePath();
 }

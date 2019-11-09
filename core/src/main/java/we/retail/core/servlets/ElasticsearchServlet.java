@@ -54,7 +54,7 @@ public class ElasticsearchServlet extends SlingAllMethodsServlet
     EsService elasticsearchService;
 
     @Override
-    protected void doGet(@Nonnull SlingHttpServletRequest request, @Nonnull SlingHttpServletResponse response) throws IOException
+    protected void doGet(@Nonnull SlingHttpServletRequest request, @Nonnull SlingHttpServletResponse response)
     {
         this.doPost(request, response);
     }
@@ -139,7 +139,7 @@ public class ElasticsearchServlet extends SlingAllMethodsServlet
         }
         catch (ElasticsearchException ex)
         {
-            LOG.error("Index can not be found {}", ex);
+            LOG.error("Index can not be found", ex);
         }
         finally
         {

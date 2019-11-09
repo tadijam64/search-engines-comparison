@@ -2,6 +2,7 @@ package we.retail.core.util;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.jcr.RangeIterator;
 
@@ -34,8 +35,14 @@ import we.retail.core.config.ElasticsearchServerConfiguration;
 import we.retail.core.vo.AssetListItemImpl;
 import we.retail.core.vo.PageListItemImpl;
 
+import static com.day.cq.dam.api.DamConstants.NT_DAM_ASSET;
+import static com.day.cq.wcm.api.NameConstants.NT_PAGE;
+
 public class SearchHelpers
 {
+    private static final String PROP_SEARCH_ROOT_PAGES = "/content/we-retail";
+    private static final String PROP_SEARCH_ROOT_ASSETS = "/content/dam";
+
     private SearchHelpers()
     {
     }
@@ -180,5 +187,16 @@ public class SearchHelpers
         String protocol = esConfigService.getElasticsearchProtocol();
 
         return new RestHighLevelClient(RestClient.builder(new HttpHost(server, port, protocol), new HttpHost(server, secondPort, protocol)));
+    }
+
+    public static void prepareQuery(Map<String, String> predicatesMap)
+    {
+        predicatesMap.put("group.p.or", "true"); // combine these groups with OR operator
+        predicatesMap.put("group.1_group.path", PROP_SEARCH_ROOT_PAGES);
+        predicatesMap.put("group.1_group.type", NT_PAGE);
+        predicatesMap.put("group.2_group.path", PROP_SEARCH_ROOT_ASSETS);
+        predicatesMap.put("group.2_group.type", NT_DAM_ASSET);
+        predicatesMap.put("p.offset", "0");
+        predicatesMap.put("p.limit", "10000");
     }
 }

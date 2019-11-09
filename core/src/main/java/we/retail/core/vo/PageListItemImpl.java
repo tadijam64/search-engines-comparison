@@ -24,10 +24,6 @@ public class PageListItemImpl implements ListItem
     protected SlingHttpServletRequest request;
     protected Page page;
 
-    public PageListItemImpl()
-    {
-    }
-
     public PageListItemImpl(@Nonnull SlingHttpServletRequest request, @Nonnull Page page)
     {
         this.request = request;
@@ -55,20 +51,8 @@ public class PageListItemImpl implements ListItem
     @Override
     public String getTitle()
     {
-        String title = this.page.getNavigationTitle();
-        if (title == null)
-        {
-            title = this.page.getPageTitle();
-        }
-        if (title == null)
-        {
-            title = this.page.getTitle();
-        }
-        if (title == null)
-        {
-            title = this.page.getName();
-        }
-        return title;
+        String title = this.page.getTitle();
+        return title == null ? this.page.getName() : title;
     }
 
     @Override
