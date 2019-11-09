@@ -46,47 +46,18 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Embed-Dependency>org.apache.servicemix.bundles.solr-solrj, noggit,
-                            elasticsearch-rest-high-level-client;scope=compile|runtime;inline=true,
-                            elasticsearch;scope=compile|runtime;inline=true,
-                            elasticsearch-core;scope=compile|runtime;inline=true,
-                            elasticsearch-rest-client;scope=compile|runtime;inline=true,
-                            elasticsearch-x-content;scope=compile|runtime;inline=true,
-                            elasticsearch-core;scope=compile|runtime;inline=true,
-                            elasticsearch-secure-sm;scope=compile|runtime;inline=true,
-                            rank-eval-client;scope=compile|runtime;inline=true,
-                            lang-mustache-client;scope=compile|runtime;inline=true,
-                            httpasyncclient;scope=compile|runtime;inline=true,
-                            httpclient;scope=compile|runtime;inline=true,
-                            httpcore-nio;scope=compile|runtime;inline=true,
-                            httpcore;scope=compile|runtime;inline=true,
-                            commons-codec;scope=compile|runtime;inline=true,
-                            commons-logging;scope=compile|runtime;inline=true,
-                            lucene-core;scope=compile|runtime;inline=true;
-                        </Embed-Dependency>
+                        <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
                         <Embed-Transitive>true</Embed-Transitive>
                         <Embed-Directory>OSGI-INF/lib</Embed-Directory>
                         <Export-Package>we.retail.core.model*</Export-Package>
-                        <Import-Package>
-                            *;resolution:=optional
-                        </Import-Package>
+                        <Import-Package>*;resolution:=optional</Import-Package>
                         <Private-Package>
                             we.retail.core*
                         </Private-Package>
                         <Sling-Model-Packages>
                             we.retail.core.model
                         </Sling-Model-Packages>
-                        <_fixupmessages>"Classes found in the wrong directory";is:=warning</_fixupmessages>
                     </instructions>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <excludePackageNames>
-                        *.impl
-                    </excludePackageNames>
                 </configuration>
             </plugin>
         </plugins>
@@ -230,74 +201,18 @@
             <groupId>org.apache.zookeeper</groupId>
             <artifactId>zookeeper</artifactId>
         </dependency>
-        <!-- Elasticsearch -->
+        <!-- Elasticsearch Rest High Level Client-->
         <dependency>
             <groupId>org.elasticsearch.client</groupId>
             <artifactId>elasticsearch-rest-high-level-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.elasticsearch.client</groupId>
-            <artifactId>elasticsearch-rest-client</artifactId>
         </dependency>
         <dependency>
             <groupId>org.elasticsearch</groupId>
             <artifactId>elasticsearch</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.elasticsearch</groupId>
-            <artifactId>elasticsearch-x-content</artifactId>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>elasticsearch-rest-client</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.elasticsearch.plugin</groupId>
-            <artifactId>rank-eval-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-imaging</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.elasticsearch.plugin</groupId>
-            <artifactId>lang-mustache-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.elasticsearch</groupId>
-            <artifactId>elasticsearch-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.elasticsearch</groupId>
-            <artifactId>elasticsearch-secure-sm</artifactId>
-            <version>7.4.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpasyncclient</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpcore-nio</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpcore</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.2</version>
-        </dependency>
-
     </dependencies>
 </project>

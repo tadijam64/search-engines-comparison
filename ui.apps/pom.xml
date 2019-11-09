@@ -110,6 +110,8 @@
                 <artifactId>content-package-maven-plugin</artifactId>
                 <extensions>true</extensions>
                 <configuration>
+                    <filterSource>src/main/content/META-INF/vault/filter.xml</filterSource>
+                    <verbose>true</verbose>
                     <failOnError>true</failOnError>
                     <group>adobe/aem6/sample</group>
                     <properties>
@@ -123,12 +125,17 @@
                         </embedded>
                         <embedded>
                             <groupId>org.elasticsearch.client</groupId>
-                            <artifactId>elasticsearch-rest-client</artifactId>
+                            <artifactId>elasticsearch-rest-high-level-client</artifactId>
                             <target>/apps/weretail/install</target>
                         </embedded>
                         <embedded>
                             <groupId>org.elasticsearch</groupId>
                             <artifactId>elasticsearch</artifactId>
+                            <target>/apps/weretail/install</target>
+                        </embedded>
+                        <embedded>
+                            <groupId>org.elasticsearch.plugin</groupId>
+                            <artifactId>rank-eval-client</artifactId>
                             <target>/apps/weretail/install</target>
                         </embedded>
                     </embeddeds>
@@ -263,21 +270,6 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.elasticsearch.client</groupId>
-            <artifactId>elasticsearch-rest-high-level-client</artifactId>
-            <version>7.4.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.elasticsearch.client</groupId>
-            <artifactId>elasticsearch-rest-client</artifactId>
-            <version>7.4.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.elasticsearch</groupId>
-            <artifactId>elasticsearch</artifactId>
-            <version>7.4.0</version>
         </dependency>
     </dependencies>
 </project>

@@ -98,33 +98,6 @@
                 </executions>
             </plugin>
 
-            <plugin>
-                <groupId>com.day.jcr.vault</groupId>
-                <artifactId>content-package-maven-plugin</artifactId>
-                <configuration>
-                    <failOnMissingEmbed>true</failOnMissingEmbed>
-                    <filterSource>src/main/META-INF/vault/filter.xml</filterSource>
-                    <filters combine.self="override" />
-                    <embeddeds>
-                        <embedded>
-                            <groupId>org.elasticsearch.client</groupId>
-                            <artifactId>elasticsearch-rest-high-level-client</artifactId>
-                            <target>/ui.apps/src/main/content/jcr_root/install</target>
-                        </embedded>
-                        <embedded>
-                            <groupId>org.elasticsearch.client</groupId>
-                            <artifactId>elasticsearch-rest-client</artifactId>
-                            <target>/ui.apps/src/main/content/jcr_root/install</target>
-                        </embedded>
-                        <embedded>
-                            <groupId>org.elasticsearch</groupId>
-                            <artifactId>elasticsearch</artifactId>
-                            <target>/ui.apps/src/main/content/jcr_root/install</target>
-                        </embedded>
-                    </embeddeds>
-                </configuration>
-            </plugin>
-
             <!-- ====================================================================== -->
             <!-- V A U L T   P A C K A G E   P L U G I N                                -->
             <!-- ====================================================================== -->
@@ -215,22 +188,4 @@
             </build>
         </profile>
     </profiles>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.elasticsearch.client</groupId>
-            <artifactId>elasticsearch-rest-high-level-client</artifactId>
-            <version>7.4.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.elasticsearch.client</groupId>
-            <artifactId>elasticsearch-rest-client</artifactId>
-            <version>7.4.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.elasticsearch</groupId>
-            <artifactId>elasticsearch</artifactId>
-            <version>7.4.0</version>
-        </dependency>
-    </dependencies>
 </project>
