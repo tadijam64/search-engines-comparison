@@ -37,7 +37,8 @@
         <sling.password>admin</sling.password>
         <vault.user>admin</vault.user>
         <vault.password>admin</vault.password>
-        <slf4j.version>1.5.11</slf4j.version>
+        <slf4j.version>1.7.25</slf4j.version>
+        <elasticsearch.version>7.4.1</elasticsearch.version>
     </properties>
 
     <build>
@@ -253,7 +254,7 @@
                 <plugin>
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-bundle-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <version>4.2.1</version>
                     <inherited>true</inherited>
                 </plugin>
                 <!-- Maven Enforcer Plugin -->
@@ -440,27 +441,6 @@
     <!-- ====================================================================== -->
     <dependencyManagement>
         <dependencies>
-            <!-- Solr Dependencies -->
-            <dependency>
-                <groupId>org.apache.servicemix.bundles</groupId>
-                <artifactId>org.apache.servicemix.bundles.solr-solrj</artifactId>
-                <version>5.4.1_1</version>
-            </dependency>
-            <dependency>
-                <groupId>log4j</groupId>
-                <artifactId>log4j</artifactId>
-                <version>1.2.16</version>
-            </dependency>
-            <dependency>
-                <groupId>org.noggit</groupId>
-                <artifactId>noggit</artifactId>
-                <version>0.5</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.zookeeper</groupId>
-                <artifactId>zookeeper</artifactId>
-                <version>3.4.5</version>
-            </dependency>
             <!-- OSGi Dependencies -->
             <dependency>
                 <groupId>org.apache.felix</groupId>
@@ -631,6 +611,12 @@
                 <version>17.0.0</version>
                 <scope>provided</scope>
             </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-imaging</artifactId>
+                <version>1.0-alpha1</version>
+                <scope>test</scope>
+            </dependency>
             <!-- Jackson -->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
@@ -638,7 +624,43 @@
                 <version>2.8.11</version>
                 <scope>provided</scope>
             </dependency>
-
+            <!-- Solr Dependencies -->
+            <dependency>
+                <groupId>org.apache.servicemix.bundles</groupId>
+                <artifactId>org.apache.servicemix.bundles.solr-solrj</artifactId>
+                <version>5.4.1_1</version>
+            </dependency>
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.17</version>
+            </dependency>
+            <dependency>
+                <groupId>org.noggit</groupId>
+                <artifactId>noggit</artifactId>
+                <version>0.5</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.zookeeper</groupId>
+                <artifactId>zookeeper</artifactId>
+                <version>3.5.6</version>
+            </dependency>
+            <!-- Elasticsearch Rest High Level Client-->
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-high-level-client</artifactId>
+                <version>${elasticsearch.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.elasticsearch</groupId>
+                <artifactId>elasticsearch</artifactId>
+                <version>${elasticsearch.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-client</artifactId>
+                <version>${elasticsearch.version}</version>
+            </dependency>
         </dependencies>
 
     </dependencyManagement>
