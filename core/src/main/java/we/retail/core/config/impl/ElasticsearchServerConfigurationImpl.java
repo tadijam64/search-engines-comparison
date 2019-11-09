@@ -7,10 +7,10 @@ import org.osgi.service.component.annotations.Modified;
 import org.osgi.service.metatype.annotations.Designate;
 
 import we.retail.core.config.ElasticsearchServerConfiguration;
-import we.retail.core.services.ElasticsearchConfigurationService;
+import we.retail.core.services.EsConfigService;
 
 @Component(immediate = true, service = ElasticsearchServerConfiguration.class, configurationPolicy = ConfigurationPolicy.REQUIRE)
-@Designate(ocd = ElasticsearchConfigurationService.class)
+@Designate(ocd = EsConfigService.class)
 public class ElasticsearchServerConfigurationImpl implements ElasticsearchServerConfiguration
 {
     private String elasticsearchProtocol;
@@ -18,16 +18,24 @@ public class ElasticsearchServerConfigurationImpl implements ElasticsearchServer
     private String elasticsearchServerPort;
     private String elasticsearchSecondServerPort;
     private String elasticsearchIndexName;
+    private String elasticsearchIndexId;
 
     @Activate
     @Modified
-    public void activate(ElasticsearchConfigurationService config)
+    public void activate(EsConfigService config)
     {
         this.elasticsearchProtocol = config.protocolValue();
         this.elasticsearchServerName = config.serverName();
         this.elasticsearchServerPort = config.serverPort();
         this.elasticsearchSecondServerPort = config.secondServerPort();
         this.elasticsearchIndexName = config.serverIndex();
+        this.elasticsearchIndexId = config.serverIndexId();
+    }
+
+    @Override
+    public String getElasticsearchIndexId()
+    {
+        return this.elasticsearchIndexId;
     }
 
     @Override

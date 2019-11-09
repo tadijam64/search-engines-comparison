@@ -1,7 +1,9 @@
 package we.retail.core.services.impl;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.jcr.RepositoryException;
@@ -17,14 +19,17 @@ import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.day.cq.commons.jcr.JcrConstants;
+import com.day.cq.dam.api.DamConstants;
 import com.day.cq.search.PredicateConverter;
 import com.day.cq.search.PredicateGroup;
 import com.day.cq.search.Query;
 import com.day.cq.search.QueryBuilder;
 import com.day.cq.search.result.Hit;
 import com.day.cq.search.result.SearchResult;
+import com.day.cq.tagging.TagConstants;
 
-import we.retail.core.services.ElasticsearchService;
+import we.retail.core.services.EsService;
 
 import static com.day.cq.commons.jcr.JcrConstants.JCR_CREATED;
 import static com.day.cq.commons.jcr.JcrConstants.JCR_DESCRIPTION;
@@ -38,18 +43,20 @@ import static org.apache.sling.jcr.resource.api.JcrResourceConstants.SLING_RESOU
 import static we.retail.core.util.ElasticsearchUtils.addFields;
 
 @Component
-public class ElasticsearchServiceImpl implements ElasticsearchService
+public class EsServiceImpl implements EsService
 {
-    private static final Logger LOG = LoggerFactory.getLogger(SolrSearchServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(EsServiceImpl.class);
 
     private static final String PROP_SEARCH_ROOT_PAGES = "/content/we-retail";
     private static final String PROP_SEARCH_ROOT_ASSETS = "/content/dam";
+    private static final String PROP_SEARCH_ID = "id";
+    private static final String PROP_SEARCH_TYPE = "type";
 
     @Reference
     private QueryBuilder queryBuilder;
 
     @Override
-    public XContentBuilder crawlContent(Session session) throws IOException, RepositoryException
+    public List<XContentBuilder> crawlContent(Session session) throws IOException, RepositoryException
     {
         Map<String, String> predicatesMap = new HashMap<>();
 
@@ -67,54 +74,65 @@ public class ElasticsearchServiceImpl implements ElasticsearchService
 
         LOG.info("Found '{}' matches for query", searchResults.getTotalMatches());
 
-        return createResultsMap(searchResults);
+        return createResultsList(searchResults);
     }
 
-    private XContentBuilder createResultsMap(SearchResult searchResults) throws IOException, RepositoryException
+    private List<XContentBuilder> createResultsList(SearchResult searchResults) throws IOException, RepositoryException
     {
-        XContentBuilder builder = builder = XContentFactory.jsonBuilder();
+        ArrayList<XContentBuilder> builders = new ArrayList<>();
 
         for (Hit hit : searchResults.getHits())
         {
             Resource resource = hit.getResource();
             if (StringUtils.equals(resource.getResourceType(), NT_PAGE))
             {
-                createPageObject(resource, builder, hit);
+                builders.add(createPageObject(resource, hit));
             }
             else if (StringUtils.equals(resource.getResourceType(), NT_DAM_ASSET))
             {
-                createAssetObject(resource, builder, hit);
+                builders.add(createAssetObject(resource));
             }
         }
+
+        return builders;
+    }
+
+    private XContentBuilder createPageObject(Resource resource, Hit hit) throws RepositoryException, IOException
+    {
+        XContentBuilder builder = XContentFactory.jsonBuilder();
+        ValueMap vm = hit.getProperties();
+
+        builder.startObject();
+        builder.field(PROP_SEARCH_ID, resource.getPath());
+        builder.field(PROP_SEARCH_TYPE, resource.getResourceType());
+        builder.field("jcr_title", vm.get(JCR_TITLE));
+
+        addFields(builder, vm, JCR_CREATED, PN_PAGE_LAST_MOD, "manualCreationDate", JCR_DESCRIPTION, JCR_NAME, JCR_PRIMARYTYPE, SLING_RESOURCE_TYPE_PROPERTY, TagConstants.PN_TAGS, "searchDescription", "pageImportanceRank");
+        builder.endObject();
+        return builder;
+    }
+
+    private XContentBuilder createAssetObject(Resource resource) throws IOException
+    {
+        XContentBuilder builder = XContentFactory.jsonBuilder();
+        ValueMap vm = getValueMapFromResource(resource);
+
+        builder.startObject();
+        builder.field(PROP_SEARCH_ID, resource.getPath());
+        builder.field(PROP_SEARCH_TYPE, resource.getResourceType());
+        builder.field("damAssetId", resource.getPath());
+
+        addFields(builder, vm, JcrConstants.JCR_MIMETYPE, DamConstants.PN_NAME, DamConstants.PN_PARENT_PATH, DamConstants.DAM_ASSET_RELATIVE_PATH, TagConstants.PN_TAGS, "description", "sellingPriority", "creationDate");
+        builder.endObject();
 
         return builder;
     }
 
-    private void createPageObject(Resource resource, XContentBuilder builder, Hit hit) throws RepositoryException, IOException
+    private ValueMap getValueMapFromResource(Resource resource)
     {
-        ValueMap vm = hit.getProperties();
+        Resource resourceChild = resource.getChild(JcrConstants.JCR_CONTENT);
 
-        builder.startObject();
-        builder.field("id", resource.getPath());
-        builder.field("type", resource.getResourceType());
-        builder.field("jcr_title", vm.get(JCR_TITLE));
-
-        addFields(builder, vm, JCR_CREATED, PN_PAGE_LAST_MOD, "manualCreationDate", JCR_DESCRIPTION, JCR_NAME, JCR_PRIMARYTYPE, SLING_RESOURCE_TYPE_PROPERTY, "cqTags", "searchDescription", "pageImportanceRank");
-        builder.endObject();
-    }
-
-    private void createAssetObject(Resource resource, XContentBuilder builder, Hit hit) throws RepositoryException, IOException
-    {
-        ValueMap vm = hit.getProperties();
-        builder = XContentFactory.jsonBuilder();
-
-        builder.startObject();
-        builder.field("id", resource.getPath());
-        builder.field("type", resource.getResourceType());
-        builder.field("damAssetId", resource.getPath());
-
-        addFields(builder, vm, "jcr:mimeType", "cq:name", "cq:parentPath", "dam:relativePath", "cq:tags", "description", "sellingPriotiry", "creationDate");
-        builder.endObject();
+        return resourceChild != null ? resourceChild.getValueMap() : resource.getValueMap();
     }
 
 }
