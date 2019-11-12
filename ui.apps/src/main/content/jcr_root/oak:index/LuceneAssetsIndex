@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:oak="http://jackrabbit.apache.org/oak/ns/1.0"
+          xmlns:dam="http://www.day.com/dam/1.0"
+          xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+          xmlns:rep="internal"
+          jcr:mixinTypes="[rep:AccessControllable]"
+          jcr:primaryType="nt:unstructured">
+    <LuceneAssetsIndex
+        jcr:primaryType="oak:QueryIndexDefinition"
+        async="[async,nrt]"
+        compatVersion="{Long}2"
+        evaluatePathRestrictions="{Boolean}true"
+        includedPaths="[/content/dam]"
+        reindex="{Boolean}false"
+        reindexCount="{Long}4"
+        type="lucene">
+    <aggregates jcr:primaryType="nt:unstructured">
+        <dam:Asset jcr:primaryType="nt:unstructured">
+            <include0
+                jcr:primaryType="nt:unstructured"
+                path="jcr:content" />
+            <include1
+                jcr:primaryType="nt:unstructured"
+                path="jcr:content/metadata" />
+            <include2
+                jcr:primaryType="nt:unstructured"
+                path="jcr:content/metadata/*" />
+            <include3
+                jcr:primaryType="nt:unstructured"
+                path="jcr:content/renditions" />
+            <include4
+                jcr:primaryType="nt:unstructured"
+                path="jcr:content/renditions/original" />
+            <include5
+                jcr:primaryType="nt:unstructured"
+                path="jcr:content/renditions/original/jcr:content" />
+            <include6
+                jcr:primaryType="nt:unstructured"
+                path="jcr:content/comments" />
+            <include7
+                jcr:primaryType="nt:unstructured"
+                path="jcr:content/comments/*" />
+            <include8
+                jcr:primaryType="nt:unstructured"
+                path="jcr:content/data/master" />
+            <include9
+                jcr:primaryType="nt:unstructured"
+                path="jcr:content/usages" />
+            <include10
+                jcr:primaryType="nt:unstructured"
+                path="jcr:content/renditions/cqdam.text.txt" />
+        </dam:Asset>
+    </aggregates>
+    <indexRules jcr:primaryType="nt:unstructured">
+        <dam:Asset jcr:primaryType="nt:unstructured">
+            <properties jcr:primaryType="nt:unstructured">
+                <cqTags
+                    jcr:primaryType="nt:unstructured"
+                    name="jcr:content/metadata/cq:tags"
+                    nodeScopeIndex="{Boolean}true"
+                    propertyIndex="{Boolean}true"
+                    useInSuggest="{Boolean}true" />
+                <dcTitle
+                    jcr:primaryType="nt:unstructured"
+                    boost="{Long}2"
+                    name="jcr:content/metadata/dc:title"
+                    nodeScopeIndex="{Boolean}true"
+                    ordered="{Boolean}true"
+                    propertyIndex="{Boolean}true"
+                    useInSuggest="{Boolean}true" />
+                <dcDescription
+                    jcr:primaryType="nt:unstructured"
+                    name="jcr:content/metadata/dc:description"
+                    nodeScopeIndex="{Boolean}true"
+                    propertyIndex="{Boolean}true"
+                    useInSuggest="{Boolean}true" />
+                <onTime
+                    jcr:primaryType="nt:unstructured"
+                    name="jcr:content/onTime"
+                    ordered="{Boolean}true"
+                    propertyIndex="{Boolean}true"
+                    type="Date" />
+                <offTime
+                    jcr:primaryType="nt:unstructured"
+                    name="jcr:content/offTime"
+                    ordered="{Boolean}true"
+                    propertyIndex="{Boolean}true"
+                    type="Date" />
+                <jcrTitle
+                    jcr:primaryType="nt:unstructured"
+                    boost="{Long}2"
+                    name="jcr:content/jcr:title"
+                    nodeScopeIndex="{Boolean}true"
+                    propertyIndex="{Boolean}true"
+                    useInSuggest="{Boolean}true" />
+                <jcrDescription
+                    jcr:primaryType="nt:unstructured"
+                    name="jcr:content/jcr:description"
+                    nodeScopeIndex="{Boolean}true"
+                    propertyIndex="{Boolean}true"
+                    useInSuggest="{Boolean}true" />
+                <jcrCreated
+                    jcr:primaryType="nt:unstructured"
+                    name="jcr:created"
+                    ordered="{Boolean}true"
+                    propertyIndex="{Boolean}true"
+                    type="Date" />
+                <customDescription
+                    jcr:primaryType="nt:unstructured"
+                    boost="{Double}2.0"
+                    name="jcr:content/description"
+                    nodeScopeIndex="{Boolean}true"
+                    propertyIndex="{Boolean}true"
+                    useInSpellcheck="{Boolean}true"
+                    useInSuggest="{Boolean}true" />
+                <customCreationDate
+                    jcr:primaryType="nt:unstructured"
+                    name="jcr:content/creationDate"
+                    ordered="{Boolean}true"
+                    propertyIndex="{Boolean}true"
+                    type="Date" />
+                <customSellingPriority
+                    jcr:primaryType="nt:unstructured"
+                    name="jcr:content/sellingPriority"
+                    ordered="{Boolean}true"
+                    propertyIndex="{Boolean}true"
+                    type="Decimal" />
+            </properties>
+        </dam:Asset>
+    </indexRules>
+</jcr:root>

@@ -13,24 +13,71 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/-->
-<section class="cmp-search" role="search"
-         data-sly-use.search="com.adobe.cq.wcm.core.components.models.Search"
-         data-cmp-is="search"
-         data-cmp-min-length="${search.searchTermMinimumLength}"
-         data-cmp-results-size="${search.resultsSize}">
-    <form class="cmp-search__form" data-cmp-hook-search="form"
-          method="get" action="${currentPage.path @ addSelectors=['mysearchresults'], extension='json', suffix = search.relativePath}"
-          autocomplete="off">
+<section class="cmp-search" role="search" data-sly-use.search="com.adobe.cq.wcm.core.components.models.Search" data-cmp-is="search" data-cmp-min-length="${search.searchTermMinimumLength}" data-cmp-results-size="${search.resultsSize}">
+    <form class="cmp-search__form" data-cmp-hook-search="form" method="get" action="${currentPage.path @ addSelectors=['mysearchresults'], extension='json', suffix = search.relativePath}" autocomplete="off">
         <div class="cmp-search__field">
             <i class="cmp-search__icon" data-cmp-hook-search="icon"></i>
             <span class="cmp-search__loading-indicator" data-cmp-hook-search="loadingIndicator"></span>
-            <input class="cmp-search__input" data-cmp-hook-search="input" type="text" name="fulltext" placeholder="${'Search' @ i18n}"
-                   role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-invalid="false">
+            <input class="cmp-search__input" data-cmp-hook-search="input" type="text" name="fulltext" placeholder="${'Search' @ i18n}" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-invalid="false">
             <button class="cmp-search__clear" data-cmp-hook-search="clear">
                 <i class="cmp-search__clear-icon"></i>
             </button>
         </div>
+        <div>
+            <h3>Choose search options</h3>
+            <div style="display:inline-block;margin-right:10px;">
+                <select style="background-color:#D43732;" name="searchContent">
+                    <option value="pages" selected> Pages</option>
+                    <option value="assets"> Assets</option>
+                    <option value="allContent"> All content</option>
+                    <option value="tags"> Content with tag</option>
+                </select>
+            </div>
+
+            <div style="display:inline-block">
+                <select style="background-color:#D43732;" name="searchEngine" id="searchEngine" onchange="yesnoCheck(this);">
+                    <option value="lucene" selected> Lucene</option>
+                    <option value="solr"> Solr</option>
+                    <option value="elasticsearch"> Elasticsearch</option>
+                </select>
+            </div>
+        </div>
     </form>
     <div class="cmp-search__results" data-cmp-hook-search="results" role="listbox" aria-multiselectable="false"></div>
     <sly data-sly-include="itemTemplate.html"/>
+
+    <form id="solrForm" action="${currentPage.path @ addSelectors=['indexSolrPages'], extension='json', suffix = search.relativePath}" autocomplete="off" method="get" style="display: none;">
+        <h3>Solr collection management</h3>
+        <button name="indexType" type="submit" value="indexpages" style="background-color:#D43732; border-radius: 8px; display:inline-block;  margin-right:10px">
+            Index data
+        </button>
+        <button name="indexType" type="submit" value="deleteindexdata" style="background-color:#D43732; border-radius: 8px; display:inline-block;">
+            Delete index
+        </button>
+    </form>
+    <form id="elasticsearchForm" action="${currentPage.path @ addSelectors=['indexElasticsearchPages'], extension='json', suffix = search.relativePath}" autocomplete="off" method="get" style="display: none;">
+        <h3>Elasticsearch index management</h3>
+        <button name="indexType" type="submit" value="indexpages" style="background-color:#D43732; border-radius: 8px; display:inline-block;  margin-right:10px">
+            Index data
+        </button>
+        <button name="indexType" type="submit" value="deleteindexdata" style="background-color:#D43732; border-radius: 8px; display:inline-block;">
+            Delete index
+        </button>
+    </form>
+    <br>
 </section>
+
+<script>
+    function yesnoCheck(that) {
+        if (that.value == "solr") {
+            document.getElementById("solrForm").style.display = "block";
+            document.getElementById("elasticsearchForm").style.display = "none";
+        } else if (that.value == "elasticsearch") {
+            document.getElementById("solrForm").style.display = "none";
+            document.getElementById("elasticsearchForm").style.display = "block";
+        } else {
+            document.getElementById("solrForm").style.display = "none";
+            document.getElementById("elasticsearchForm").style.display = "none";
+        }
+    }
+</script>

@@ -1,3 +1,5 @@
+package groovyScripts
+
 import groovy.transform.Field
 import org.apache.sling.api.resource.ModifiableValueMap
 import org.apache.sling.api.resource.Resource
@@ -17,24 +19,24 @@ import org.apache.sling.api.resource.ValueMap
 @Field manualCreationDateListSize = manualCreationDateList.size()
 
 
-def predicates = [path: "/content/dam/we-retail", type: "dam:Asset",  "orderby.index": "true", "orderby.sort": "desc"]
+def predicates = [path: "/content/dam/we-retail", type: "dam:Asset", "orderby.index": "true", "orderby.sort": "desc"]
 def query = createQuery(predicates)
 query.hitsPerPage = 500
 def result = query.result
 println "${result.totalMatches} hits, execution time = ${result.executionTime}s\n--"
 
 result.hits.each { hit ->
-    def path=hit.node.path
+    def path = hit.node.path
     Resource res = resourceResolver.getResource(path)
-    if(res!=null){
+    if (res != null) {
         setValuesToChildren(res);
     }
 }
 
-// Uncomment this to applly changes on server
-//session.save()
+// Uncomment this to apply changes on server
+session.save()
 
-def setValuesToChildren(res){
+def setValuesToChildren(res) {
     def r = new Random();
     Iterator<Resource> children = res.listChildren();
 
@@ -56,7 +58,7 @@ def setValuesToChildren(res){
             ModifiableValueMap valueMap = child.adaptTo(ModifiableValueMap.class);
             for (String key : valueMap.keySet()) {
                 String value = valueMap.get(key, String.class);
-                println 'Key-'+key+' value-'+value
+                println 'Key-' + key + ' value-' + value
             }
         }
     }

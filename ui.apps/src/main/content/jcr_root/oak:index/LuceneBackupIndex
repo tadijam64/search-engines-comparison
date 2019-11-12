@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:oak="http://jackrabbit.apache.org/oak/ns/1.0"
+          xmlns:dam="http://www.day.com/dam/1.0"
+          xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+          xmlns:rep="internal"
+          jcr:mixinTypes="[rep:AccessControllable]"
+          jcr:primaryType="nt:unstructured">
+    <LuceneBackupIndex
+        jcr:primaryType="oak:QueryIndexDefinition"
+        async="async"
+        compatVersion="{Long}2"
+        excludedPaths="[/var,/etc/replication,/etc/workflow/instances,/jcr:system]"
+        reindex="{Boolean}false"
+        reindexCount="{Long}7"
+        type="lucene">
+        <aggregates jcr:primaryType="nt:unstructured">
+            <nt:file jcr:primaryType="nt:unstructured">
+                <include0
+                    jcr:primaryType="nt:unstructured"
+                    path="jcr:content" />
+            </nt:file>
+            <dam:Asset jcr:primaryType="nt:unstructured">
+                <include0
+                    jcr:primaryType="nt:unstructured"
+                    path="jcr:content" />
+                <include1
+                    jcr:primaryType="nt:unstructured"
+                    path="jcr:content/metadata" />
+                <include2
+                    jcr:primaryType="nt:unstructured"
+                    path="jcr:content/metadata/*" />
+                <include3
+                    jcr:primaryType="nt:unstructured"
+                    path="jcr:content/renditions" />
+                <include4
+                    jcr:primaryType="nt:unstructured"
+                    path="jcr:content/renditions/original" />
+                <include5
+                    jcr:primaryType="nt:unstructured"
+                    path="jcr:content/renditions/original/jcr:content" />
+                <include6
+                    jcr:primaryType="nt:unstructured"
+                    path="jcr:content/comments" />
+                <include7
+                    jcr:primaryType="nt:unstructured"
+                    path="jcr:content/comments/*" />
+                <include8
+                    jcr:primaryType="nt:unstructured"
+                    path="jcr:content/data/master" />
+                <include9
+                    jcr:primaryType="nt:unstructured"
+                    path="jcr:content/usages" />
+            </dam:Asset>
+        </aggregates>
+        <indexRules jcr:primaryType="nt:unstructured">
+            <nt:base
+                jcr:primaryType="nt:unstructured"
+                includePropertyTypes="all">
+                <properties jcr:primaryType="nt:unstructured">
+                    <analyticsProvider
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="analyticsProvider" />
+                    <analyticsSnippet
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="analyticsSnippet" />
+                    <hideInNav
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="hideInNav" />
+                    <offTime
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="offTime" />
+                    <onTime
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="onTime" />
+                    <allowedTemplates
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="cq:allowedTemplates" />
+                    <childrenOrder
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="cq:childrenOrder" />
+                    <cugEnabled
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="cq:cugEnabled" />
+                    <cugPrincipals
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="cq:cugPrincipals" />
+                    <cugRealm
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="cq:cugRealm" />
+                    <designPath
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="cq:designPath" />
+                    <isCancelledForChildren
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="cq:isCancelledForChildren" />
+                    <isDeep
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="cq:isDeep" />
+                    <lastModified
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="cq:lastModified" />
+                    <lastModifiedBy
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="cq:lastModifiedBy" />
+                    <lastPublished
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="cq:lastPublished" />
+                    <lastPublishedBy
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="cq:lastPublishedBy" />
+                    <lastReplicated
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="cq:lastReplicated" />
+                    <lastReplicatedBy
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="cq:lastReplicatedBy" />
+                    <lastReplicationAction
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="cq:lastReplicationAction" />
+                    <lastReplicationStatus
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="cq:lastReplicationStatus" />
+                    <lastRolledout
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="cq:lastRolledout" />
+                    <lastRolledoutBy
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="cq:lastRolledoutBy" />
+                    <name
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="cq:name" />
+                    <parentPath
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="cq:parentPath" />
+                    <segments
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="cq:segments" />
+                    <siblingOrder
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="cq:siblingOrder" />
+                    <template
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="cq:template" />
+                    <trigger
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="cq:trigger" />
+                    <versionComment
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="cq:versionComment" />
+                    <createdBy
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="jcr:createdBy" />
+                    <lastModifiedBy_31
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="jcr:lastModifiedBy" />
+                    <alias
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="sling:alias" />
+                    <vanityPath
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="sling:vanityPath" />
+                    <asyncstatus
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="async-status" />
+                    <asyncstart
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="async-start" />
+                    <asyncdone
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="async-done" />
+                    <runtimeId
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="runtimeId" />
+                    <leaderElectionId
+                        jcr:primaryType="nt:unstructured"
+                        index="{Boolean}false"
+                        name="leaderElectionId" />
+                    <resourceType
+                        jcr:primaryType="nt:unstructured"
+                        name="sling:resourceType"
+                        propertyIndex="{Boolean}true"
+                        weight="{Long}0" />
+                    <resourceSuperType
+                        jcr:primaryType="nt:unstructured"
+                        name="sling:resourceSuperType"
+                        propertyIndex="{Boolean}true"
+                        weight="{Long}0" />
+                    <prop
+                        jcr:primaryType="nt:unstructured"
+                        analyzed="{Boolean}true"
+                        isRegexp="{Boolean}true"
+                        name="^[^\\/]*$"
+                        nodeScopeIndex="{Boolean}true"
+                        useInExcerpt="{Boolean}true" />
+                    <searchDescription
+                        jcr:primaryType="nt:unstructured"
+                        name="jcr:content/searchDescription"
+                        nodeScopeIndex="{Boolean}true"
+                        propertyIndex="{Boolean}true"
+                        type="String"
+                        useInSuggest="{Boolean}true" />
+                    <pageImportanceRank
+                        jcr:primaryType="nt:unstructured"
+                        name="jcr:content/pageImportanceRank"
+                        nodeScopeIndex="{Boolean}true"
+                        propertyIndex="{Boolean}true"
+                        type="Long"
+                        useInSuggest="{Boolean}true" />
+                    <manualCreationDate
+                        jcr:primaryType="nt:unstructured"
+                        name="jcr:content/manualCreationDate"
+                        nodeScopeIndex="{Boolean}true"
+                        propertyIndex="{Boolean}true"
+                        type="Date"
+                        useInSuggest="{Boolean}true" />
+                    <description
+                        jcr:primaryType="nt:unstructured"
+                        name="jcr:content/description"
+                        nodeScopeIndex="{Boolean}true"
+                        propertyIndex="{Boolean}true"
+                        type="String"
+                        useInSuggest="{Boolean}true" />
+                    <sellingPriority
+                        jcr:primaryType="nt:unstructured"
+                        name="jcr:content/sellingPriority"
+                        nodeScopeIndex="{Boolean}true"
+                        propertyIndex="{Boolean}true"
+                        type="Long"
+                        useInSuggest="{Boolean}true" />
+                    <creationDate
+                        jcr:primaryType="nt:unstructured"
+                        name="jcr:content/creationDate"
+                        nodeScopeIndex="{Boolean}true"
+                        propertyIndex="{Boolean}true"
+                        type="Date"
+                        useInSuggest="{Boolean}true" />
+                    <cqTagsOnAssets
+                        jcr:primaryType="nt:unstructured"
+                        boost="{Long}2"
+                        name="jcr:content/metadata/cq:tags"
+                        nodeScopeIndex="{Boolean}true"
+                        propertyIndex="{Boolean}true"
+                        useInSpellcheck="{Boolean}true"
+                        useInSuggest="{Boolean}true" />
+                    <cqTagsOnPages
+                        jcr:primaryType="nt:unstructured"
+                        boost="{Long}2"
+                        name="jcr:content/cq:tags"
+                        nodeScopeIndex="{Boolean}true"
+                        propertyIndex="{Boolean}true"
+                        useInSpellcheck="{Boolean}true"
+                        useInSuggest="{Boolean}true" />
+                </properties>
+            </nt:base>
+        </indexRules>
+    </LuceneBackupIndex>
+</jcr:root>
