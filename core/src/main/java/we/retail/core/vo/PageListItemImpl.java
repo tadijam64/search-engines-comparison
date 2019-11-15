@@ -15,6 +15,9 @@ import com.adobe.cq.wcm.core.components.models.ListItem;
 import com.day.cq.wcm.api.Page;
 import com.day.cq.wcm.api.PageManager;
 
+/**
+ * This method implements ListItem for using item object as a page
+ */
 public class PageListItemImpl implements ListItem
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(PageListItemImpl.class);

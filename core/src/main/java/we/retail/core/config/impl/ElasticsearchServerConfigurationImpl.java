@@ -9,6 +9,10 @@ import org.osgi.service.metatype.annotations.Designate;
 import we.retail.core.config.ElasticsearchServerConfiguration;
 import we.retail.core.services.EsConfigService;
 
+/**
+ * Configuration impl class.
+ * Values can be set using AEM Web Console - OSGi Configuration
+ */
 @Component(immediate = true, service = ElasticsearchServerConfiguration.class, configurationPolicy = ConfigurationPolicy.REQUIRE)
 @Designate(ocd = EsConfigService.class)
 public class ElasticsearchServerConfigurationImpl implements ElasticsearchServerConfiguration

@@ -7,6 +7,11 @@ public class ExtendedStringUtils extends org.apache.commons.lang3.StringUtils
         super();
     }
 
+    /**
+     * This method takes text to return the same text without starting "/" character if it exists
+     * @param text
+     * @return
+     */
     public static String removeStartingSlash(String text)
     {
         if (startsWith(text, "/"))

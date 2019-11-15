@@ -16,7 +16,7 @@ public @interface SolrConfigurationService
       String serverPort() default "8983";
 
     /**
-     * This is a collection name in Solr terminology
+     * This is a collection (index) name in Solr terminology
      */
     @AttributeDefinition(name = "Solr Core Name", description = "Core name in Solr server") //
       String serverCollection() default "gettingstarted";
