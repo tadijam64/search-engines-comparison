@@ -105,7 +105,7 @@ public class SolrSearchServiceImpl implements SolrSearchService
     }
 
     /**
-     * This method connects to the Solr server and indexes page content using Solrj api. This is used by bulk update handler (servlet)
+     * This method connects to the Solr server and indexes page content using Solrj API. This is used by bulk update handler (servlet)
      * @param indexItemData
      * @param server
      * Takes Json array and iterates over each object and index solr

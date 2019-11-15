@@ -47,6 +47,14 @@ public class SearchHelpers
     {
     }
 
+    /**
+     * This method takes current page and search root to get search root page path
+     * @param searchRoot
+     * @param currentPage
+     * @param languageManager
+     * @param relationshipManager
+     * @return
+     */
     public static String getSearchRootPagePath(String searchRoot, Page currentPage, LanguageManager languageManager, LiveRelationshipManager relationshipManager)
     {
         String searchRootPagePath = null;
@@ -78,6 +86,14 @@ public class SearchHelpers
         return searchRootPagePath;
     }
 
+    /**
+     * This method takes current page to return current live copy root needed for lucene search
+     * @param liveCopiesIterator
+     * @param currentPage
+     * @param pageManager
+     * @param rootPage
+     * @return
+     */
     private static Page getCurrentLiveCopyRoot(RangeIterator liveCopiesIterator, Page currentPage, PageManager pageManager, Page rootPage)
     {
         Page result = rootPage;
@@ -97,6 +113,12 @@ public class SearchHelpers
         return result;
     }
 
+    /**
+     * This method takes current page and relationship manager to create a live copies iterator
+     * @param relationshipManager
+     * @param currentPage
+     * @return
+     */
     private static RangeIterator getLiveCopiesIterator(LiveRelationshipManager relationshipManager, Page currentPage)
     {
         RangeIterator result = null;
@@ -111,20 +133,32 @@ public class SearchHelpers
         return result;
     }
 
+    /**
+     * This method takes root page and child page to return their relative path
+     * @param root
+     * @param child
+     * @return
+     */
     @Nullable
     private static String getRelativePath(@NotNull Page root, @NotNull Page child)
     {
+        String relativePath = null;
         if (child.equals(root))
         {
-            return ".";
+            relativePath = ".";
         }
         else if ((child.getPath() + "/").startsWith(root.getPath()))
         {
-            return child.getPath().substring(root.getPath().length() + 1);
+            relativePath = child.getPath().substring(root.getPath().length() + 1);
         }
-        return null;
+        return relativePath;
     }
 
+    /**
+     * This method takes search resoure to return content policy properties
+     * @param searchResource
+     * @return
+     */
     public static ValueMap getContentPolicyProperties(Resource searchResource)
     {
         ValueMap contentPolicyProperties = new ValueMapDecorator(new HashMap<>());
@@ -141,24 +175,42 @@ public class SearchHelpers
         return contentPolicyProperties;
     }
 
+    /**
+     * This method returns asset from resource
+     * @param resource
+     * @return
+     */
     public static Asset getAsset(Resource resource)
     {
         return DamUtil.resolveToAsset(resource);
     }
 
+    /**
+     * This method returns page from resource
+     * @param resource
+     * @return
+     */
     public static Page getPage(Resource resource)
     {
+        Page page = null;
+
         ResourceResolver resourceResolver = resource.getResourceResolver();
         PageManager pageManager = resourceResolver.adaptTo(PageManager.class);
 
         if (pageManager != null)
         {
-            return pageManager.getContainingPage(resource);
+            page = pageManager.getContainingPage(resource);
         }
 
-        return null;
+        return page;
     }
 
+    /**
+     * This method adds page to result list
+     * @param results
+     * @param request
+     * @param hitRes
+     */
     public static void addPageToResultsList(List<ListItem> results, SlingHttpServletRequest request, Resource hitRes)
     {
         Page page = getPage(hitRes);
@@ -169,6 +221,12 @@ public class SearchHelpers
         }
     }
 
+    /**
+     * This method adds asset to result list
+     * @param results
+     * @param request
+     * @param hitRes
+     */
     public static void addAssetToResultsList(List<ListItem> results, SlingHttpServletRequest request, Resource hitRes)
     {
         Asset asset = getAsset(hitRes);
@@ -179,6 +237,11 @@ public class SearchHelpers
         }
     }
 
+    /**
+     * This method gets an elasticsearch client
+     * @param esConfigService
+     * @return
+     */
     public static RestHighLevelClient getEsClient(ElasticsearchServerConfiguration esConfigService)
     {
         String server = esConfigService.getElasticsearchServerName();
@@ -189,6 +252,10 @@ public class SearchHelpers
         return new RestHighLevelClient(RestClient.builder(new HttpHost(server, port, protocol), new HttpHost(server, secondPort, protocol)));
     }
 
+    /**
+     * This method prepares query for multiple condition search (pages and assets)
+     * @param predicatesMap
+     */
     public static void prepareQuery(Map<String, String> predicatesMap)
     {
         predicatesMap.put("group.p.or", "true"); // combine these groups with OR operator

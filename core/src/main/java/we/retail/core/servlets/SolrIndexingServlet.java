@@ -56,6 +56,13 @@ public class SolrIndexingServlet extends SlingAllMethodsServlet
         this.doPost(request, response);
     }
 
+    /**
+     * This method calls other methods for indexing content or deleting indexed content from Solr server.
+     * This is based on user's choice provided in given request.
+     * This method writes response of successful or unsuccessful indexing/deleting.
+     * @param request
+     * @param response
+     */
     @Override
     protected void doPost(@Nonnull SlingHttpServletRequest request, @Nonnull SlingHttpServletResponse response)
     {
@@ -73,6 +80,13 @@ public class SolrIndexingServlet extends SlingAllMethodsServlet
         }
     }
 
+    /**
+     * This method performs indexing.
+     * It is done by taking Solr server URL to create client, index data and return response
+     * @param request
+     * @param response
+     * @param url
+     */
     private void indexData(SlingHttpServletRequest request, SlingHttpServletResponse response, String url)
     {
         Resource resource = request.getResource();
@@ -90,6 +104,12 @@ public class SolrIndexingServlet extends SlingAllMethodsServlet
         }
     }
 
+    /**
+     * This method takes Boolean parameter dataIndex and writes response based on it's value.
+     * @param dataIndexed
+     * @param response
+     * @throws IOException
+     */
     private void writeResponse(boolean dataIndexed, SlingHttpServletResponse response) throws IOException
     {
         if (dataIndexed)
@@ -102,6 +122,11 @@ public class SolrIndexingServlet extends SlingAllMethodsServlet
         }
     }
 
+    /**
+     * This method takes URL of Solr client to write info response about index data deletion.
+     * @param url
+     * @param response
+     */
     private void deleteData(String url, SlingHttpServletResponse response)
     {
         try (HttpSolrClient server = new HttpSolrClient(url))

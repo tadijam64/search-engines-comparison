@@ -56,6 +56,11 @@ public class SolrUtils
         }
     }
 
+    /**
+     * This method creates solr server url from AEM configuration
+     * @param solrConfigurationService
+     * @return
+     */
     public static String getSolrServerUrl(SolrServerConfiguration solrConfigurationService)
     {
         String protocol = solrConfigurationService.getSolrProtocol();
@@ -65,6 +70,12 @@ public class SolrUtils
         return protocol + "://" + serverName + ":" + serverPort + "/solr/" + coreName;
     }
 
+    /**
+     * This method adds different type of results as the same object in result list
+     * @param hits
+     * @param results
+     * @param request
+     */
     public static void addHitsToResultsListItem(List<Hit> hits, List<ListItem> results, SlingHttpServletRequest request)
     {
         for (Hit hit : hits)
@@ -89,6 +100,12 @@ public class SolrUtils
         }
     }
 
+    /**
+     * This method takes searchContentType to add different query parameters
+     * @param searchContentType
+     * @param query
+     * @param fulltext
+     */
     public static void addPredicatesToQuery(String searchContentType, SolrQuery query, String fulltext)
     {
         if (searchContentType.equalsIgnoreCase(PROP_SEARCH_ASSETS))

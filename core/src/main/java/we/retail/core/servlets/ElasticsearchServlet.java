@@ -38,6 +38,11 @@ import static we.retail.core.util.ElasticsearchUtils.setIndexRequestOptions;
 import static we.retail.core.util.ElasticsearchUtils.writeResponse;
 import static we.retail.core.util.SearchHelpers.getEsClient;
 
+/**
+ *
+ * This servlet acts as a bulk update to index content pages and assets to the configured Elasticsearch server
+ *
+ */
 @Component(service = Servlet.class, property = { "sling.servlet.selectors=indexElasticsearchPages", "sling.servlet.resourceTypes=cq/Page",
   "sling.servlet.extensions=json", "sling.servlet.methods=" + HttpConstants.METHOD_GET })
 public class ElasticsearchServlet extends SlingAllMethodsServlet
@@ -59,6 +64,13 @@ public class ElasticsearchServlet extends SlingAllMethodsServlet
         this.doPost(request, response);
     }
 
+    /**
+     * This method calls other methods for indexing content or deleting indexed content from Elasticsearch server.
+     * This is based on user's choice provided in given request.
+     * This method writes response of successful or unsuccessful indexing/deleting.
+     * @param request
+     * @param response
+     */
     @Override
     protected void doPost(@Nonnull SlingHttpServletRequest request, @Nonnull SlingHttpServletResponse response)
     {
@@ -86,6 +98,15 @@ public class ElasticsearchServlet extends SlingAllMethodsServlet
         }
     }
 
+    /**
+     * This method performs indexing.
+     * This is done by taking Elasticsearch server client and resourceResolver to index data and writes indexing response
+     * @param response
+     * @param client
+     * @param resourceResolver
+     * @throws IOException
+     * @throws RepositoryException
+     */
     private void indexData(SlingHttpServletResponse response, RestHighLevelClient client, ResourceResolver resourceResolver) throws IOException, RepositoryException
     {
         Session session = resourceResolver.adaptTo(Session.class);
@@ -114,6 +135,12 @@ public class ElasticsearchServlet extends SlingAllMethodsServlet
         }
     }
 
+    /**
+     * This method adds retrieved indexed documents to bulk request needed for synchronous indexing of many documents
+     * @param bulkRequest
+     * @param builders
+     * @param indexName
+     */
     private void addDocsToRequest(BulkRequest bulkRequest, List<XContentBuilder> builders, String indexName)
     {
         for (XContentBuilder builder : builders)
@@ -124,6 +151,12 @@ public class ElasticsearchServlet extends SlingAllMethodsServlet
         }
     }
 
+    /**
+     * This method takes Elasticsearch server client to delete indexed data and write response
+     * @param client
+     * @param response
+     * @throws IOException
+     */
     private void deleteData(RestHighLevelClient client, SlingHttpServletResponse response) throws IOException
     {
         String indexName = this.esConfigService.getElasticsearchIndexName();
