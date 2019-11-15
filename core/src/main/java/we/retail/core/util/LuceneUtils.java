@@ -35,12 +35,23 @@ public class LuceneUtils
     {
     }
 
+    /**
+     * This method takes predicates map and adds path and type as search conditions
+     * @param predicatesMap
+     * @param propRootPath
+     * @param propItemType
+     */
     public static void addQueryConditions(Map<String, String> predicatesMap, String propRootPath, String propItemType)
     {
         predicatesMap.put(PREDICATE_PATH, propRootPath);
         predicatesMap.put(PREDICATE_TYPE, propItemType);
     }
 
+    /**
+     * This method takes request to add query conditions for search by tag
+     * @param request
+     * @param predicatesMap
+     */
     public static void addTagQueryConditions(SlingHttpServletRequest request, Map<String, String> predicatesMap)
     {
         String fulltext = request.getParameter(PREDICATE_FULLTEXT);
@@ -60,6 +71,12 @@ public class LuceneUtils
         predicatesMap.put(PREDICATE_TAG_ID + ".property", "jcr:content/cq:tags");
     }
 
+    /**
+     * This method takes request to get all tags containing search term
+     * @param request
+     * @param fulltext
+     * @return Tag[]
+     */
     private static Tag[] getTagsFromRequest(SlingHttpServletRequest request, String fulltext)
     {
         Tag[] results = null;
@@ -73,6 +90,11 @@ public class LuceneUtils
         return results;
     }
 
+    /**
+     * This method takes previously prepared predicates to run a query for assets and pages
+     * @param searchRootPagePath
+     * @param predicatesMap
+     */
     public static void prepareAllContentQuery(String searchRootPagePath, Map<String, String> predicatesMap)
     {
         predicatesMap.put("group.p.or", "true"); //combine these groups with OR operator
@@ -82,6 +104,12 @@ public class LuceneUtils
         predicatesMap.put("group.2_group.type", NT_DAM_ASSET);
     }
 
+    /**
+     * This method takes lucene query results to create Solr documents ready for indexing
+     * @param resultDocs
+     * @param request
+     * @param results
+     */
     public static void addResultDocsToResultItemList(SolrDocumentList resultDocs, SlingHttpServletRequest request, List<ListItem> results)
     {
         ResourceResolver resourceResolver = request.getResourceResolver();
@@ -105,6 +133,11 @@ public class LuceneUtils
         }
     }
 
+    /**
+     * This method takes request to get search results offset
+     * @param request
+     * @return
+     */
     public static long getResultOffset(SlingHttpServletRequest request)
     {
         long resultsOffset = 0;
@@ -116,6 +149,13 @@ public class LuceneUtils
         return resultsOffset;
     }
 
+    /**
+     * This method set query predicates to search pages, assets, all content or tags
+     * @param request
+     * @param predicatesMap
+     * @param fulltext
+     * @param searchRootPagePath
+     */
     public static void setQueryPredicates(SlingHttpServletRequest request, Map<String, String> predicatesMap, String fulltext, String searchRootPagePath)
     {
         predicatesMap.put(PREDICATE_FULLTEXT, "*" + fulltext + "*");

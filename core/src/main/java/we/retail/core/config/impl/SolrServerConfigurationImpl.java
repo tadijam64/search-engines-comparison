@@ -9,6 +9,10 @@ import org.osgi.service.metatype.annotations.Designate;
 import we.retail.core.config.SolrServerConfiguration;
 import we.retail.core.services.SolrConfigurationService;
 
+/**
+ * Configuration impl class.
+ * Values can be set using AEM Web Console - OSGi Configuration
+ */
 @Component(immediate = true, service = SolrServerConfiguration.class, configurationPolicy = ConfigurationPolicy.REQUIRE)
 @Designate(ocd = SolrConfigurationService.class)
 public class SolrServerConfigurationImpl implements SolrServerConfiguration

@@ -11,6 +11,9 @@ import org.apache.sling.models.annotations.Model;
 
 import we.retail.core.util.SolrUtils;
 
+/**
+ * Extension of AbstractSolrItemModel class with page-specific properties
+ */
 @Model(adaptables = Resource.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 public class SolrPageModel extends AbstractSolrItemModel
 {
@@ -63,6 +66,9 @@ public class SolrPageModel extends AbstractSolrItemModel
         return this.jcrTitle;
     }
 
+    /**
+     * @return jcrCreated property in Solr format (necessary for indexing)
+     */
     public String getJcrCreated()
     {
         return SolrUtils.castToSolrDate(this.jcrCreated);
@@ -73,6 +79,9 @@ public class SolrPageModel extends AbstractSolrItemModel
         return this.jcrDescription;
     }
 
+    /**
+     * @return cqLastModified property in Solr format (necessary for indexing)
+     */
     public String getCqLastModified()
     {
         return SolrUtils.castToSolrDate(this.cqLastModified);
@@ -108,6 +117,9 @@ public class SolrPageModel extends AbstractSolrItemModel
         return this.pageImportanceRank;
     }
 
+    /**
+     * @return manualCreationDate property in Solr format (necessary for indexing)
+     */
     public String getManualCreationDate()
     {
         return SolrUtils.castToSolrDate(this.manualCreationDate);

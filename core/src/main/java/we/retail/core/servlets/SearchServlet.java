@@ -108,6 +108,11 @@ public class SearchServlet extends SlingSafeMethodsServlet
         this.handleRequest(request, response);
     }
 
+    /**
+     * This method call other methods for perform lucene, solr or elasticsearch based on given request and writes results.
+     * @param request
+     * @param response
+     */
     private void handleRequest(SlingHttpServletRequest request, SlingHttpServletResponse response)
     {
         Page currentPage = getCurrentPage(request);
@@ -134,6 +139,11 @@ public class SearchServlet extends SlingSafeMethodsServlet
         }
     }
 
+    /**
+     * This method returns current page where user is based from the given request
+     * @param request
+     * @return currentPage
+     */
     private Page getCurrentPage(SlingHttpServletRequest request)
     {
         Page currentPage = null;
@@ -147,6 +157,12 @@ public class SearchServlet extends SlingSafeMethodsServlet
         return currentPage;
     }
 
+    /**
+     * This method takes request and current page to return search content resource
+     * @param request
+     * @param currentPage
+     * @return searchContentResource
+     */
     private Resource getSearchContentResource(SlingHttpServletRequest request, Page currentPage)
     {
         Resource searchContentResource = null;
@@ -177,6 +193,14 @@ public class SearchServlet extends SlingSafeMethodsServlet
         return searchContentResource;
     }
 
+    /**
+     * This method takes request, search resource and current page to search for pages, assets and tags by input provided in request.
+     * The method returns list of lucene items shown in search
+     * @param request
+     * @param searchResource
+     * @param currentPage
+     * @return
+     */
     private List<ListItem> getLuceneResults(SlingHttpServletRequest request, Resource searchResource, Page currentPage)
     {
         int searchTermMinimumLength = PROP_SEARCH_TERM_MINIMUM_LENGTH_DEFAULT;
@@ -237,6 +261,11 @@ public class SearchServlet extends SlingSafeMethodsServlet
         return results;
     }
 
+    /**
+     * This method takes request to return search results by querying index on remote Solr server
+     * @param request
+     * @return list of search results
+     */
     private List<ListItem> getSolrResults(SlingHttpServletRequest request)
     {
         List<ListItem> results = new ArrayList<>();
@@ -261,6 +290,11 @@ public class SearchServlet extends SlingSafeMethodsServlet
         return results;
     }
 
+    /**
+     * This method takes request to return search results by querying index on remote Elasticsearch server
+     * @param request
+     * @return list of search results
+     */
     private List<ListItem> getElasticsearchResults(SlingHttpServletRequest request)
     {
         List<ListItem> results = new ArrayList<>();
@@ -286,6 +320,11 @@ public class SearchServlet extends SlingSafeMethodsServlet
         return results;
     }
 
+    /**
+     * This method takes results to write a response to users on site.
+     * @param results
+     * @param response
+     */
     private void writeJson(List<ListItem> results, SlingHttpServletResponse response)
     {
         response.setContentType(APPLICATION_JSON);

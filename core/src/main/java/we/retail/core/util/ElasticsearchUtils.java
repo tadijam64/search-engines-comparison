@@ -52,6 +52,12 @@ public class ElasticsearchUtils
     {
     }
 
+    /**
+     * This method takes indexResponse from Elasticsearch index to write info of indexing process success or failure
+     * @param indexResponse
+     * @param response
+     * @throws IOException
+     */
     public static void writeResponse(BulkResponse indexResponse, SlingHttpServletResponse response) throws IOException
     {
         if (indexResponse.hasFailures())
@@ -70,6 +76,13 @@ public class ElasticsearchUtils
 
     }
 
+    /**
+     * This method takes Boolean acknowledged parameter and index name to write info of deleting index process success or failure
+     * @param acknowledged
+     * @param response
+     * @param indexName
+     * @throws IOException
+     */
     public static void writeResponse(Boolean acknowledged, SlingHttpServletResponse response, String indexName) throws IOException
     {
         if (Boolean.FALSE.equals(acknowledged))
@@ -83,6 +96,13 @@ public class ElasticsearchUtils
         }
     }
 
+    /**
+     * This method adds property to JSON builder if it is contained in search results
+     * @param builder
+     * @param vm
+     * @param keys
+     * @throws IOException
+     */
     public static void addFields(XContentBuilder builder, ValueMap vm, String... keys) throws IOException
     {
         for (String key : keys)
@@ -94,6 +114,13 @@ public class ElasticsearchUtils
         }
     }
 
+    /**
+     * This method adds property to JSON builder based on it's type
+     * @param key
+     * @param vm
+     * @param builder
+     * @throws IOException
+     */
     private static void addField(String key, ValueMap vm, XContentBuilder builder) throws IOException
     {
         if (StringUtils.equals(key, TagConstants.PN_TAGS))
@@ -110,6 +137,13 @@ public class ElasticsearchUtils
         }
     }
 
+    /**
+     * This method adds date property to JSON builder
+     * @param builder
+     * @param key
+     * @param vm
+     * @throws IOException
+     */
     private static void addDateField(XContentBuilder builder, String key, ValueMap vm) throws IOException
     {
         Calendar cal = vm.get(key, Calendar.class);
@@ -121,12 +155,23 @@ public class ElasticsearchUtils
         builder.field(key, d.toString());
     }
 
+    /**
+     * This method adds array property to JSON builder
+     * @param vm
+     * @param builder
+     * @param key
+     * @throws IOException
+     */
     private static void addTagArray(ValueMap vm, XContentBuilder builder, String key) throws IOException
     {
         String[] tags = vm.get(key, String[].class);
         builder.array("tags", tags);
     }
 
+    /**
+     * This method takes ElasticsearchException to write it's status to Logger file
+     * @param ex
+     */
     public static void handleElasticsearchException(ElasticsearchException ex)
     {
         if (ex.status().equals(RestStatus.CONFLICT))
@@ -143,6 +188,10 @@ public class ElasticsearchUtils
         }
     }
 
+    /**
+     * This method takes request for index creation to set it's properties
+     * @param createIndexRequest
+     */
     public static void setIndexRequestOptions(CreateIndexRequest createIndexRequest)
     {
         createIndexRequest.settings(Settings.builder() //
@@ -152,6 +201,13 @@ public class ElasticsearchUtils
                                       .build());
     }
 
+    /**
+     * This method takes user's search input (fulltext) parameter and search type (searchContentType) parameter
+     * to return query based on these parameters
+     * @param fulltext
+     * @param searchContentType
+     * @return
+     */
     public static BoolQueryBuilder getBoolQuery(String fulltext, String searchContentType)
     {
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
@@ -176,6 +232,12 @@ public class ElasticsearchUtils
         return boolQueryBuilder;
     }
 
+    /**
+     * This method takes index name and source builder to create search request for Elasticsearch server
+     * @param sourceBuilder
+     * @param indexName
+     * @return
+     */
     public static SearchRequest getSearchRequest(SearchSourceBuilder sourceBuilder, String indexName)
     {
         SearchRequest searchRequest = new SearchRequest();
@@ -185,6 +247,11 @@ public class ElasticsearchUtils
         return searchRequest;
     }
 
+    /**
+     * This method takes query to create source builder
+     * @param boolQueryBuilder
+     * @return
+     */
     public static SearchSourceBuilder getSourceBuilder(BoolQueryBuilder boolQueryBuilder)
     {
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
@@ -194,6 +261,12 @@ public class ElasticsearchUtils
         return sourceBuilder;
     }
 
+    /**
+     * This method takes search results and request to convert each result to data format needed for indexing
+     * @param results
+     * @param request
+     * @param searchResponse
+     */
     public static void addResultsToResultItemList(List<ListItem> results, SlingHttpServletRequest request, SearchResponse searchResponse)
     {
         long numberOfHits = searchResponse.getHits().getTotalHits().value;

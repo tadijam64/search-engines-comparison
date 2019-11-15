@@ -9,6 +9,9 @@ import org.apache.sling.api.SlingHttpServletRequest;
 import com.adobe.cq.wcm.core.components.models.ListItem;
 import com.day.cq.dam.api.Asset;
 
+/**
+ * This method implements ListItem for using item object as an asset
+ */
 public class AssetListItemImpl implements ListItem
 {
     protected SlingHttpServletRequest request;

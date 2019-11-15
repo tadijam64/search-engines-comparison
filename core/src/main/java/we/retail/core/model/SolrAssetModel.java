@@ -11,6 +11,9 @@ import org.apache.sling.models.annotations.Model;
 
 import we.retail.core.util.SolrUtils;
 
+/**
+ * Extension of AbstractSolrItemModel class with page-specific properties
+ */
 @Model(adaptables = Resource.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 public class SolrAssetModel extends AbstractSolrItemModel
 {
@@ -50,6 +53,11 @@ public class SolrAssetModel extends AbstractSolrItemModel
     @Named("jcr:content/cq:tags")
     private String[] cqTags;
 
+    /**
+     * In this case it is not important which mime type to save.
+     * In some other cases these could be two different index fields.
+     * @return any mime type available
+     */
     public String getJcrMimeType()
     {
         if (this.jcrMimeType == null)
@@ -87,6 +95,9 @@ public class SolrAssetModel extends AbstractSolrItemModel
         return this.sellingPriority;
     }
 
+    /**
+     * @return creation date in solr format
+     */
     public String getCreationDate()
     {
         return SolrUtils.castToSolrDate(this.creationDate);

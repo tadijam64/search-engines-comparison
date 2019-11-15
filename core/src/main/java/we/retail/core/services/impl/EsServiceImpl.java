@@ -54,6 +54,14 @@ public class EsServiceImpl implements EsService
     @Reference
     private QueryBuilder queryBuilder;
 
+    /**
+     * This method takes session to crawls AEM content querying CRXDE.
+     * This content is returned to be indexed on ES server.
+     * @param session
+     * @return List<XContentBuilder> list of json objects (documents) adapted to correct format
+     * @throws IOException
+     * @throws RepositoryException
+     */
     @Override
     public List<XContentBuilder> crawlContent(Session session) throws IOException, RepositoryException
     {
@@ -68,6 +76,13 @@ public class EsServiceImpl implements EsService
         return createResultsList(searchResults);
     }
 
+    /**
+     * This method takes search results and converts every result hit to the JSON page or JSON asset object.
+     * @param searchResults
+     * @return list of json builders
+     * @throws IOException
+     * @throws RepositoryException
+     */
     private List<XContentBuilder> createResultsList(SearchResult searchResults) throws IOException, RepositoryException
     {
         ArrayList<XContentBuilder> builders = new ArrayList<>();
@@ -88,6 +103,15 @@ public class EsServiceImpl implements EsService
         return builders;
     }
 
+    /**
+     * This method takes resource and result hit to create a page object
+     * that will be indexed as a document on ES server.
+     * @param resource
+     * @param hit
+     * @return json builder
+     * @throws RepositoryException
+     * @throws IOException
+     */
     private XContentBuilder createPageObject(Resource resource, Hit hit) throws RepositoryException, IOException
     {
         XContentBuilder builder = XContentFactory.jsonBuilder();
@@ -103,6 +127,13 @@ public class EsServiceImpl implements EsService
         return builder;
     }
 
+    /**
+     * This method takes resource of given AEM node and creates an asset object
+     * that will be indexed as a document on ES server
+     * @param resource
+     * @return json builder
+     * @throws IOException
+     */
     private XContentBuilder createAssetObject(Resource resource) throws IOException
     {
         XContentBuilder builder = XContentFactory.jsonBuilder();
