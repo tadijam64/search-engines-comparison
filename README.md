@@ -13,8 +13,6 @@ Key words: ***Apache Lucene, Apache Solr, Elasticsearch***, AEM, search engines
 Copy of original readme file of ***We Retail*** project follows:
 
 # We.Retail
-[![Build Status](https://travis-ci.org/Adobe-Marketing-Cloud/aem-sample-we-retail.png?branch=master)](https://travis-ci.org/Adobe-Marketing-Cloud/aem-sample-we-retail)
-
 This is an AEM 6.4 reference implementation for the retail industry.
 
 ## Modules
