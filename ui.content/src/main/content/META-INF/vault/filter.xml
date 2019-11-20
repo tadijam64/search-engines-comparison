@@ -25,4 +25,8 @@
     </filter>
     <filter root="/content/projects/we-retail" />
     <filter root="/conf/global/settings/dam/adminui-extension/metadataschema/default" mode="merge" />
+    <filter root="/oak:index/LuceneAssetsIndex" />
+    <filter root="/oak:index/LuceneBackupIndex" />
+    <filter root="/oak:index/LuceneIndex" />
+    <filter root="/oak:index/PropertyIndex" />
 </workspaceFilter>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:oak="http://jackrabbit.apache.org/oak/ns/1.0"
+          xmlns:cq="http://www.day.com/jcr/cq/1.0"
+          xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+          xmlns:rep="internal"
+          jcr:mixinTypes="[rep:AccessControllable]"
+          jcr:primaryType="oak:QueryIndexDefinition"
+          async="[async,nrt]"
+          compatVersion="{Long}2"
+          reindex="{Boolean}false"
+          reindexCount="{Long}20"
+          type="lucene">
+    <aggregates jcr:primaryType="nt:unstructured">
+        <cq:Page jcr:primaryType="nt:unstructured">
+            <include0
+                jcr:primaryType="nt:unstructured"
+                path="jcr:content"
+                relativeNode="{Boolean}true" />
+        </cq:Page>
+    </aggregates>
+    <indexRules jcr:primaryType="nt:unstructured">
+        <cq:Page jcr:primaryType="nt:unstructured">
+            <properties jcr:primaryType="nt:unstructured">
+                <cqLastModified
+                    jcr:primaryType="nt:unstructured"
+                    name="jcr:content/cq:lastModified"
+                    ordered="{Boolean}true"
+                    propertyIndex="{Boolean}true"
+                    type="Date" />
+                <jcrTitle
+                    jcr:primaryType="nt:unstructured"
+                    name="jcr:content/jcr:title"
+                    nodeScopeIndex="{Boolean}true"
+                    propertyIndex="{Boolean}true"
+                    type="String"
+                    useInSpellcheck="{Boolean}true"
+                    useInSuggest="{Boolean}true" />
+                <pageTitle
+                    jcr:primaryType="nt:unstructured"
+                    name="jcr:content/pageTitle"
+                    nodeScopeIndex="{Boolean}true"
+                    propertyIndex="{Boolean}true"
+                    type="String"
+                    useInSpellcheck="{Boolean}true"
+                    useInSuggest="{Boolean}true" />
+                <navTitle
+                    jcr:primaryType="nt:unstructured"
+                    name="jcr:content/navTitle"
+                    nodeScopeIndex="{Boolean}true"
+                    propertyIndex="{Boolean}true"
+                    type="String"
+                    useInSpellcheck="{Boolean}true"
+                    useInSuggest="{Boolean}true" />
+                <nodeName
+                    jcr:primaryType="nt:unstructured"
+                    name=":nodeName"
+                    nodeScopeIndex="{Boolean}true"
+                    propertyIndex="{Boolean}true"
+                    type="String"
+                    useInSpellcheck="{Boolean}true"
+                    useInSuggest="{Boolean}true" />
+                <cqLastRolledoutBy
+                    jcr:primaryType="nt:unstructured"
+                    name="jcr:content/cq:lastRolledoutBy"
+                    propertyIndex="{Boolean}true"
+                    type="String" />
+                <location
+                    jcr:primaryType="nt:unstructured"
+                    name="jcr:content/location"
+                    notNullCheckEnabled="{Boolean}true"
+                    propertyIndex="{Boolean}true"
+                    type="String" />
+                <searchDescription
+                    jcr:primaryType="nt:unstructured"
+                    name="jcr:content/searchDescription"
+                    nodeScopeIndex="{Boolean}true"
+                    propertyIndex="{Boolean}true"
+                    type="String"
+                    useInSuggest="{Boolean}true" />
+                <pageImportanceRank
+                    jcr:primaryType="nt:unstructured"
+                    name="jcr:content/pageImportanceRank"
+                    nodeScopeIndex="{Boolean}true"
+                    propertyIndex="{Boolean}true"
+                    type="Long"
+                    useInSuggest="{Boolean}true" />
+                <manualCreationDate
+                    jcr:primaryType="nt:unstructured"
+                    name="jcr:content/manualCreationDate"
+                    nodeScopeIndex="{Boolean}true"
+                    propertyIndex="{Boolean}true"
+                    type="Date"
+                    useInSuggest="{Boolean}true" />
+                <cqTags
+                    jcr:primaryType="nt:unstructured"
+                    boost="{Long}2"
+                    name="jcr:content/cq:tags"
+                    nodeScopeIndex="{Boolean}true"
+                    propertyIndex="{Boolean}true"
+                    useInSuggest="{Boolean}true" />
+            </properties>
+        </cq:Page>
+    </indexRules>
+</jcr:root>

@@ -5,16 +5,14 @@
           xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
           xmlns:rep="internal"
           jcr:mixinTypes="[rep:AccessControllable]"
-          jcr:primaryType="nt:unstructured">
-    <LuceneAssetsIndex
-        jcr:primaryType="oak:QueryIndexDefinition"
-        async="[async,nrt]"
-        compatVersion="{Long}2"
-        evaluatePathRestrictions="{Boolean}true"
-        includedPaths="[/content/dam]"
-        reindex="{Boolean}false"
-        reindexCount="{Long}4"
-        type="lucene">
+          jcr:primaryType="oak:QueryIndexDefinition"
+          async="[async,nrt]"
+          compatVersion="{Long}2"
+          evaluatePathRestrictions="{Boolean}true"
+          includedPaths="[/content/dam]"
+          reindex="{Boolean}false"
+          reindexCount="{Long}4"
+          type="lucene">
     <aggregates jcr:primaryType="nt:unstructured">
         <dam:Asset jcr:primaryType="nt:unstructured">
             <include0
