@@ -5,7 +5,7 @@
 Exploring **capabilities** **of** ***search engines*** mentioned in the title.
 This is done with different types of content and with different technical cases. It was also important to explore behavior of the search engines with AEM's technology stack.
 
-Proper testing of search engines capabilities requires large amount of data. To avoid thinking and planning of all site's content that makes sense, existing AEM reference site - We Retail is used.
+Proper testing of search engines capabilities requires large amount of data. To avoid looking for relevant content for imaginary business case, existing AEM reference site - We Retail is used.
 
 ## Description
 
@@ -23,11 +23,11 @@ This project adds the following functionalities to the We Retail app:
   - Lucene (OOTB AEM Lucene Oak)
   - Apache Solr
   - Elasticsearch
-- user can **choose to search different type of content**. Options are:
+- user can **choose to search different types of content**. Options are:
   - Pages (all nodes with cq:Page type - i.e. products)
   - Assets (all nodes with dam:Asset type - i.e pictures of products for content authors to edit)
   - All content (pages and assets combined in results)
-  - By tag (look for all pages and assets with tag that matches given term)
+  - By tag (look for all pages and assets with tag that matches the given term)
 
 ## Technologies
 - **Adobe Experience Manager 6.4.2**
