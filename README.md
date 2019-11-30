@@ -1,19 +1,44 @@
-# Apache Lucene, Apache Solr and Elasticsearch comparison on AEM 6.4
+# Apache Lucene, Apache Solr and Elasticsearch comparison on Adobe Experience Manager
 
-Goal of this project is to explore capabilities of ***search engines*** mentioned in the title on different types of content and with different technical cases, together with their behaviour on AEM's technology stack.
+## Goal
 
-This project is practical part of Master's Thesis "***Implementing Search Engines in Adobe Experience Manager***" on Faculty of Organization and Informatics.
+Exploring **capabilities** **of** ***search engines*** mentioned in the title.
+This is done with different types of content and with different technical cases. It was also important to explore behavior of the search engines with AEM's technology stack.
 
-Proper testing of search engine's capabilities requires large amount of data. To avoid thinking and planing of all site's content that makes sense, existing AEM reference site - We Retail is used.
+Proper testing of search engines capabilities requires large amount of data. To avoid thinking and planning of all site's content that makes sense, existing AEM reference site - We Retail is used.
 
-The whole Master's Thesis will be published here as soon as the project is done.
+## Description
 
-Key words: ***Apache Lucene, Apache Solr, Elasticsearch***, AEM, search engines
+Many options of the search engines are explored and then compared.
 
-Copy of original readme file of ***We Retail*** project follows:
+Using search engines is a critical functionality for almost all applications, but to choose which one to use primarily depends on you business case. However, more detailed comparison and implementation details are going to be available on my GitHub profile under - Wiki pages.
 
-# We.Retail
-This is an AEM 6.4 reference implementation for the retail industry.
+*This project is practical part of Master's Thesis "**Implementing Search Engines in Adobe Experience Manager**" on Faculty of Organization and Informatics. Theory part of Thesis can be found in the root of the project. It is written in Croatian, but additional blogs on implementation details are going to be available soon.*
+
+## Functionalities
+
+This project adds the following functionalities to the We Retail app:
+
+- search component is updated with **option for user to choose search engine to execute query** with the given term. Options are:
+  - Lucene (OOTB AEM Lucene Oak)
+  - Apache Solr
+  - Elasticsearch
+- user can **choose to search different type of content**. Options are:
+  - Pages (all nodes with cq:Page type - i.e. products)
+  - Assets (all nodes with dam:Asset type - i.e pictures of products for content authors to edit)
+  - All content (pages and assets combined in results)
+  - By tag (look for all pages and assets with tag that matches given term)
+
+## Technologies
+- **Adobe Experience Manager 6.4.2**
+- **Apache Lucene 8.2.0**
+- **Apache Solr 8.2.0**
+- **Elasticsearch 7.4.1**
+- **Java 8**
+- **AEM Groovy 13.0.0 - writing scripts for additional content rendering** 
+
+
+# Implementation
 
 ## Modules
 
@@ -28,38 +53,25 @@ The main parts of the template are:
 
 ## How to build
 
-To build all the modules run in the project root directory the following command with Maven 3:
+**Install clean AEM 6.4 instance**
 
-    mvn clean install
+When you have a running AEM instance you can package the whole project and deploy into AEM with  
 
-If you have a running AEM instance you can build and package the whole project and deploy into AEM with  
+```Maven
+mvn clean install -PautoInstallPackage
+```
 
-    mvn clean install -PautoInstallPackage
-    
-Or to deploy it to a publish instance, run
+Additionally, bundle should be deployed to the author with running
 
-    mvn clean install -PautoInstallPackagePublish
-    
-Or to deploy only the bundle to the author, run
+```Maven
+mvn clean install -PautoInstallBundle
+```
 
-    mvn clean install -PautoInstallBundle
+To run a Groovy scripts under /resources/groovyScripts, install
 
-To build a single package
+- Groovy console for AEM - https://github.com/icfnext/aem-groovy-console/releases/tag/13.0.0
+- Then you can run Groovy scripts directly on Author via http://localhost:4902/apps/groovyconsole.html
 
-    mvn clean install -PbuildSinglePackage
-
-To install single package on an AEM instance
-
-    mvn clean install -PbuildSinglePackage -PautoInstallSinglePackage
-    
-
-### UberJar
-
-This project relies on the unobfuscated AEM 6.2 cq-quickstart. This is not publicly available from http://repo.adobe.com and must be 
-manually 
-downloaded from https://daycare.day.com/home/products/uberjar.html. After downloading the file (_cq-quickstart-6.2.0-apis.jar_), you must install it into your local Maven repository with this command:
-
-    mvn install:install-file -Dfile=cq-quickstart-6.2.0-apis.jar -DgroupId=com.day.cq -DartifactId=cq-quickstart -Dversion=6.2.0 -Dclassifier=apis -Dpackaging=jar
 
 ## Testing
 
@@ -83,3 +95,7 @@ There are three levels of testing contained in the project:
 The project comes with the auto-public repository configured. To setup the repository in your Maven settings, refer to:
 
     http://helpx.adobe.com/experience-manager/kb/SetUpTheAdobeMavenRepository.html
+
+
+
+Key words: **Apache Lucene, Apache Solr, Elasticsearch**, AEM, search engines
