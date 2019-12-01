@@ -95,7 +95,18 @@ There are three levels of testing contained in the project:
 The project comes with the auto-public repository configured. To setup the repository in your Maven settings, refer to:
 
     http://helpx.adobe.com/experience-manager/kb/SetUpTheAdobeMavenRepository.html
+    
+## Contributing
+Feel free to contribute. For all additional questions, there is email address attached in Author section.
+
+## Authors
+Tadija Malić - Initial work - tadija@tadijamalic.com
+See also the list of contributors who participated in this project.
+
+## License
+This project is licensed under the Apache License - see the LICENSE.md file for details
 
 
 
-Key words: **Apache Lucene, Apache Solr, Elasticsearch**, AEM, search engines
+Key words:
+## Apache Lucene, Apache Solr, Elasticsearch, AEM, search engines, Jackrabbit Oak, JCR
