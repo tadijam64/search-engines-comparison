@@ -97,7 +97,7 @@ The project comes with the auto-public repository configured. To setup the repos
     http://helpx.adobe.com/experience-manager/kb/SetUpTheAdobeMavenRepository.html
     
 ## Contributing
-Feel free to contribute. For all additional questions, there is email address attached in Author section.
+Feel free to contribute. For all additional questions, there is email address attached in the Authors section.
 
 ## Authors
 Tadija Malić - Initial work - tadija@tadijamalic.com
