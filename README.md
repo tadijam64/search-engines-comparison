@@ -11,10 +11,11 @@ Proper testing of search engines capabilities requires large amount of data. To 
 
 Many options of the search engines are explored and then compared.
 
-Using search engines is a critical functionality for almost all applications, but to choose which one to use primarily depends on you business case. **However, more detailed comparison and implementation details are available here:**
-https://github.com/tadijam64/search-engines-comparison-on-we-retail/wiki/Apache-Lucene-vs.-Apache-Solr-vs.-Elasticsearch
+Using search engines is a critical functionality for almost all applications, but to choose which one to use primarily depends on you business case.
 
-*This project is practical part of Master's Thesis "**Implementing Search Engines in Adobe Experience Manager**" on Faculty of Organization and Informatics. Theory part of Thesis can be found in the root of the project. It is written in Croatian, but additional blogs on implementation details are going to be available soon.*
+**Full write-up of theoretical and practical part behind this this project is available [here](https://github.com/tadijam64/search-engines-comparison-on-we-retail/wiki). You can find five blog posts there explaining every detail of this project implementation.**
+
+*This project is practical part of Master's Thesis "**Implementing Search Engines in Adobe Experience Manager**" on Faculty of Organization and Informatics.*
 
 ## Functionalities
 
@@ -102,6 +103,7 @@ Feel free to contribute. For all additional questions, there is email address at
 
 ## Authors
 Tadija Malić - Initial work - tadija@tadijamalic.com
+
 See also the list of contributors who participated in this project.
 
 ## License
