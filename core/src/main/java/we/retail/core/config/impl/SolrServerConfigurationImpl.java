@@ -13,10 +13,10 @@ import we.retail.core.services.SolrConfigurationService;
  * Configuration impl class.
  * Values can be set using AEM Web Console - OSGi Configuration
  */
-@Component(immediate = true, service = SolrServerConfiguration.class, configurationPolicy = ConfigurationPolicy.REQUIRE)
+@Component(immediate = true, service = SolrServerConfiguration.class, configurationPolicy = ConfigurationPolicy.OPTIONAL)
 @Designate(ocd = SolrConfigurationService.class)
-public class SolrServerConfigurationImpl implements SolrServerConfiguration
-{
+public class SolrServerConfigurationImpl implements SolrServerConfiguration {
+
     private String solrProtocol;
     private String solrServerName;
     private String solrServerPort;
@@ -24,8 +24,7 @@ public class SolrServerConfigurationImpl implements SolrServerConfiguration
 
     @Activate
     @Modified
-    public void activate(SolrConfigurationService config)
-    {
+    public void activate(SolrConfigurationService config) {
         this.solrProtocol = config.protocolValue();
         this.solrServerName = config.serverName();
         this.solrServerPort = config.serverPort();
@@ -33,26 +32,23 @@ public class SolrServerConfigurationImpl implements SolrServerConfiguration
     }
 
     @Override
-    public String getSolrProtocol()
-    {
+    public String getSolrProtocol() {
         return this.solrProtocol;
     }
 
     @Override
-    public String getSolrServerName()
-    {
+    public String getSolrServerName() {
         return this.solrServerName;
     }
 
     @Override
-    public String getSolrServerPort()
-    {
+    public String getSolrServerPort() {
         return this.solrServerPort;
     }
 
     @Override
-    public String getSolrCoreName()
-    {
+    public String getSolrCoreName() {
         return this.solrCoreName;
     }
+
 }

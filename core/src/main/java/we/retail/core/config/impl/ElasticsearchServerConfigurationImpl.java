@@ -13,10 +13,10 @@ import we.retail.core.services.EsConfigService;
  * Configuration impl class.
  * Values can be set using AEM Web Console - OSGi Configuration
  */
-@Component(immediate = true, service = ElasticsearchServerConfiguration.class, configurationPolicy = ConfigurationPolicy.REQUIRE)
+@Component(immediate = true, service = ElasticsearchServerConfiguration.class, configurationPolicy = ConfigurationPolicy.OPTIONAL)
 @Designate(ocd = EsConfigService.class)
-public class ElasticsearchServerConfigurationImpl implements ElasticsearchServerConfiguration
-{
+public class ElasticsearchServerConfigurationImpl implements ElasticsearchServerConfiguration {
+
     private String elasticsearchProtocol;
     private String elasticsearchServerName;
     private String elasticsearchServerPort;
@@ -25,8 +25,7 @@ public class ElasticsearchServerConfigurationImpl implements ElasticsearchServer
 
     @Activate
     @Modified
-    public void activate(EsConfigService config)
-    {
+    public void activate(EsConfigService config) {
         this.elasticsearchProtocol = config.protocolValue();
         this.elasticsearchServerName = config.serverName();
         this.elasticsearchServerPort = config.serverPort();
@@ -35,32 +34,28 @@ public class ElasticsearchServerConfigurationImpl implements ElasticsearchServer
     }
 
     @Override
-    public String getElasticsearchProtocol()
-    {
+    public String getElasticsearchProtocol() {
         return this.elasticsearchProtocol;
     }
 
     @Override
-    public String getElasticsearchServerName()
-    {
+    public String getElasticsearchServerName() {
         return this.elasticsearchServerName;
     }
 
     @Override
-    public String getElasticsearchServerPort()
-    {
+    public String getElasticsearchServerPort() {
         return this.elasticsearchServerPort;
     }
 
     @Override
-    public String getElasticsearchSecondServerPort()
-    {
+    public String getElasticsearchSecondServerPort() {
         return this.elasticsearchSecondServerPort;
     }
 
     @Override
-    public String getElasticsearchIndexName()
-    {
+    public String getElasticsearchIndexName() {
         return this.elasticsearchIndexName;
     }
+
 }
