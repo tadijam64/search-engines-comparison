@@ -49,7 +49,9 @@ import com.day.cq.wcm.api.Page;
 import com.day.cq.wcm.api.PageManager;
 import com.day.cq.wcm.api.Template;
 import com.day.cq.wcm.msm.api.LiveRelationshipManager;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import we.retail.core.config.ElasticsearchServerConfiguration;
 import we.retail.core.config.SolrServerConfiguration;
@@ -73,8 +75,8 @@ import static we.retail.core.util.SolrUtils.getSolrServerUrl;
 
 @Component(service = Servlet.class, property = { "sling.servlet.selectors=" + SearchServlet.DEFAULT_SELECTOR, "sling.servlet.resourceTypes=cq/Page",
   "sling.servlet.extensions=json", "sling.servlet.methods=" + HttpConstants.METHOD_GET })
-public class SearchServlet extends SlingSafeMethodsServlet
-{
+public class SearchServlet extends SlingSafeMethodsServlet {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(SearchServlet.class);
 
     static final String DEFAULT_SELECTOR = "mysearchresults";
@@ -83,28 +85,21 @@ public class SearchServlet extends SlingSafeMethodsServlet
     private static final String PROP_SEARCH_ROOT_DEFAULT = "/content";
     private static final String PROP_SEARCH_CONTENT_TYPE = "searchContent";
     private static final String PARAM_SEARCH_ENGINE = "searchEngine";
+    private static final String URL_PROP = "url";
+    private static final String PATH_PROP = "path";
+    private static final String TITLE_PROP = "title";
 
     private static final int PROP_RESULTS_SIZE_DEFAULT = 10;
     private static final int PROP_SEARCH_TERM_MINIMUM_LENGTH_DEFAULT = 3;
 
-    @Reference
-    private QueryBuilder queryBuilder;
-
-    @Reference
-    private LanguageManager languageManager;
-
-    @Reference
-    private LiveRelationshipManager relationshipManager;
-
-    @Reference
-    private SolrServerConfiguration solrConfigurationService;
-
-    @Reference
-    private ElasticsearchServerConfiguration esConfigService;
+    @Reference private QueryBuilder queryBuilder;
+    @Reference private LanguageManager languageManager;
+    @Reference private LiveRelationshipManager relationshipManager;
+    @Reference private SolrServerConfiguration solrConfigurationService;
+    @Reference private ElasticsearchServerConfiguration esConfigService;
 
     @Override
-    protected void doGet(@NotNull SlingHttpServletRequest request, @NotNull SlingHttpServletResponse response)
-    {
+    protected void doGet(@NotNull SlingHttpServletRequest request, @NotNull SlingHttpServletResponse response) {
         this.handleRequest(request, response);
     }
 
@@ -113,25 +108,18 @@ public class SearchServlet extends SlingSafeMethodsServlet
      * @param request
      * @param response
      */
-    private void handleRequest(SlingHttpServletRequest request, SlingHttpServletResponse response)
-    {
+    private void handleRequest(SlingHttpServletRequest request, SlingHttpServletResponse response) {
         Page currentPage = getCurrentPage(request);
 
-        if (currentPage != null)
-        {
+        if (currentPage != null) {
             Resource searchResource = getSearchContentResource(request, currentPage);
             List<ListItem> results = null;
 
-            if (StringUtils.equalsIgnoreCase(request.getParameter(PARAM_SEARCH_ENGINE), "lucene"))
-            {
+            if (StringUtils.equalsIgnoreCase(request.getParameter(PARAM_SEARCH_ENGINE), "lucene")) {
                 results = getLuceneResults(request, searchResource, currentPage);
-            }
-            else if (StringUtils.equalsIgnoreCase(request.getParameter(PARAM_SEARCH_ENGINE), "solr"))
-            {
+            } else if (StringUtils.equalsIgnoreCase(request.getParameter(PARAM_SEARCH_ENGINE), "solr")) {
                 results = getSolrResults(request);
-            }
-            else if (StringUtils.equalsIgnoreCase(request.getParameter(PARAM_SEARCH_ENGINE), "elasticsearch"))
-            {
+            } else if (StringUtils.equalsIgnoreCase(request.getParameter(PARAM_SEARCH_ENGINE), "elasticsearch")) {
                 results = getElasticsearchResults(request);
             }
 
@@ -144,14 +132,12 @@ public class SearchServlet extends SlingSafeMethodsServlet
      * @param request
      * @return currentPage
      */
-    private Page getCurrentPage(SlingHttpServletRequest request)
-    {
+    private Page getCurrentPage(SlingHttpServletRequest request) {
         Page currentPage = null;
         Resource currentResource = request.getResource();
         ResourceResolver resourceResolver = currentResource.getResourceResolver();
         PageManager pageManager = resourceResolver.adaptTo(PageManager.class);
-        if (pageManager != null)
-        {
+        if (pageManager != null) {
             currentPage = pageManager.getContainingPage(currentResource.getPath());
         }
         return currentPage;
@@ -163,27 +149,21 @@ public class SearchServlet extends SlingSafeMethodsServlet
      * @param currentPage
      * @return searchContentResource
      */
-    private Resource getSearchContentResource(SlingHttpServletRequest request, Page currentPage)
-    {
+    private Resource getSearchContentResource(SlingHttpServletRequest request, Page currentPage) {
         Resource searchContentResource = null;
         RequestPathInfo requestPathInfo = request.getRequestPathInfo();
         Resource resource = request.getResource();
         String relativeContentResource = ExtendedStringUtils.removeStartingSlash(requestPathInfo.getSuffix());
 
-        if (StringUtils.isNotEmpty(relativeContentResource))
-        {
+        if (StringUtils.isNotEmpty(relativeContentResource)) {
             searchContentResource = resource.getChild(relativeContentResource);
-            if (searchContentResource == null)
-            {
+            if (searchContentResource == null) {
                 PageManager pageManager = resource.getResourceResolver().adaptTo(PageManager.class);
-                if (pageManager != null)
-                {
+                if (pageManager != null) {
                     Template template = currentPage.getTemplate();
-                    if (template != null)
-                    {
+                    if (template != null) {
                         Resource templateResource = request.getResourceResolver().getResource(template.getPath());
-                        if (templateResource != null)
-                        {
+                        if (templateResource != null) {
                             searchContentResource = templateResource.getChild(NN_STRUCTURE + "/" + relativeContentResource);
                         }
                     }
@@ -201,28 +181,24 @@ public class SearchServlet extends SlingSafeMethodsServlet
      * @param currentPage
      * @return
      */
-    private List<ListItem> getLuceneResults(SlingHttpServletRequest request, Resource searchResource, Page currentPage)
-    {
+    private List<ListItem> getLuceneResults(SlingHttpServletRequest request, Resource searchResource, Page currentPage) {
         int searchTermMinimumLength = PROP_SEARCH_TERM_MINIMUM_LENGTH_DEFAULT;
         int resultsSize = PROP_RESULTS_SIZE_DEFAULT;
         String searchRootPagePath;
-        if (searchResource != null)
-        {
+        if (searchResource != null) {
             ValueMap valueMap = searchResource.getValueMap();
             ValueMap contentPolicyMap = getContentPolicyProperties(searchResource);
-            searchTermMinimumLength = valueMap.get(Search.PN_SEARCH_TERM_MINIMUM_LENGTH, contentPolicyMap.get(Search.PN_SEARCH_TERM_MINIMUM_LENGTH, PROP_SEARCH_TERM_MINIMUM_LENGTH_DEFAULT));
+            searchTermMinimumLength = valueMap.get(Search.PN_SEARCH_TERM_MINIMUM_LENGTH,
+              contentPolicyMap.get(Search.PN_SEARCH_TERM_MINIMUM_LENGTH, PROP_SEARCH_TERM_MINIMUM_LENGTH_DEFAULT));
             resultsSize = valueMap.get(Search.PN_RESULTS_SIZE, contentPolicyMap.get(Search.PN_RESULTS_SIZE, PROP_RESULTS_SIZE_DEFAULT));
             String searchRoot = valueMap.get(Search.PN_SEARCH_ROOT, contentPolicyMap.get(Search.PN_SEARCH_ROOT, PROP_SEARCH_ROOT_DEFAULT));
             searchRootPagePath = getSearchRootPagePath(searchRoot, currentPage, this.languageManager, this.relationshipManager);
-        }
-        else
-        {
+        } else {
             String languageRoot = this.languageManager.getLanguageRoot(currentPage.getContentResource()).getPath();
             searchRootPagePath = getSearchRootPagePath(languageRoot, currentPage, this.languageManager, this.relationshipManager);
         }
 
-        if (StringUtils.isEmpty(searchRootPagePath))
-        {
+        if (StringUtils.isEmpty(searchRootPagePath)) {
             searchRootPagePath = currentPage.getPath();
         }
 
@@ -230,8 +206,7 @@ public class SearchServlet extends SlingSafeMethodsServlet
         Map<String, String> predicatesMap = new HashMap<>();
 
         String fulltext = request.getParameter(PREDICATE_FULLTEXT);
-        if (fulltext == null || fulltext.length() < searchTermMinimumLength)
-        {
+        if (fulltext == null || fulltext.length() < searchTermMinimumLength) {
             return results;
         }
 
@@ -242,19 +217,16 @@ public class SearchServlet extends SlingSafeMethodsServlet
         ResourceResolver resourceResolver = request.getResource().getResourceResolver();
 
         Query query = this.queryBuilder.createQuery(predicates, resourceResolver.adaptTo(Session.class));
-        if (resultsSize != 0)
-        {
+        if (resultsSize != 0) {
             query.setHitsPerPage(resultsSize);
         }
-        if (resultsOffset != 0)
-        {
+        if (resultsOffset != 0) {
             query.setStart(resultsOffset);
         }
         SearchResult searchResult = query.getResult();
 
         List<Hit> hits = searchResult.getHits();
-        if (hits != null)
-        {
+        if (hits != null) {
             addHitsToResultsListItem(hits, results, request);
         }
 
@@ -266,8 +238,7 @@ public class SearchServlet extends SlingSafeMethodsServlet
      * @param request
      * @return list of search results
      */
-    private List<ListItem> getSolrResults(SlingHttpServletRequest request)
-    {
+    private List<ListItem> getSolrResults(SlingHttpServletRequest request) {
         List<ListItem> results = new ArrayList<>();
         String fulltext = request.getParameter(PREDICATE_FULLTEXT);
         String searchContentType = request.getParameter(PROP_SEARCH_CONTENT_TYPE);
@@ -275,15 +246,12 @@ public class SearchServlet extends SlingSafeMethodsServlet
         SolrQuery query = new SolrQuery();
         addPredicatesToQuery(searchContentType, query, fulltext);
 
-        try (HttpSolrClient server = new HttpSolrClient(getSolrServerUrl(this.solrConfigurationService)))
-        {
+        try (HttpSolrClient server = new HttpSolrClient(getSolrServerUrl(this.solrConfigurationService))) {
             QueryResponse response = server.query(query);
             SolrDocumentList resultDocs = response.getResults();
 
             addResultDocsToResultItemList(resultDocs, request, results);
-        }
-        catch (SolrServerException | IOException e)
-        {
+        } catch (SolrServerException | IOException e) {
             LOGGER.error("Exception due to ", e);
         }
 
@@ -295,15 +263,13 @@ public class SearchServlet extends SlingSafeMethodsServlet
      * @param request
      * @return list of search results
      */
-    private List<ListItem> getElasticsearchResults(SlingHttpServletRequest request)
-    {
+    private List<ListItem> getElasticsearchResults(SlingHttpServletRequest request) {
         List<ListItem> results = new ArrayList<>();
         String fulltext = request.getParameter(PREDICATE_FULLTEXT);
         String searchContentType = request.getParameter(PROP_SEARCH_CONTENT_TYPE);
         String indexName = this.esConfigService.getElasticsearchIndexName();
 
-        try (RestHighLevelClient client = getEsClient(this.esConfigService))
-        {
+        try (RestHighLevelClient client = getEsClient(this.esConfigService)) {
             BoolQueryBuilder boolQueryBuilder = getBoolQuery(fulltext, searchContentType);
             SearchSourceBuilder sourceBuilder = getSourceBuilder(boolQueryBuilder);
             SearchRequest searchRequest = getSearchRequest(sourceBuilder, indexName);
@@ -311,9 +277,7 @@ public class SearchServlet extends SlingSafeMethodsServlet
             SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
 
             addResultsToResultItemList(results, request, searchResponse);
-        }
-        catch (ElasticsearchException | IOException e)
-        {
+        } catch (ElasticsearchException | IOException e) {
             LOGGER.error("Exception due to ", e);
         }
 
@@ -325,18 +289,33 @@ public class SearchServlet extends SlingSafeMethodsServlet
      * @param results
      * @param response
      */
-    private void writeJson(List<ListItem> results, SlingHttpServletResponse response)
-    {
+    private void writeJson(List<ListItem> results, SlingHttpServletResponse response) {
         response.setContentType(APPLICATION_JSON);
         response.setCharacterEncoding(UTF_8);
-        ObjectMapper mapper = new ObjectMapper();
-        try
-        {
-            mapper.writeValue(response.getWriter(), results);
-        }
-        catch (IOException e)
-        {
+
+        JsonArray jsonArray = createJsonObjectFromResults(results);
+
+        try {
+            Gson gson = new Gson();
+            String json = gson.toJson(jsonArray, JsonArray.class);
+
+            response.getWriter().write(json);
+        } catch (IOException e) {
             LOGGER.error(e.getMessage());
         }
     }
+
+    private JsonArray createJsonObjectFromResults(List<ListItem> results) {
+        JsonArray jsonArray = new JsonArray();
+        for (ListItem item : results) {
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty(URL_PROP, item.getURL());
+            jsonObject.addProperty(PATH_PROP, item.getPath());
+            jsonObject.addProperty(TITLE_PROP, item.getTitle());
+
+            jsonArray.add(jsonObject);
+        }
+        return jsonArray;
+    }
+
 }
