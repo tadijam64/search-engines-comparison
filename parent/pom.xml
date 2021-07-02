@@ -38,7 +38,7 @@
         <vault.user>admin</vault.user>
         <vault.password>admin</vault.password>
         <slf4j.version>1.7.25</slf4j.version>
-        <elasticsearch.version>7.4.1</elasticsearch.version>
+        <elasticsearch.version>7.11.2</elasticsearch.version>
     </properties>
 
     <build>
